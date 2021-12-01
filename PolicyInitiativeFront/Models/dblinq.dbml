@@ -1,0 +1,1184 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="policyinitiativeDb" Class="dblinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=209.160.40.46;Initial Catalog=policyinitiativeDb;Persist Security Info=True;User ID=policyinitiativeUser;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="policyinitiativeDbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AgeGroup" Member="AgeGroups">
+    <Type Name="AgeGroup">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="AgeGroup_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="ageGroupId" Type="AspNetUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TypeArticles" Member="TypeArticles">
+    <Type Name="TypeArticle">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="TypeArticle_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageParentId" Type="TypeArticle" />
+      <Association Name="TypeArticle_ArticlesType" Member="ArticlesTypes" ThisKey="id" OtherKey="TypeId" Type="ArticlesType" />
+      <Association Name="TypeArticle_TypeArticle" Member="TypeArticle1" ThisKey="languageParentId" OtherKey="id" Type="TypeArticle" IsForeignKey="true" />
+      <Association Name="Language_TypeArticle" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticlesKeyword" Member="ArticlesKeywords">
+    <Type Name="ArticlesKeyword">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="KeywordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ArticlesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Keyword_ArticlesKeyword" Member="Keyword" ThisKey="KeywordId" OtherKey="id" Type="Keyword" IsForeignKey="true" />
+      <Association Name="NewsCommunication_ArticlesKeyword" Member="NewsCommunication" ThisKey="ArticlesId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticlesTypes" Member="ArticlesTypes">
+    <Type Name="ArticlesType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ArticlesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TypeArticle_ArticlesType" Member="TypeArticle" ThisKey="TypeId" OtherKey="id" Type="TypeArticle" IsForeignKey="true" />
+      <Association Name="NewsCommunication_ArticlesType" Member="NewsCommunication" ThisKey="ArticlesId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRole">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="menu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="menuLevel" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
+      <Association Name="AspNetRole_KMSPermission" Member="KMSPermissions" ThisKey="Id" OtherKey="roleId" Type="KMSPermission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogin">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRole">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="KSecurityStamp" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="aspNetUsersActivationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="contactTitleId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dob" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="countryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ageGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="verificationCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumberExt" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="aspNetUsersCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="aspNetUsersStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="providerUserId" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="appInstallDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="appOs" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="appVersion" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="appNbOfCrashes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="lastLoginDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="totalVisits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="regionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="subRegionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="googleMapsCoordsLatitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="googleMapsCoordsLongitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="googleMapZoom" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ipAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="provider" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="code" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="street" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="language" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="fromWaitingList" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="zipCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="utm_source" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="last_utm_source" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isLoggedIn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="oldUser" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="firstTime" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="lastVisitDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="couponId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="welcomeEmailSent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nickname" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="joinNewsletter" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="phoneCode" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="phoneNb" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isBlogger" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="totalCommision" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="bloggerDiscountValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bloggerCommissionValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="bloggerFundValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="bloggerExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="bloggerCouponCode" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="accountCredit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="hasOldPassword" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="referenceEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="pos_customerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="accountNumber" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="pos_bloggerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bloggerNumber" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="loyaltyPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="syncedWithTP" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="browserName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="browserVersion" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="osName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="osVersion" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_AspNetUsersDevice" Member="AspNetUsersDevices" ThisKey="Id" OtherKey="UserId" Type="AspNetUsersDevice" />
+      <Association Name="AspNetUser_KMSLog" Member="KMSLogs" ThisKey="Id" OtherKey="aspNetUsersId" Type="KMSLog" />
+      <Association Name="AgeGroup_AspNetUser" Member="AgeGroup" ThisKey="ageGroupId" OtherKey="id" Type="AgeGroup" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="AspNetUsersActivation_AspNetUser" Member="AspNetUsersActivation" ThisKey="aspNetUsersActivationId" OtherKey="id" Type="AspNetUsersActivation" IsForeignKey="true" />
+      <Association Name="AspNetUsersCategory_AspNetUser" Member="AspNetUsersCategory" ThisKey="aspNetUsersCategoryId" OtherKey="id" Type="AspNetUsersCategory" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="AspNetUsersStatus_AspNetUser" Member="AspNetUsersStatus" ThisKey="aspNetUsersStatusId" OtherKey="id" Type="AspNetUsersStatus" IsForeignKey="true" />
+      <Association Name="ContactTitle_AspNetUser" Member="ContactTitle" ThisKey="contactTitleId" OtherKey="id" Type="ContactTitle" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Country_AspNetUser" Member="Country" ThisKey="countryId" OtherKey="id" Type="Country" IsForeignKey="true" />
+      <Association Name="Region_AspNetUser" Member="Region" ThisKey="regionId" OtherKey="id" Type="Region" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Region_AspNetUser1" Member="Region1" ThisKey="subRegionId" OtherKey="id" Type="Region" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsersActivation" Member="AspNetUsersActivations">
+    <Type Name="AspNetUsersActivation">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="hasReason" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUsersActivation_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="aspNetUsersActivationId" Type="AspNetUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsersCategory" Member="AspNetUsersCategories">
+    <Type Name="AspNetUsersCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ekomDiscountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUsersCategory_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="aspNetUsersCategoryId" Type="AspNetUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsersDevice" Member="AspNetUsersDevices">
+    <Type Name="AspNetUsersDevice">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="deviceIdentifier" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="deviceDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="securityStamp" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUsersDevice" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsersStatus" Member="AspNetUsersStatus">
+    <Type Name="AspNetUsersStatus">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUsersStatus_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="aspNetUsersStatusId" Type="AspNetUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Career" Member="Careers">
+    <Type Name="Career">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="Career_Career" Member="Careers" ThisKey="id" OtherKey="languageParentId" Type="Career" />
+      <Association Name="Career_CareerApplication" Member="CareerApplications" ThisKey="id" OtherKey="careerId" Type="CareerApplication" />
+      <Association Name="Career_Career" Member="Career1" ThisKey="languageParentId" OtherKey="id" Type="Career" IsForeignKey="true" />
+      <Association Name="Language_Career" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CareerApplication" Member="CareerApplications">
+    <Type Name="CareerApplication">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="careerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="contactTitleId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fullName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="countryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="education" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="experience" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="CareerApplication_CareerApplication" Member="CareerApplication2" ThisKey="id" OtherKey="id" Type="CareerApplication" Cardinality="One" />
+      <Association Name="Career_CareerApplication" Member="Career" ThisKey="careerId" OtherKey="id" Type="Career" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CareerApplication_CareerApplication" Member="CareerApplication1" ThisKey="id" OtherKey="id" Type="CareerApplication" IsForeignKey="true" />
+      <Association Name="ContactTitle_CareerApplication" Member="ContactTitle" ThisKey="contactTitleId" OtherKey="id" Type="ContactTitle" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Country_CareerApplication" Member="Country" ThisKey="countryId" OtherKey="id" Type="Country" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Company" Member="Companies">
+    <Type Name="Company">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="aliasTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrcSecondary" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="countryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="whatsapp" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="directPhone" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="postCode" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="fax" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="googleMapLatitude" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="googleMapLongitude" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="googleMapZoom" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="facebook" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="twitter" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="linkedin" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="instagram" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Company_Company" Member="Companies" ThisKey="id" OtherKey="languageParentId" Type="Company" />
+      <Association Name="Company_Company1" Member="Companies1" ThisKey="id" OtherKey="parentId" Type="Company" />
+      <Association Name="Company_Company" Member="Company1" ThisKey="languageParentId" OtherKey="id" Type="Company" IsForeignKey="true" />
+      <Association Name="Company_Company1" Member="Company2" ThisKey="parentId" OtherKey="id" Type="Company" IsForeignKey="true" />
+      <Association Name="Country_Company" Member="Country" ThisKey="countryId" OtherKey="id" Type="Country" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Language_Company" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContactInfo" Member="ContactInfos">
+    <Type Name="ContactInfo">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="mainTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="whatsapp" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="directPhone" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="postCode" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="fax" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="googleMapLatitude" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="googleMapLongitude" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="googleMapZoom" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hasOrderPickup" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openingHour" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="closingHour" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="processingTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isMainAddress" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="ContactInfo_ContactInfo" Member="ContactInfos" ThisKey="id" OtherKey="languageParentId" Type="ContactInfo" />
+      <Association Name="ContactInfo_ContactInfo" Member="ContactInfo1" ThisKey="languageParentId" OtherKey="id" Type="ContactInfo" IsForeignKey="true" />
+      <Association Name="Language_ContactInfo" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContactTitle" Member="ContactTitles">
+    <Type Name="ContactTitle">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="ContactTitle_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="contactTitleId" Type="AspNetUser" />
+      <Association Name="ContactTitle_CareerApplication" Member="CareerApplications" ThisKey="id" OtherKey="contactTitleId" Type="CareerApplication" />
+      <Association Name="ContactTitle_ContactTitle" Member="ContactTitles" ThisKey="id" OtherKey="languageParentId" Type="ContactTitle" />
+      <Association Name="ContactTitle_Inquiry" Member="Inquiries" ThisKey="id" OtherKey="contactTitleId" Type="Inquiry" />
+      <Association Name="ContactTitle_ContactTitle" Member="ContactTitle1" ThisKey="languageParentId" OtherKey="id" Type="ContactTitle" IsForeignKey="true" />
+      <Association Name="Language_ContactTitle" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CorporatePage" Member="CorporatePages">
+    <Type Name="CorporatePage">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="subTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subTitle1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="labelLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrcHover" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="pdf" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="showRedAlert" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="showOnSitemap" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="showOnNavigation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CorporatePage_CorporatePage" Member="CorporatePages" ThisKey="id" OtherKey="parentId" Type="CorporatePage" />
+      <Association Name="CorporatePage_CorporatePage1" Member="CorporatePages1" ThisKey="id" OtherKey="languageParentId" Type="CorporatePage" />
+      <Association Name="CorporatePage_CorporatePageSection" Member="CorporatePageSections" ThisKey="id" OtherKey="corporatePageId" Type="CorporatePageSection" />
+      <Association Name="CorporatePage_CorporatePage" Member="CorporatePage1" ThisKey="parentId" OtherKey="id" Type="CorporatePage" IsForeignKey="true" />
+      <Association Name="CorporatePage_CorporatePage1" Member="CorporatePage2" ThisKey="languageParentId" OtherKey="id" Type="CorporatePage" IsForeignKey="true" />
+      <Association Name="Language_CorporatePage" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CorporatePageSection" Member="CorporatePageSections">
+    <Type Name="CorporatePageSection">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="corporatePageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="subCorporatePageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="corporatePageTemplateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subtitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subtitle1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSubCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrcSecondary" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSecondaryCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSecondarySubCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSecondaryDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSecondaryLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="labelLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="CorporatePageSection_CorporatePageSection" Member="CorporatePageSections" ThisKey="id" OtherKey="languageParentId" Type="CorporatePageSection" />
+      <Association Name="CorporatePageSection_CorporatePageSection1" Member="CorporatePageSections1" ThisKey="id" OtherKey="subCorporatePageId" Type="CorporatePageSection" />
+      <Association Name="CorporatePageSection_CorporatePageSectionMedia" Member="CorporatePageSectionMedias" ThisKey="id" OtherKey="corporatePageSectionId" Type="CorporatePageSectionMedia" />
+      <Association Name="CorporatePage_CorporatePageSection" Member="CorporatePage" ThisKey="corporatePageId" OtherKey="id" Type="CorporatePage" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CorporatePageSection_CorporatePageSection" Member="CorporatePageSection1" ThisKey="languageParentId" OtherKey="id" Type="CorporatePageSection" IsForeignKey="true" />
+      <Association Name="CorporatePageSection_CorporatePageSection1" Member="CorporatePageSection2" ThisKey="subCorporatePageId" OtherKey="id" Type="CorporatePageSection" IsForeignKey="true" />
+      <Association Name="Language_CorporatePageSection" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="CorporatePageTemplate_CorporatePageSection" Member="CorporatePageTemplate" ThisKey="corporatePageTemplateId" OtherKey="id" Type="CorporatePageTemplate" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CorporatePageSectionMedia" Member="CorporatePageSectionMedias">
+    <Type Name="CorporatePageSectionMedia">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="corporatePageSectionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mediaType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mediaSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="caption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="CorporatePageSection_CorporatePageSectionMedia" Member="CorporatePageSection" ThisKey="corporatePageSectionId" OtherKey="id" Type="CorporatePageSection" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Country" Member="Countries">
+    <Type Name="Country">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ZoneCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ZoneName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="countryCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CountryName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="arabicName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="phoneCode" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="iso" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="iso3" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="numcode" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Country_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="countryId" Type="AspNetUser" />
+      <Association Name="Country_CareerApplication" Member="CareerApplications" ThisKey="id" OtherKey="countryId" Type="CareerApplication" />
+      <Association Name="Country_Company" Member="Companies" ThisKey="id" OtherKey="countryId" Type="Company" />
+      <Association Name="Country_Inquiry" Member="Inquiries" ThisKey="id" OtherKey="countryId" Type="Inquiry" />
+      <Association Name="Country_NewsletterUser" Member="NewsletterUsers" ThisKey="id" OtherKey="country" Type="NewsletterUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Director" Member="Directors">
+    <Type Name="Director">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fullName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="biography" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isInGroup1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="isInGroup2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="categoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Director_Director" Member="Directors" ThisKey="id" OtherKey="languageParentId" Type="Director" />
+      <Association Name="Director_Director" Member="Director1" ThisKey="languageParentId" OtherKey="id" Type="Director" IsForeignKey="true" />
+      <Association Name="Language_Director" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="TeamCategory_Director" Member="TeamCategory" ThisKey="categoryId" OtherKey="id" Type="TeamCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmailTemplate" Member="EmailTemplates">
+    <Type Name="EmailTemplate">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="subject" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="EmailTemplate_EmailTemplate" Member="EmailTemplates" ThisKey="id" OtherKey="languageParentId" Type="EmailTemplate" />
+      <Association Name="EmailTemplate_EmailTemplate" Member="EmailTemplate1" ThisKey="languageParentId" OtherKey="id" Type="EmailTemplate" IsForeignKey="true" />
+      <Association Name="Language_EmailTemplate" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ImageResize" Member="ImageResizes">
+    <Type Name="ImageResize">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="width" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="height" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isInside" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="section" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="resizeName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Inquiry" Member="Inquiries">
+    <Type Name="Inquiry">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="inquiryTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="contactTitleId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fullName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="countryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="ContactTitle_Inquiry" Member="ContactTitle" ThisKey="contactTitleId" OtherKey="id" Type="ContactTitle" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Country_Inquiry" Member="Country" ThisKey="countryId" OtherKey="id" Type="Country" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="InquiryType_Inquiry" Member="InquiryType" ThisKey="inquiryTypeId" OtherKey="id" Type="InquiryType" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InquiryType" Member="InquiryTypes">
+    <Type Name="InquiryType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="InquiryType_Inquiry" Member="Inquiries" ThisKey="id" OtherKey="inquiryTypeId" Type="Inquiry" />
+      <Association Name="InquiryType_InquiryType" Member="InquiryTypes" ThisKey="id" OtherKey="languageParentId" Type="InquiryType" />
+      <Association Name="InquiryType_InquiryType" Member="InquiryType1" ThisKey="languageParentId" OtherKey="id" Type="InquiryType" IsForeignKey="true" />
+      <Association Name="Language_InquiryType" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KConfig" Member="KConfigs">
+    <Type Name="KConfig">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="categoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[key]" Member="key" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="KConfigCategory_KConfig" Member="KConfigCategory" ThisKey="categoryId" OtherKey="id" Type="KConfigCategory" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KConfigCategory" Member="KConfigCategories">
+    <Type Name="KConfigCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="subtitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="KConfigCategory_KConfig" Member="KConfigs" ThisKey="id" OtherKey="categoryId" Type="KConfig" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Keywords" Member="Keywords">
+    <Type Name="Keyword">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Keyword_ArticlesKeyword" Member="ArticlesKeywords" ThisKey="id" OtherKey="KeywordId" Type="ArticlesKeyword" />
+      <Association Name="Keyword_Keyword" Member="Keywords" ThisKey="id" OtherKey="languageParentId" Type="Keyword" />
+      <Association Name="Keyword_Keyword" Member="Keyword1" ThisKey="languageParentId" OtherKey="id" Type="Keyword" IsForeignKey="true" />
+      <Association Name="Language_Keyword" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KMSLog" Member="KMSLogs">
+    <Type Name="KMSLog">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="aspNetUsersId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="adminName" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="action" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="subAction" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subActionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="assetType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="assetId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="assets" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="assetTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ipAddress" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="hasError" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="eKomBasketId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AspNetUser_KMSLog" Member="AspNetUser" ThisKey="aspNetUsersId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KMSPermission" Member="KMSPermissions">
+    <Type Name="KMSPermission">
+      <Column Name="roleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="kmsSectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="kmsPermissionTypeId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetRole_KMSPermission" Member="AspNetRole" ThisKey="roleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="KMSPermissionType_KMSPermission" Member="KMSPermissionType" ThisKey="kmsPermissionTypeId" OtherKey="id" Type="KMSPermissionType" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="KMSSection_KMSPermission" Member="KMSSection" ThisKey="kmsSectionId" OtherKey="id" Type="KMSSection" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KMSPermissionType" Member="KMSPermissionTypes">
+    <Type Name="KMSPermissionType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="KMSPermissionType_KMSPermission" Member="KMSPermissions" ThisKey="id" OtherKey="kmsPermissionTypeId" Type="KMSPermission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KMSSection" Member="KMSSections">
+    <Type Name="KMSSection">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nesteLabelUnderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="labelInParent" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="depth" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="computername" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="component" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="icon" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isSortable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="showOnMenu" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isUnderline" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublishable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasReadyForPublish" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="config" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="KMSSection_KMSPermission" Member="KMSPermissions" ThisKey="id" OtherKey="kmsSectionId" Type="KMSPermission" />
+      <Association Name="KMSSection_KMSSection" Member="KMSSections" ThisKey="id" OtherKey="parentId" Type="KMSSection" />
+      <Association Name="KMSSection_KMSSection1" Member="KMSSections1" ThisKey="id" OtherKey="nesteLabelUnderId" Type="KMSSection" />
+      <Association Name="KMSSection_KMSSection" Member="KMSSection1" ThisKey="parentId" OtherKey="id" Type="KMSSection" IsForeignKey="true" />
+      <Association Name="KMSSection_KMSSection1" Member="KMSSection2" ThisKey="nesteLabelUnderId" OtherKey="id" Type="KMSSection" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Language" Member="Languages">
+    <Type Name="Language">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flagIcon" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isRightToLeft" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Language_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageId" Type="TypeArticle" />
+      <Association Name="Language_Career" Member="Careers" ThisKey="id" OtherKey="languageId" Type="Career" />
+      <Association Name="Language_Company" Member="Companies" ThisKey="id" OtherKey="languageId" Type="Company" />
+      <Association Name="Language_ContactInfo" Member="ContactInfos" ThisKey="id" OtherKey="languageId" Type="ContactInfo" />
+      <Association Name="Language_ContactTitle" Member="ContactTitles" ThisKey="id" OtherKey="languageId" Type="ContactTitle" />
+      <Association Name="Language_CorporatePage" Member="CorporatePages" ThisKey="id" OtherKey="languageId" Type="CorporatePage" />
+      <Association Name="Language_CorporatePageSection" Member="CorporatePageSections" ThisKey="id" OtherKey="languageId" Type="CorporatePageSection" />
+      <Association Name="Language_Director" Member="Directors" ThisKey="id" OtherKey="languageId" Type="Director" />
+      <Association Name="Language_EmailTemplate" Member="EmailTemplates" ThisKey="id" OtherKey="languageId" Type="EmailTemplate" />
+      <Association Name="Language_InquiryType" Member="InquiryTypes" ThisKey="id" OtherKey="languageId" Type="InquiryType" />
+      <Association Name="Language_Keyword" Member="Keywords" ThisKey="id" OtherKey="languageId" Type="Keyword" />
+      <Association Name="Language_LanguageResourceTranslation" Member="LanguageResourceTranslations" ThisKey="id" OtherKey="languageId" Type="LanguageResourceTranslation" />
+      <Association Name="Language_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageId" Type="NewsCommunication" />
+      <Association Name="Language_Region" Member="Regions" ThisKey="id" OtherKey="languageId" Type="Region" />
+      <Association Name="Language_SocialMedia" Member="SocialMedias" ThisKey="id" OtherKey="languageId" Type="SocialMedia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LanguageResource" Member="LanguageResources">
+    <Type Name="LanguageResource">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="LanguageResource_LanguageResourceTranslation" Member="LanguageResourceTranslations" ThisKey="id" OtherKey="languageResourceId" Type="LanguageResourceTranslation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LanguageResourceTranslation" Member="LanguageResourceTranslations">
+    <Type Name="LanguageResourceTranslation">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="languageResourceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Language_LanguageResourceTranslation" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="LanguageResource_LanguageResourceTranslation" Member="LanguageResource" ThisKey="languageResourceId" OtherKey="id" Type="LanguageResource" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsCommunication" Member="NewsCommunications">
+    <Type Name="NewsCommunication">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subtitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSubCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isArchived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateArchived" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="archivedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isFeatured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isFeatured1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isFeatured2" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isReadyForPublish" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateUnPublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="unPublishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hasArabic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="NewsCommunication_ArticlesKeyword" Member="ArticlesKeywords" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesKeyword" />
+      <Association Name="NewsCommunication_ArticlesType" Member="ArticlesTypes" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesType" />
+      <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageParentId" Type="NewsCommunication" />
+      <Association Name="NewsCommunication_NewsCommunicationMedia" Member="NewsCommunicationMedias" ThisKey="id" OtherKey="newsCommunicationId" Type="NewsCommunicationMedia" />
+      <Association Name="Language_NewsCommunication" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunication1" ThisKey="languageParentId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
+      <Association Name="NewsCategory_NewsCommunication" Member="NewsCategory" ThisKey="categoryId" OtherKey="id" Type="NewsCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsCommunicationMedia" Member="NewsCommunicationMedias">
+    <Type Name="NewsCommunicationMedia">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="newsCommunicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mediaType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mediaSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="caption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="NewsCommunication_NewsCommunicationMedia" Member="NewsCommunication" ThisKey="newsCommunicationId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Newsletter" Member="Newsletters">
+    <Type Name="Newsletter">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="provider" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="campaignId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="subject" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="subtitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="label" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="labelLink" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="topArticles" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="middleArticles" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="entratainmentNews" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="photosAndVids" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="bottomSection" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="sentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="hasBeenSent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Newsletter_NewsletterImageSection" Member="NewsletterImageSections" ThisKey="id" OtherKey="newsletterId" Type="NewsletterImageSection" />
+      <Association Name="Newsletter_NewsletterInterestSection" Member="NewsletterInterestSections" ThisKey="id" OtherKey="newsletterId" Type="NewsletterInterestSection" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsletterImageSection" Member="NewsletterImageSections">
+    <Type Name="NewsletterImageSection">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="newsletterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="label" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Newsletter_NewsletterImageSection" Member="Newsletter" ThisKey="newsletterId" OtherKey="id" Type="Newsletter" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsletterInterestSection" Member="NewsletterInterestSections">
+    <Type Name="NewsletterInterestSection">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="newsletterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="newsletterUserCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="label" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Newsletter_NewsletterInterestSection" Member="Newsletter" ThisKey="newsletterId" OtherKey="id" Type="Newsletter" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="NewsletterUserCategory_NewsletterInterestSection" Member="NewsletterUserCategory" ThisKey="newsletterUserCategoryId" OtherKey="id" Type="NewsletterUserCategory" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsletterUser" Member="NewsletterUsers">
+    <Type Name="NewsletterUser">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="newsletterUserCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="company" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="position" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="country" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="industry" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="random" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="dob" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="send" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Country_NewsletterUser" Member="Country1" ThisKey="country" OtherKey="id" Type="Country" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="NewsletterUserCategory_NewsletterUser" Member="NewsletterUserCategory" ThisKey="newsletterUserCategoryId" OtherKey="id" Type="NewsletterUserCategory" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsletterUserCategory" Member="NewsletterUserCategories">
+    <Type Name="NewsletterUserCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="mailchimpId" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="NewsletterUserCategory_NewsletterInterestSection" Member="NewsletterInterestSections" ThisKey="id" OtherKey="newsletterUserCategoryId" Type="NewsletterInterestSection" />
+      <Association Name="NewsletterUserCategory_NewsletterUser" Member="NewsletterUsers" ThisKey="id" OtherKey="newsletterUserCategoryId" Type="NewsletterUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PushNotification" Member="PushNotifications">
+    <Type Name="PushNotification">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ios" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="android" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isSentIOS" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isSentAndroid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="result" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Region" Member="Regions">
+    <Type Name="Region">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="phoneCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Region_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="regionId" Type="AspNetUser" />
+      <Association Name="Region_AspNetUser1" Member="AspNetUsers1" ThisKey="id" OtherKey="subRegionId" Type="AspNetUser" />
+      <Association Name="Region_Region" Member="Regions" ThisKey="id" OtherKey="parentId" Type="Region" />
+      <Association Name="Region_Region1" Member="Regions1" ThisKey="id" OtherKey="languageParentId" Type="Region" />
+      <Association Name="Language_Region" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="Region_Region" Member="Region1" ThisKey="parentId" OtherKey="id" Type="Region" IsForeignKey="true" />
+      <Association Name="Region_Region1" Member="Region2" ThisKey="languageParentId" OtherKey="id" Type="Region" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Settings" Member="Settings">
+    <Type Name="Setting">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="shippingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="voucherValidity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="defaultSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="receiptSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="tPPostFailureSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="defaultSendFromEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="supportPhone" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="staticDataLastChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="staticImageLastChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="smsProvider" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="refundTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="disableGiftCardCreationOnWebsite" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="giftCardExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="giftCardMinAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="refundExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="friendCouponExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="friendCouponPercentage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="newsletterCouponExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="newsletterCouponPercentage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="loyaltyPointValue" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="instagramAccessToken" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Setting_SettingsFile" Member="SettingsFiles" ThisKey="id" OtherKey="settingsId" Type="SettingsFile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SettingsFile" Member="SettingsFiles">
+    <Type Name="SettingsFile">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="settingsId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="fileTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Setting_SettingsFile" Member="Setting" ThisKey="settingsId" OtherKey="id" Type="Setting" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SignalRUser" Member="SignalRUsers">
+    <Type Name="SignalRUser">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="connectionId" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="productId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SocialMedia" Member="SocialMedias">
+    <Type Name="SocialMedia">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="icon" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="SocialMedia_SocialMedia" Member="SocialMedias" ThisKey="id" OtherKey="languageParentId" Type="SocialMedia" />
+      <Association Name="Language_SocialMedia" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="SocialMedia_SocialMedia" Member="SocialMedia1" ThisKey="languageParentId" OtherKey="id" Type="SocialMedia" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamCategory" Member="TeamCategories">
+    <Type Name="TeamCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TeamCategory_Director" Member="Directors" ThisKey="id" OtherKey="categoryId" Type="Director" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CorporatePageTemplate" Member="CorporatePageTemplates">
+    <Type Name="CorporatePageTemplate">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="frontHtmlId" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="frontHtmlClass" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="hasRelatedEKomCategories" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasRelatedEKomCategories1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasRelatedEKomCollections" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasRelatedEKomProducts" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasTitle" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasSubtitle" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasSubtitle1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasDescription" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasSmallDescription" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasLabelLink" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasLink" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasImage" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasImageSecondary" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasVideoLink" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasVideo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasFile" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasImageGallery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasVideoGallery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasFileGallery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hasSubSectionsRepeater" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="subSectionsRepeaterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="hasEntry" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="CorporatePageTemplate_CorporatePageSection" Member="CorporatePageSections" ThisKey="id" OtherKey="corporatePageTemplateId" Type="CorporatePageSection" />
+      <Association Name="CorporatePageTemplate_CorporatePageTemplate" Member="CorporatePageTemplates" ThisKey="id" OtherKey="subSectionsRepeaterId" Type="CorporatePageTemplate" />
+      <Association Name="CorporatePageTemplate_CorporatePageTemplate" Member="CorporatePageTemplate1" ThisKey="subSectionsRepeaterId" OtherKey="id" Type="CorporatePageTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsCategory" Member="NewsCategories">
+    <Type Name="NewsCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="NewsCategory_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="categoryId" Type="NewsCommunication" />
+    </Type>
+  </Table>
+</Database>

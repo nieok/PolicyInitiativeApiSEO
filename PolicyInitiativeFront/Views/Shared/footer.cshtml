@@ -1,0 +1,86 @@
+﻿<footer>
+    <div class="container">
+        <div class="wrap">
+            <div class="holder">
+                <ul class="medias">
+                    @foreach (var item in ViewBag.medias)
+                    {
+                        if (item.id == 4)
+                        {
+                            <li><a href="@item.link" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="32" viewBox="0 0 31 31.882"><g transform="translate(0)"><rect width="31" height="31" rx="3" transform="translate(0 0)" /><path d="M104.113,46.41V57.681a.3.3,0,0,0,.3.3h4.184a.3.3,0,0,0,.3-.3h0V46.223h3.035a.29.29,0,0,0,.292-.265l.3-3.454a.3.3,0,0,0-.275-.319h-3.347V39.736a1.035,1.035,0,0,1,1.036-1.038h2.34a.3.3,0,0,0,.3-.3h0V34.954a.3.3,0,0,0-.3-.3h-3.95a4.2,4.2,0,0,0-4.2,4.2v3.327h-2.093a.3.3,0,0,0-.3.3h0v3.454a.3.3,0,0,0,.3.292h2.093Z" transform="translate(-91.727 -26.097)" fill="#fff" fill-rule="evenodd" /></g></svg></a></li>
+                        }
+                        if (item.id == 3)
+                        {
+                            <li><a href="@item.link" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 30.84 30.84"><rect width="30.84" height="30.84" rx="3" /><path d="M115.685,55.933c.01.152.01.306.01.461a10.027,10.027,0,0,1-9.957,10.095H105.6a10.072,10.072,0,0,1-5.448-1.587,7.423,7.423,0,0,0,.855.043,7.106,7.106,0,0,0,4.4-1.515,3.551,3.551,0,0,1-3.316-2.461,3.825,3.825,0,0,0,1.6-.064,3.548,3.548,0,0,1-2.839-3.485v-.051a3.525,3.525,0,0,0,1.6.45,3.556,3.556,0,0,1-1.1-4.743,10.081,10.081,0,0,0,7.315,3.711,3.555,3.555,0,0,1,6.053-3.24,6.978,6.978,0,0,0,2.251-.855,3.551,3.551,0,0,1-1.556,1.955,7.052,7.052,0,0,0,2.044-.551,7.487,7.487,0,0,1-1.78,1.838Z" transform="translate(-93.39 -44.037)" fill="#fff" /></svg></a></li>
+                        }
+                        if (item.id == 12)
+                        {
+                            <li><a href="@item.link" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 30.84 30.84"><rect width="30.84" height="30.84" rx="3" /><path d="M108.285,84.131A7.231,7.231,0,1,1,115.3,76.7l0,.01A7.244,7.244,0,0,1,108.285,84.131Zm4.124-7.216a4.319,4.319,0,1,0,0,.019v-.019Z" transform="translate(-92.658 -61.484)" fill="#fff" /><path d="M111.313,69.715a1.777,1.777,0,1,1,0-.031Z" transform="translate(-85.393 -63.333)" fill="#fff" /></svg></a></li>
+                        }
+                        if (item.id == 2)
+                        {
+                            <li><a href="@item.link" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 31.299 23.376"><path d="M128.163,94.107c-.051,1.4-.1,3.341-.212,5.274a20.19,20.19,0,0,1-.38,2.92,4.262,4.262,0,0,1-1.852,2.93,4.354,4.354,0,0,1-2.157.658c-2.829.117-5.662.255-8.493.315-2.42.047-4.854.014-7.28-.021-1.583-.023-3.166-.088-4.747-.179a18.458,18.458,0,0,1-2.469-.308,3.689,3.689,0,0,1-2.9-2.58,12.822,12.822,0,0,1-.6-3.183,70.126,70.126,0,0,1-.177-7.408,28.779,28.779,0,0,1,.475-5.541,4.687,4.687,0,0,1,1.7-3,4.026,4.026,0,0,1,2.2-.79c2.757-.125,5.516-.269,8.275-.319s5.545-.025,8.314.023c1.783.029,3.551.136,5.325.241a5.267,5.267,0,0,1,2.315.563,4.21,4.21,0,0,1,1.955,2.607A16.982,16.982,0,0,1,128,90.365C128.068,91.432,128.1,92.5,128.163,94.107Zm-19.554-5.442V100.4l9.78-5.87Z" transform="translate(-96.864 -82.85)" fill="#050505" /></svg></a></li>
+                        }
+
+                    }
+
+                </ul>
+                @if (ViewBag.contactInfo.Count != 0)
+                {
+                    foreach (var item in ViewBag.contactInfo)
+                    {
+                        if (item.isMainAddress == true)
+                        {
+                            <div class="info">
+                                @if (!String.IsNullOrEmpty(item.address))
+                                {
+                                    @Html.Raw(item.address)
+                                }
+                                @if (!String.IsNullOrEmpty(item.phone))
+                                {
+                                    if (!String.IsNullOrEmpty(item.email))
+                                    {
+                                        <span class="contact">
+                                            <a class="call" href="tel:@item.phone">@item.phone</a>
+                                            <a href="mailto:@item.email">@item.email</a>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="contact">
+                                            T <a class="call" href="tel:@item.phone">@item.phone</a>
+
+                                        </span>
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (!String.IsNullOrEmpty(item.email))
+                                    {<span class="contact">
+                                            <a href="mailto:@item.email">@item.email</a>
+                                        </span>
+                                    }
+
+                                }
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <a class="logo" href="@Url.Content("~/home")"><img src="@Url.Content("~/content/images/logo2.png")" /></a>
+        </div>
+    </div>
+</footer>
+
+
+<div class="backTab">
+    <div class="container">
+        <div class="wrap">
+            <div class="holder" onclick="scrollToTop()">
+                <div class="label">Back to top</div>
+                <div class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38"><g transform="translate(0.081 38) rotate(-90)"><g transform="translate(0 0)"><g transform="translate(0 -0.081)" fill="none" stroke="#fff" stroke-width="1"><circle cx="19" cy="19" r="19" stroke="none" /><circle cx="19" cy="19" r="18.5" fill="none" /></g><g transform="translate(11.672 13.409)"><path d="M0,0,6.176,6.176,0,12.352" transform="translate(7.941)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M12.556,0H0" transform="translate(0 6.359)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
+            </div>
+        </div>
+    </div>
+</div>

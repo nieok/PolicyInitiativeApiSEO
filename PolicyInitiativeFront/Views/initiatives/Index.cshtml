@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "The Policy Initiative - Initiatives";
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    ViewBag.BodyAttributes = "class=initiativePage";
+}
+
+<div class="Options">
+    <div class="container">
+        <ul class="items">
+            <li><div class="lang ar">عربي</div></li>
+            <li><div class="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 25.961 25.966"><path d="M25.608,22.449l-5.056-5.056a1.216,1.216,0,0,0-.862-.355h-.827a10.543,10.543,0,1,0-1.826,1.826v.827a1.216,1.216,0,0,0,.355.862l5.056,5.056a1.212,1.212,0,0,0,1.719,0L25.6,24.173a1.223,1.223,0,0,0,.005-1.724ZM10.548,17.038a6.491,6.491,0,1,1,6.491-6.491A6.487,6.487,0,0,1,10.548,17.038Z" fill="#070606" /></svg></div></li>
+            <li>
+                <div class="mailboxBtn"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" viewBox="0 0 32.75 29.75"><g transform="translate(-47.25 -297.25)"><g transform="translate(0 10)"><g transform="translate(3.268 -15.052)"><rect width="25" height="25" rx="0.5" transform="translate(44.732 303.052)" fill="none" stroke="#040405" stroke-width="1.5" /></g></g><g transform="translate(-91.847 111.179)"><circle cx="7.5" cy="7.5" r="7.5" transform="translate(156.847 200.821)" fill="#070708" /><path d="M168.47,209.377h-3.013v2.944h-2.234v-2.944h-3v-2.112h3v-2.944h2.234v2.944h3.013Z" fill="#fff" /></g></g></svg></div>
+                @{Html.RenderPartial("newsletterPop");}
+            </li>
+        </ul>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    if (item.frontHtmlId == "1")
+    {
+        <div class="Initiatives">
+            <div class="container">
+                <div class="titleTab">
+                    <h2 class="title">@item.title</h2>
+                </div>
+                <div class="wrap">
+                    @if (!String.IsNullOrEmpty(item.smallDescription))
+                    {
+                        <div class="top">
+                            <div class="text">@Html.Raw(item.smallDescription)</div>
+                        </div>
+                    }
+
+                    @if (ViewBag.categories.Count != 0)
+                    {
+                        <div class="graph">
+                            <div class="lines">
+                                <img src="@Url.Content("~/content/pictures/curves.png")" />
+                                @{int count = 1; }
+                                @foreach (var sub in ViewBag.categories)
+                                {
+                                    Random r = new Random();
+                                    string[] words = { "purple", "blue", "green" };
+                                    string word = words[r.Next(0, words.Length)];
+                                    string classitem = "item" + count;
+                                    <a href="@Url.Content("~/initiatives/details/"+sub.id+"/"+ sub.urlTitle)" class="item @classitem @word">@sub.title</a>
+
+                                    count++;
+                                }
+
+                            </div>
+
+                        </div>
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    }
+}

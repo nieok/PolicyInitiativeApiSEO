@@ -1,0 +1,50 @@
+﻿@using System.Configuration;
+@using PolicyInitiativeFront.Helpers
+@{
+    var controllername = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+    var actionname = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
+
+    PolicyInitiativeFront.Models.MetasModel metas = (PolicyInitiativeFront.Models.MetasModel)ViewBag.metas;
+
+    string onlineUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"];
+    string projectName = ConfigurationManager.AppSettings["ProjectName"];
+
+    string twitter = "@samiatallah1";
+}
+
+<!-- Update your html tag to include the itemscope and itemtype attributes. -->
+@*<html itemscope itemtype="http://schema.org/Product">*@
+
+<!-- Place this data between the <head> tags of your website -->
+<title>@metas.customPageTitle</title> @*Page Title. Maximum length 60-70 characters*@
+<meta name="description" content="@(new UtilsHelper().GetStrippedHTML(metas.metaDescription, 5000))" /> @*Page description. No longer than 155 characters.*@
+<link rel="canonical" href="@metas.canonicalUrl" />
+<meta name="keywords" content="@metas.metaKeywords" />
+<meta name="robots" content="index" />
+<!--#region Schema.org markup for Google+ -->
+<meta itemprop="name" content="@metas.customPageTitle" /> @*The Name or Title Here*@
+<meta itemprop="description" content="@(new UtilsHelper().GetStrippedHTML(metas.metaDescription, 5000))" />
+<meta itemprop="image" content="@metas.metaImgSrc" />
+<!--#endregion -->
+<!--#region Twitter Card data -->
+@*<meta name="twitter:card" content="product">*@
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@twitter" />
+<meta name="twitter:title" content="@metas.customPageTitle" />
+<meta name="twitter:description" content="@(new UtilsHelper().GetStrippedHTML(metas.metaDescription, 5000))" />
+<meta name="twitter:creator" content="Cedars Art Production"> @*@author_handle*@
+<meta name="twitter:image" content="@metas.metaImgSrc" />
+
+<!--#endregion -->
+<!--#region Open Graph data -->
+<meta property="og:title" content="@metas.customPageTitle" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="@metas.canonicalUrl" />
+<meta property="og:description" content="@(new UtilsHelper().GetStrippedHTML(metas.metaDescription, 5000))" />
+<meta property="og:site_name" content="@projectName" />
+<meta property="og:image" content="@metas.metaImgSrc" />
+
+<!--#endregion -->
+<!--#region Facebook data -->
+<meta property="fb:app_id" content="187060489652248" />
+<!--#endregion -->

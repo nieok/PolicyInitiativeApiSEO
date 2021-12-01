@@ -1,0 +1,86 @@
+﻿@{
+    var controllername = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+    var actionname = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
+    //var language = ViewContext.RouteData.Values["localisation"].ToString().ToLower();
+    var frontUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"];
+    var apiUrl = ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"];
+    PolicyInitiativeFront.Models.MetasModel metas = (PolicyInitiativeFront.Models.MetasModel)ViewBag.metas;
+
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<!-- ng-app="phoneDeck" -->
+
+<head>
+
+    <base href="/en/" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    @if (metas != null)
+    {
+        @Html.Partial("_Metas")
+    }
+
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon.ico")" />
+    <link rel="stylesheet" href="https://use.typekit.net/hng1okw.css">
+    <link href="@Url.Content("~/Content/css/plugins.css?v=1")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/player.css?v=1")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/styles.css?v=183")" rel="stylesheet" />
+ 
+    <script>document.documentElement.className = 'js';</script>
+    <!-- #region PhoneGap -->
+    <script type="text/javascript" charset="utf-8">
+        var appVersion = "";
+        var defaultData = undefined;
+        var firstOpen = false;
+        var orderPrice = "";
+        var orderNumber = "";
+        var medium;
+        var device = undefined;
+    </script>
+
+
+    <meta name="twitter:widgets:autoload" content="off">
+
+</head>
+
+<body class="color1" ng-controller="myCtrl" >
+    <input hidden id="RouteUrl" value="@apiUrl" />
+    <input hidden id="FrontUrl" value="@frontUrl" />
+
+    <div id="fb-root"></div>
+    <div hidden>
+        <div addthis-tool tool-class="addthis_inline_share_toolbox"></div>
+    </div>
+    <div id="wrapper" @Html.Raw(ViewBag.BodyAttributes)>
+        @{Html.RenderPartial("header");}
+        <div id="content">
+            @RenderBody()
+        </div>
+        @{Html.RenderPartial("footer");}
+        @{Html.RenderPartial("authorPopup");}
+        @{Html.RenderPartial("authorPopup-arabic");}
+        @{Html.RenderPartial("filterMenu");}
+        @{Html.RenderPartial("videoPopup");}
+        @{Html.RenderPartial("searchPop");}
+
+
+    </div>
+    @{ if (controllername == "contact")
+        {
+            <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyBmRJICbrcT92eeEU6Cdc9DAlchb_1ZxKU"></script>
+        } }
+
+    <script type="text/javascript" src="@(Url.Content("~/Scripts/plugins.js?v=1"))"></script>
+    <script type="text/javascript" src="@(Url.Content("~/Scripts/audioPlayer.js?v=1"))"></script>
+    <script type="text/javascript" src="@(Url.Content("~/Scripts/myscript.js?v=13"))"></script>
+
+    <script src="@Url.Content("~/")assets/vendor/angular/plugins.js"></script>
+    <script src="@Url.Content("~/")assets/vendor/angular/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="@(Url.Content("~/Scripts/script.js?v=13"))"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

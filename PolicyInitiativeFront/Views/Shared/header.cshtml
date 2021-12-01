@@ -1,0 +1,29 @@
+﻿
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+
+<header class="minimiseHeader">
+    <div class="container">
+        <div class="wrap">
+            <a class="logo" href="@Url.Content("~/home")">
+            <img class="main" src="@Url.Content("~/content/images/logoblack.png")" />
+           <img class="main2" src="@Url.Content("~/content/images/logo2.png")" />
+            <img class="sub" src="@Url.Content("~/content/images/logowhite.png")" />
+            </a>
+       
+        <div class="Menu">
+            <ul class="items">
+                <li><a class="link @(("about" == controller) ? "selected" : "")" href="@Url.Content("~/about")">about</a></li>
+                 <li><a class="link @(("team" == controller) ? "selected" : "")" href="@Url.Content("~/team")">team</a></li>
+                 <li><a class="link @(("initiatives" == controller) ? "selected" : "")" href="@Url.Content("~/initiatives")">initiatives</a></li>
+                 <li><a class="link @(("contact" == controller) ? "selected" : "")" href="@Url.Content("~/contact")">contact</a></li>
+            </ul>
+        </div>
+
+            <div class="openMenu"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="27" viewBox="0 0 27.886 26.966"><path d="M0-1V2.633H27.886V-1ZM0,10.612v3.633H27.886V10.612ZM0,22.333v3.633H27.886V22.333Z" transform="translate(0 1)" fill="#fff"/></svg></div>
+        
+        </div>
+    </div>
+</header>

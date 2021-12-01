@@ -1,0 +1,3 @@
+﻿Sitemap: http://shift2.koein.com/lorganica/GoogleSitemap
+User-agent: *
+Allow:
