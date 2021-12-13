@@ -7,7 +7,7 @@
 
 <h1 class="hiddenHeader">The Policy Initiative</h1>
 
-
+<input hidden value="true" class="home"/>
 <div class="Options">
     <div class="container">
         <ul class="items">
@@ -74,8 +74,8 @@
     <!-- note add class "loadmore"  to itemsList -->
     <div class="container">
         <ul class="grid">
-            <li class="grid-item" ng-repeat="item in news" ng-class="{'newPost': item.newPost == true}">
-                <div class="item englishBox">
+            @*<li class="grid-item" ng-repeat="item in news" ng-class="{'newPost': item.newPost == true}">
+                <div class="item englishBox" ng-if="item.hasArabic == false">
                     <div class="pic"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" ng-if="item.imgSrc != null" /></a></div>
                     <div class="top">
                         <div class="date" ng-bind="item.date"></div>
@@ -90,7 +90,7 @@
 
                     </div>
                 </div>
-                <div class="item arabicBox">
+                <div class="item arabicBox" ng-if="item.hasArabic == false">
                     <div class="pic"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" ng-if="item.imgSrc != null" /></a></div>
                     <div class="top">
                         <div class="date" ng-bind="item.date"></div>
@@ -106,7 +106,22 @@
 
                     </div>
                 </div>
-            </li>
+                <div class="item arabicBox" ng-if="item.hasArabic == true">
+                    <div class="pic"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" ng-if="item.imgSrc != null" /></a></div>
+                    <div class="top">
+                        <div class="date" ng-bind="item.date"></div>
+                    </div>
+                    <h2 class="title"><a href="{{item.detailUrl}}?lang=ar" ng-bind="item.artitle"></a></h2>
+                    <div class="author" ng-bind="item.authors.artitle"></div>
+                    <div class="text">
+                        <a href="{{item.detailUrl}}?lang=ar">
+                            <p ng-bind-html="item.arsmallDescription"></p>
+                            <span class="read">اقرأ</span>
+                        </a>
+
+                    </div>
+                </div>
+            </li>*@
   
         </ul>
     </div>

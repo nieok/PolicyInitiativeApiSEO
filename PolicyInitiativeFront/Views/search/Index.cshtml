@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "The Policy Initiative";
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    ViewBag.BodyAttributes = "class=subpage2";
+}
+
+<h1 class="hiddenHeader">The Policy Initiative</h1>
+<div ng-controller="SearchCTRL">
+    <div class="Options">
+        <div class="container">
+            <ul class="items">
+                <li><div class="filterBtn"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 26.334 25.981"><g transform="translate(-24.453 -157.5)"><path d="M0,0H24.834" transform="translate(25.203 161.021)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="1.5" /><line x2="24.834" transform="translate(25.203 170.26)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" /><line x2="24.834" transform="translate(25.203 179.98)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" /><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(32.532 158)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1" /><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(39.373 167.075)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1" /><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(30.949 176.151)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1" /></g></svg></div></li>
+                <li><div class="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 25.961 25.966"><path d="M25.608,22.449l-5.056-5.056a1.216,1.216,0,0,0-.862-.355h-.827a10.543,10.543,0,1,0-1.826,1.826v.827a1.216,1.216,0,0,0,.355.862l5.056,5.056a1.212,1.212,0,0,0,1.719,0L25.6,24.173a1.223,1.223,0,0,0,.005-1.724ZM10.548,17.038a6.491,6.491,0,1,1,6.491-6.491A6.487,6.487,0,0,1,10.548,17.038Z" fill="#070606" /></svg></div></li>
+                <li>
+                    <div class="mailboxBtn"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" viewBox="0 0 32.75 29.75"><g transform="translate(-47.25 -297.25)"><g transform="translate(0 10)"><g transform="translate(3.268 -15.052)"><rect width="25" height="25" rx="0.5" transform="translate(44.732 303.052)" fill="none" stroke="#040405" stroke-width="1.5" /></g></g><g transform="translate(-91.847 111.179)"><circle cx="7.5" cy="7.5" r="7.5" transform="translate(156.847 200.821)" fill="#070708" /><path d="M168.47,209.377h-3.013v2.944h-2.234v-2.944h-3v-2.112h3v-2.944h2.234v2.944h3.013Z" fill="#fff" /></g></g></svg></div>
+                    @{Html.RenderPartial("newsletterPop");}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="Tags">
+        <div class="container">
+            <ul class="list">
+                <li ng-repeat="item in typeList" ng-if="typeList.length != 0">
+                    <div class="item">
+                        <div class="name red">{{item}}</div><div class="delete"></div>
+                    </div>
+                </li>
+                <li ng-repeat="item in keywordList" ng-if="keywordList.length != 0">
+                    <div class="item">
+                        <div class="name green">{{item}}</div><div class="delete"></div>
+                    </div>
+                </li>
+                <li ng-if="datefrom != '' && dateto !=''">
+                    <div class="item">
+                        <div class="name yellow">{{datefrom}} > {{dateto}}</div><div class="delete"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="itemsList">
+        <div class="container">
+            <ul class="grid">
+                @*<li class="grid-item" ng-repeat="item in newsList">
+                    <div class="item englishBox" ng-if="item.hasArabic == false">
+                        <div class="pic" ng-if="item.imgSrc != null"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" alt="{{item.title}}" /></a></div>
+                        <div class="top">
+                            <div class="date" ng-bind="item.Date"></div>
+                            <div class="arabic">عربي</div>
+                        </div>
+                        <h2 class="title"><a href="{{item.detailUrl}}">{{item.title}}</a></h2>
+                        <div class="author" ng-bind="item.authorsList"></div>
+                        <div class="text">
+                            <a href="{{item.detailUrl}}">
+                                <p ng-bind-html="item.smallDescription"></p> <span class="read">read</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item arabicBox" ng-if="item.hasArabic == false">
+                        <div class="pic" ng-if="item.imgSrc != null"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" alt="{{item.arabictitle}}" /></a></div>
+                        <div class="top">
+                            <div class="date" ng-bind="item.Date"></div>
+                            <div class="english">eng</div>
+                        </div>
+                        <h2 class="title"><a href="{{item.detailUrl}}">{{item.arabictitle}}</a></h2>
+                        <div class="author" ng-bind="item.authorsarList"></div>
+                        <div class="text">
+                            <a href="{{item.detailUrl}}">
+                                <p ng-bind-html="item.arabicDesc"></p>
+                                <span class="read">اقرأ</span>
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="item arabicBox" ng-if="item.hasArabic == true">
+                        <div class="pic" ng-if="item.imgSrc != null"><a href="{{item.detailUrl}}?lang=ar"><img ng-src="{{item.imgSrc}}" alt="{{item.arabictitle}}" /></a></div>
+                        <div class="top">
+                            <div class="date" ng-bind="item.Date"></div>
+                        </div>
+                        <h2 class="title"><a href="{{item.detailUrl}}?lang=ar">{{item.arabictitle}}</a></h2>
+                        <div class="author" ng-bind="item.authorsarList"></div>
+                        <div class="text">
+                            <a href="{{item.detailUrl}}?lang=ar">
+                                <p ng-bind-html="item.arabicDesc"></p>
+                                <span class="read">اقرأ</span>
+                            </a>
+
+
+                        </div>
+                    </div>
+                </li>*@
+              
+
+            </ul>
+        </div>
+    </div>
+</div>

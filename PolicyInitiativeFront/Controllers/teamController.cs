@@ -15,12 +15,23 @@ namespace PolicyInitiativeFront.Controllers
         private TeamRepository teamRepository = new TeamRepository();
         private TeamCategoryRepository teamcatRepository = new TeamCategoryRepository();
         // GET: about
-        public ActionResult Index(string category="team")
+        public ActionResult Index(string category="team" ,string lang="en")
         {
-            var teams = teamRepository.GetAllTeam("220x220xi", category).ToList();
-            var categories = teamcatRepository.GetAllTeamCategory();
-            ViewBag.category = categories.FirstOrDefault(d=>d.title.ToLower() == category);
-            ViewBag.categories = categories;
+            var teams = teamRepository.GetAllTeam("220x220xi", category , lang).ToList();
+         
+            if(lang == "en")
+            {
+                ViewBag.category = teamcatRepository.GetAllIsPublished().FirstOrDefault(d => d.title.ToLower() == category);
+               
+            }
+            else
+            {
+
+                ViewBag.category = teamcatRepository.GetAll().FirstOrDefault(d => d.title.ToLower() == category);
+               
+            }
+            ViewBag.categories = teamcatRepository.GetAllTeamCategory(lang);
+            ViewBag.language = lang;
             #region SEO
             MetasModel metas = new MetasModel();
             CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["TeamPage"]));
@@ -33,7 +44,7 @@ namespace PolicyInitiativeFront.Controllers
             metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? defaultPage.customPageTitle : currentPage.customPageTitle;
             metas.customUrlTitle = string.IsNullOrEmpty(currentPage.customUrlTitle) ? defaultPage.customUrlTitle : currentPage.customUrlTitle;
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"];
+            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] +"team?category=" +category;
             ViewBag.metas = metas;
             #endregion
             return View(teams);

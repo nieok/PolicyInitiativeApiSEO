@@ -19,22 +19,20 @@
 
 <div class="Description">
     <div class="container">
-        <div class="pic">
-            @if (!String.IsNullOrEmpty(Model.imgSrc))
-            {
+        @if (!String.IsNullOrEmpty(Model.imgSrc))
+        {
+            <div class="pic">
                 <img src="@Url.Content(Model.imgSrc)" />
-
-            }
-            <div class="info">
-                <h2 class="caption">@Model.title</h2>
+                <div class="info">
+                    <h2 class="caption">@Model.title</h2>
+                </div>
             </div>
-        </div>
+        }
         @if (!String.IsNullOrEmpty(Model.description))
         {
             <div class="text">
                 @Html.Raw(Model.description)
             </div>
-
         }
 
     </div>
@@ -43,228 +41,101 @@
 <div class="itemsList">
     <div class="container">
         <ul class="grid">
-            <li class="grid-item">
-                <div class="item">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template1")">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template1")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item englishBox">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                        <div class="arabic">عربي</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template2")">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template2")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="item arabicBox">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                        <div class="english">eng</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template3")">التشريع “للضرورة الخاصة بهم”</a></h2>
-                    <div class="author">سامي عطاالله </div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template3")">
-                            في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور،
-                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
-                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
-                            <span class="read">اقرأ</span>
-                        </a>
+            @if (ViewBag.news.Count != null)
+            {
+                foreach (var item in ViewBag.news)
+                {
+                    if (!item.hasArabic)
+                    {
+                        <li class="grid-item">
+                            <div class="item englishBox">
+                                <div class="top">
+                                    @if (!String.IsNullOrEmpty(item.Date))
+                                    {
+                                        <div class="date">@item.Date</div>
+                                    }
+                                    <div class="arabic" onclick="arabic(event)">عربي</div>
+                                </div>
+                                <h2 class="title"><a href="@Url.Content(item.detailUrl)">@item.title</a></h2>
+                                @if (!String.IsNullOrEmpty(item.authorsList))
+                                {
+                                    <div class="author">@item.authorsList</div>
 
+                                }
+                                @if (!String.IsNullOrEmpty(item.smallDescription))
+                                {
+                                    <div class="text">
+                                        <a href="@Url.Content(item.detailUrl)">
+                                            @Html.Raw(item.smallDescription) <span class="read">read</span>
+                                        </a>
+                                    </div>
+                                }
 
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item englishBox">
-                    <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/change.jpg")" /></a></div>
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                        <div class="arabic">عربي</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template1")">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template1")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="item arabicBox">
-                    <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/change.jpg")" /></a></div>
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                        <div class="english">eng</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template3")">التشريع “للضرورة الخاصة بهم”</a></h2>
-                    <div class="author">سامي عطاالله </div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template3")">
-                            في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور،
-                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
-                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
-                            <span class="read">اقرأ</span>
-                        </a>
+                            </div>
+                            <div class="item arabicBox">
+                                <div class="top">
+                                    @if (!String.IsNullOrEmpty(item.Date))
+                                    {
+                                        <div class="date">@item.Date</div>
+                                    }
+                                    <div class="english" onclick="english(event)">eng</div>
+                                </div>
+                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")">@item.artitle</a></h2>
+                                @if (!String.IsNullOrEmpty(item.authorsarList))
+                                {
+                                    <div class="author">@item.authorsarList</div>
+                                }
+                                @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                {
+                                    <div class="text">
+                                        <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                            @Html.Raw(item.arabicDesc)
+                                            <span class="read">اقرأ</span>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </li>
 
+                    }
+                    else
+                    {
+                        <li class="grid-item">
+                            <div class="item arabicBox">
+                                <div class="top">
+                                    @if (!String.IsNullOrEmpty(item.Date))
+                                    {
+                                        <div class="date">@item.Date</div>
+                                    }
+                                </div>
+                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")">@item.artitle</a></h2>
+                                @if (!String.IsNullOrEmpty(item.authorsarList))
+                                {
+                                    <div class="author">@item.authorsarList</div>
+                                }
+                                @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                {
+                                    <div class="text">
+                                        <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                            @Html.Raw(item.arabicDesc)
+                                            <span class="read">اقرأ</span>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </li>
+                    }
 
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item englishBox">
-                    <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/initiative.jpg")" /></a></div>
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                        <div class="arabic">عربي</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template2")">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template2")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="item arabicBox">
-                    <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/initiative.jpg")" /></a></div>
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                        <div class="english">eng</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template3")">التشريع “للضرورة الخاصة بهم”</a></h2>
-                    <div class="author">سامي عطاالله </div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template3")">
-                            في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور،
-                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
-                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
-                            <span class="read">اقرأ</span>
-                        </a>
+                }
+            }
 
-
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item">
-                    <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/elections2022.jpg")" /></a></div>
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template1")">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template1")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template1")">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template1")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template3")">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template3")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template1")">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template1")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="grid-item">
-                <div class="item">
-                    <div class="top">
-                        <div class="date">05.04.21</div>
-                    </div>
-                    <h2 class="title"><a href="@Url.Content("~/article/template2")">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2>
-                    <div class="author">Sami Atallah</div>
-                    <div class="text">
-                        <a href="@Url.Content("~/article/template2")">
-                            Five months have passed since caretaker Prime Minister Saad Hariri
-                            was nominated to form a new government. Since then, he has struggled to strike
-                            a balance between domestic and regional interests.
-                            While it might take some time for ostensibly disparate interests to align. <span class="read">read</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
 
         </ul>
     </div>
 </div>
 
 
-<div class="itemSwiper">
+@*<div class="itemSwiper">
     <div class="container">
         <div class="top">
             <h2 class="name">Related Output</h2>
@@ -346,4 +217,4 @@
         <div class="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
         <div class="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
     </div>
-</div>
+</div>*@

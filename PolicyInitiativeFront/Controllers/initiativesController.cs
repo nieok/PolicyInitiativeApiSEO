@@ -9,12 +9,13 @@ using System.Web.Mvc;
 
 namespace PolicyInitiativeFront.Controllers
 {
-    public class initiativesController : Controller
+    public class initiativesController : SharedController
     {
         private CorporatePageRepository rpstry = new CorporatePageRepository();
         private CorporatePageSectionRepository sectionrpstry = new CorporatePageSectionRepository();
 
         private NewsCategoryRepository categoryRepository = new NewsCategoryRepository();
+        private NewsCommunicationRepository newsRepository = new NewsCommunicationRepository();
         // GET: about
         public ActionResult Index()
         {
@@ -66,9 +67,10 @@ namespace PolicyInitiativeFront.Controllers
 
             #region SEO
             MetasModel metas = new MetasModel();
-            var news = categoryRepository.GetCatById(id, "1086x400xi");
+            var category = categoryRepository.GetCatById(id, "1086x400xi");
+            var news = newsRepository.GetAllByCategoryId(id, "");
 
-            ViewBag.news = news;
+            ViewBag.news= news;
             NewsCategory currentPage = categoryRepository.GetById(id);
             CorporatePage defaultPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["DefaultPage"]));
             var entryTranslatedDefaultItem = defaultPage;
@@ -108,12 +110,12 @@ namespace PolicyInitiativeFront.Controllers
             }
 
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "initiatives/details/" + id + "/" + news.urlTitle;
+            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "initiatives/details/" + id + "/" + category.urlTitle;
 
             ViewBag.metas = metas;
             #endregion
 
-            return View(news);
+            return View(category);
 
 
         }

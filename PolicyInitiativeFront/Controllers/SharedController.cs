@@ -28,6 +28,8 @@ namespace PolicyInitiativeFront.Controllers
         public LanguageRepository langrpstry = new LanguageRepository();
         public SocialMediaRepository socialrpstry = new SocialMediaRepository();
         public CorporatePageRepository rpstry = new CorporatePageRepository();
+        public TypeArticleRepository typesrpstry = new TypeArticleRepository();
+        public KeywordRepository keywordRepository = new KeywordRepository();
         private dblinqDataContext db = new dblinqDataContext();
 
         private string _DefaultLanguage = "en";
@@ -36,22 +38,23 @@ namespace PolicyInitiativeFront.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
-
-            var language = (string)filterContext.RouteData.Values["localisation"] ?? _DefaultLanguage;
-            #region Setting UI Culture
-            string selectedLanguage = ConfigurationManager.AppSettings[language + "UICulture"];
-            if (selectedLanguage == null)
-            {
-                language = _DefaultLanguage;
-                selectedLanguage = ConfigurationManager.AppSettings[language + "UICulture"];
-            }
-            Thread.CurrentThread.CurrentCulture =
-            CultureInfo.CreateSpecificCulture(ConfigurationManager.AppSettings["UICulture"]);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedLanguage);
-            #endregion
-            ViewBag.dictionary = langrpstry.LanguageDictionary(language);
+            //var language = (string)filterContext.RouteData.Values["localisation"] ?? _DefaultLanguage;
+            //#region Setting UI Culture
+            //string selectedLanguage = ConfigurationManager.AppSettings[language + "UICulture"];
+            //if (selectedLanguage == null)
+            //{
+            //    language = _DefaultLanguage;
+            //    selectedLanguage = ConfigurationManager.AppSettings[language + "UICulture"];
+            //}
+            //Thread.CurrentThread.CurrentCulture =
+            //CultureInfo.CreateSpecificCulture(ConfigurationManager.AppSettings["UICulture"]);
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedLanguage);
+            //#endregion
+            //ViewBag.dictionary = langrpstry.LanguageDictionary(language);
             ViewBag.medias = socialrpstry.GetAllIsPublished();
-            ViewBag.language = language;
+            ViewBag.types = typesrpstry.GetAllTypes();
+            ViewBag.keywords = keywordRepository.GetAllKeywords();
+            //ViewBag.language = language;
             ViewBag.contactInfo = rpstry.GetContactInfoData();
             base.OnActionExecuting(filterContext); // re-added in edit
         }

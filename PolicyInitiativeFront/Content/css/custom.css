@@ -1,0 +1,78 @@
+﻿.youTube {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin-bottom: 16px;
+}
+
+    .youTube iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+.aboutPage .Options .lang {
+    opacity: 1;
+    pointer-events: unset;
+}
+
+.About.Arabic,.Team.Arabic {
+    direction: rtl;
+}
+
+.About.Arabic .title {
+    font-family: 'SymbioARBold';
+    font-size: 40px;
+    line-height: 41px;
+}
+
+.About.Arabic .text {
+    font-family: 'SymbioARLight';
+    font-size: 27px;
+    line-height: 29px;
+ }
+
+.About.Arabic .author {
+   font-family: 'SymbioARBold';
+   font-size: 32px;
+   line-height: 33px;
+}
+
+
+.Team.Arabic .teamlist .titleTab .position:before {
+    left:unset !important;
+    right:-15px !important;
+}
+.Team.Arabic .teamlist .titleTab .position {
+    margin-left: unset !important;
+    margin-right: 30px;
+    padding-left:unset !important;
+}
+
+.Team.Arabic .teamlist ul.cols > li:nth-child(1) {
+    margin-right: -9px !important;
+}
+.Team.Arabic .teamlist .titleTab{
+    font-family: 'SymbioARLight';
+    font-size: 27px;
+    line-height: 29px;
+}
+.Team.Arabic .teamlist .text{
+    font-family: 'SymbioARLight';
+    font-size: 27px;
+    line-height: 29px;
+}
+
+
+ .Team.Arabic .subMenu ul.items > li:nth-child(1) {
+        margin-left: 30px;
+ }
+
+
+ .Widget{
+     margin-top:20px;
+ }

@@ -4,7 +4,7 @@
    <div class="close" onclick="closeFilterDropdown();"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g fill="none" stroke="#fff" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none"/><circle cx="24" cy="24" r="23.5" fill="none"/><g transform="translate(16.851 16.323)"><line y2="20.676" transform="translate(14.896 0.472) rotate(45)" fill="none" stroke="#fff" stroke-width="2"/><line x1="14.825" y1="15.021" fill="none" stroke="#fff" stroke-width="2"/></g></g></svg></div>
    <div class="applyBtn ">
        <!-- we have loading class on div: applyBtn -->
-    <button type="button" class="btn " onclick="window.location.href ='http://thepolicyinitiativehtml.koeinbeta.com/tags'">apply <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(0.094)"><g transform="translate(-0.094)" fill="none" stroke="#fafafa" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none"></circle><circle cx="24" cy="24" r="23.5" fill="none"></circle></g><g transform="translate(15 16.5)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(-41.959 -282.844)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M1032.806,389h-15.8" transform="translate(-1017.009 -381)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"></path></g></g></svg></button>
+    <button type="button" class="btn " ng-click="searchfitler()">apply <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(0.094)"><g transform="translate(-0.094)" fill="none" stroke="#fafafa" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none"></circle><circle cx="24" cy="24" r="23.5" fill="none"></circle></g><g transform="translate(15 16.5)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(-41.959 -282.844)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M1032.806,389h-15.8" transform="translate(-1017.009 -381)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"></path></g></g></svg></button>
    </div>
     <ul class="languages">
        <li class="arabic"><a onclick="showArabicFilter()">عربي</a></li>
@@ -12,76 +12,65 @@
    </ul>
     <div class="wrap">
         <div class="container">
-          <div class="inner englishBox">
+          <div class="inner englishBox show">
             <ul class="groups">
                 <li>
                     <ul class="sub">
-                        <li>
-                            <div class="sortOpen red">
-                                <div class="label">Keywords</div>
-                            </div>
-                            <div class="pop red">
-                                <div class="holder mCustomScrollbar">
-                                    <ul class="items">
-                                        <li><a class="link">agriculture</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">industry</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">energy</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">environment</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">political parties</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">elections</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">public admin</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">decentralization</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">sectarianism</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">development</a><div class="mobCancelbtn"></div></li>
-                                        <li><a class="link">political parties</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">elections</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">public admin</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">decentralization</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">sectarianism</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">development</a><div class="mobCancelbtn"></div></li>
-                                    </ul>
+                        @if (ViewBag.keywords != null)
+                        {
+                            <li>
+                                <div class="sortOpen red">
+                                    <div class="label">Keywords</div>
                                 </div>
-                            </div>
-                        </li>
-                         <li>
-                            <div class="sortOpen green">
-                                <div class="label">Type</div>
-                            </div>
-                             <div class="pop green">
-                                <div class="holder mCustomScrollbar">
-                                    <ul class="items">
-                                        <li><a class="link">podcasts</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">data visualization</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">videos</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">digital roundtables</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">opinion pieces  </a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">books</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">periodicals </a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">policy briefs</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">policy papers</a><div class="mobCancelbtn"></div></li>
-                                        <li><a class="link">monitor </a><div class="mobCancelbtn"></div></li>
-                                        <li><a class="link">reports </a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">research papers</a><div class="mobCancelbtn"></div></li>
-                                    </ul>
+                                <div class="pop red">
+                                    <div class="holder mCustomScrollbar">
+                                        <ul class="items">
+                                            @foreach (var item in ViewBag.keywords)
+                                            {
+                                                <li><a class="link">@item.title</a><div class="mobCancelbtn"></div></li>
+
+                                            }
+
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        }
+                            @if (ViewBag.types != null)
+                            {
+                                <li>
+                                    <div class="sortOpen green">
+                                        <div class="label">Type</div>
+                                    </div>
+                                    <div class="pop green">
+                                        <div class="holder mCustomScrollbar">
+                                            <ul class="items">
+                                                @foreach (var item in ViewBag.types)
+                                                {
+                                                    <li><a class="link">@item.title</a><div class="mobCancelbtn"></div></li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
                 </li>
                 <li>
                     <div class="timerange">
                         <ul class="sort">
                             <li> <!-- we have missing class on field -->
                                 <label for="fromdate" class="titre">from</label>
-                                <div class="field"><input  id="fromdate" type="date" onfocus="$(this).parents('.field').addClass('active')"   /></div>
+                                <div class="field"><input  id="fromdate" type="date" onfocus="$(this).parents('.field').addClass('active')"  ng-model="fromdate" /></div>
                             </li>
                             <li>
                                 <label for="todate" class="titre">to</label>
-                                <div class="field"><input id="todate" type="date" onfocus="$(this).parents('.field').addClass('active')" /></div>
+                                <div class="field"><input id="todate" type="date" onfocus="$(this).parents('.field').addClass('active')" ng-model="todate" /></div>
                             </li>
                         </ul>
                     </div>
-
 
                     <div class="Values">
                         <ul class="list">
@@ -98,37 +87,44 @@
             <ul class="groups">
                 <li>
                     <ul class="sub">
-                        <li>
-                            <div class="sortOpen red">
-                                <div class="label">الكلمات الدالة</div>
-                            </div>
-                            <div class="pop red">
-                                <div class="holder mCustomScrollbar">
-                                    <ul class="items">
-                                        <li><a class="link">زراعة</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">صناعة</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">طاقة</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">بيئة</a><div class="mobCancelbtn"></div></li>
-                                    </ul>
+                        @if (ViewBag.keywords != null)
+                        {
+                            <li>
+                                <div class="sortOpen red">
+                                    <div class="label">الكلمات الدالة</div>
                                 </div>
-                            </div>
-                        </li>
-                         <li>
-                            <div class="sortOpen green">
-                                <div class="label">النوع</div>
-                            </div>
-                             <div class="pop green">
-                                <div class="holder mCustomScrollbar">
-                                    <ul class="items">
-                                        <li><a class="link">المدونة الصوتية</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">عرض مرئي للمعلومات </a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">أشرطة فيديو</a><div class="mobCancelbtn"></div></li>
-                                         <li><a class="link">الكتب</a><div class="mobCancelbtn"></div></li>
-                                    </ul>
+                                <div class="pop red">
+                                    <div class="holder mCustomScrollbar">
+                                        <ul class="items">
+                                            @foreach (var item in ViewBag.keywords)
+                                            {
+                                                <li><a class="link">@item.arabictitle</a><div class="mobCancelbtn"></div></li>
+
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        }
+                        @if (ViewBag.types != null)
+                        {
+                            <li>
+                                <div class="sortOpen green">
+                                    <div class="label">النوع</div>
+                                </div>
+                                <div class="pop green">
+                                    <div class="holder mCustomScrollbar">
+                                        <ul class="items">
+                                            @foreach (var item in ViewBag.types)
+                                            {
+                                                <li><a class="link">@item.arabictitle</a><div class="mobCancelbtn"></div></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
                 </li>
                 <li>
                     <div class="timerange">

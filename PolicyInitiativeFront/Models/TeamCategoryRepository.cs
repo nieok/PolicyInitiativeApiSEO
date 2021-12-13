@@ -33,18 +33,19 @@ namespace PolicyInitiativeFront.Models
         {
             return db.TeamCategories.FirstOrDefault(d => !d.isDeleted && d.id == id);
         }
-        public List<TeamCategory> GetAllTeamCategory()
+        public List<TeamCategory> GetAllTeamCategory(string lanuage="en")
         {
-            var news = GetAllIsPublished().ToList();
+            var teams = GetAllIsPublished().ToList();
             var model = new List<TeamCategory>();
 
 
-            foreach (var item in news)
+            foreach (var item in teams)
             {
+                var translatedItem = lanuage == "en" ? null : db.TeamCategories.FirstOrDefault(lang =>lang.languageId == 2 &&  lang.languageParentId == item.id);
                 model.Add(new TeamCategory
                 {
                     id = item.id,
-                    title = item.title,
+                    title = translatedItem == null ?  item.title : translatedItem.title,
                     urlTitle = GetUrlTitle(item.title),
                    
                 });

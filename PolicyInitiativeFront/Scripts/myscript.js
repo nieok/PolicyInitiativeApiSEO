@@ -213,33 +213,71 @@ function initMasonryList() {
         horizontalOrder: true,
     });
 }
+function initMasonryListNewPost() {
+    $('.itemsList .grid').masonry({
+        itemSelector: '.grid-item.newPost',
+        horizontalOrder: true,
+    });
+}
+function updateLayout1() {
 
+    var $container = $('.itemsList .grid').masonry();
+    $container.masonry('destroy');
 
+}
 // on scroll load more items
-if ($('.initiativeSubpage').length == 0) {  // exclude masonry in initiatives/template2
-$(window).scroll(function () {
-    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {  // when reaching end of document
-        $('.itemsList').addClass('loadmore');
-        //var $items = $('<li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li>');
+//if ($('.initiativeSubpage').length == 0) {  // exclude masonry in initiatives/template2
+//$(window).scroll(function () {
+//    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {  // when reaching end of document
+//      /*  $('.itemsList').addClass('loadmore');*/
+//        //var $items = $('<li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li>');
        
-        setTimeout(function () {
-            if ($('.itemsList').hasClass('loadmore')) {
-              /*  $('.itemsList .grid').append($items).masonry('appended', $items);*/
-                initMasonryList(); // recall masonry
-            }
-                $('.itemsList').removeClass('loadmore');
-            }, 2222);
+//        setTimeout(function () {
+//            if ($('.itemsList').hasClass('loadmore')) {
+//              /*  $('.itemsList .grid').append($items).masonry('appended', $items);*/
+//                initMasonryList(); // recall masonry
+//            }
+//                $('.itemsList').removeClass('loadmore');
+//            }, 2222);
            
      
 
         
-    } else {
-        $('.itemsList').removeClass('loadmore');
-    }
-    });
+//    } else {
+//        $('.itemsList').removeClass('loadmore');
+//    }
+//    });
+
+//}
+// customise twitter box before footer
+//_________________________________________________________________________________________________
+
+
+var customizeTweetMedia = function () {   // CSS Overrides
+    $('.Widget').addClass('show');  // show the twitter box (it is hidden by default)
+    $('.Widget').find('.twitter-timeline').contents().find('.timeline-Widget').css({ 'max-width': 'none' });
+    $('.Widget').find('.twitter-timeline').contents().find('p.timeline-tweet-text').css({ 'font-size': '17px', 'line-height': '22px' });
+    $('.Widget').find('.twitter-timeline').contents().find('.timeline-Tweet').css({ 'background-color': '#ffffff' });
+    $('.Widget').find('.twitter-timeline').contents().find('.timeline-Tweet-media').css({ 'display': 'none' });
 
 }
-  
+
+var widget = $('.Widget');
+
+if (widget.length != 0) {
+    twttr.widgets.load();
+}
+
+$(window).load(function () {
+    setTimeout(function () {
+
+        customizeTweetMedia();
+
+    }, 2000)
+
+})
+
+//_________________________________________________________________________________________________
 
 
 $(window).load(function () {
@@ -453,22 +491,22 @@ function closeNewsletterPop() {
 }
 
 
-function submitNewslMssg() {
-    $('.newletterPop .sendbtn').addClass('loading');
+//function submitNewslMssg() {
+//    $('.newletterPop .sendbtn').addClass('loading');
 
-    setTimeout(function () {
-        $('.newletterPop .txmssg').addClass('show');
-        $('.newletterPop .wrap').addClass('hide');
-    }, 1500);
+//    setTimeout(function () {
+//        $('.newletterPop .txmssg').addClass('show');
+//        $('.newletterPop .wrap').addClass('hide');
+//    }, 1500);
 
-    setTimeout(function () {
-        $('.newletterPop .txmssg').removeClass('show');
-        $('.newletterPop .wrap').removeClass('hide');
-        $('.newletterPop .sendbtn').removeClass('loading');
-    }, 3500);
+//    setTimeout(function () {
+//        $('.newletterPop .txmssg').removeClass('show');
+//        $('.newletterPop .wrap').removeClass('hide');
+//        $('.newletterPop .sendbtn').removeClass('loading');
+//    }, 3500);
 
 
-}
+//}
 
 
 // ___________________________________________________________________________________________________
@@ -527,7 +565,7 @@ $('.filterMenu .englishBox .pop.red .link').click(function () { // add selected 
     $(this).addClass('selected');   // keywords menu
     $(this).next('.mobCancelbtn').show();//show delete buttom for mobile
     var getvalue = $(this).html();  
-    $('<div class="delete"></div>').insertAfter($('<div class="keyword"></div>').appendTo('.englishBox .Values .list').html(getvalue).wrap('<li></li>'));
+    $('<div class="delete"></div>').insertAfter($('<div class="keyword red"></div>').appendTo('.englishBox .Values .list').html(getvalue).wrap('<li></li>'));
 });
 
 $('.filterMenu .englishBox .pop.green .link').click(function () {  // add selected keywords on right side
@@ -584,7 +622,7 @@ $('.filterMenu .arabicBox .pop.red .link').click(function () { // add selected k
     $(this).addClass('selected');   // keywords menu
     $(this).next('.mobCancelbtn').show();//show delete buttom for mobile
     var getvalue = $(this).html();
-    $('<div class="delete"></div>').insertAfter($('<div class="keyword"></div>').appendTo('.arabicBox .Values .list').html(getvalue).wrap('<li></li>'));
+    $('<div class="delete"></div>').insertAfter($('<div class="keyword red"></div>').appendTo('.arabicBox .Values .list').html(getvalue).wrap('<li></li>'));
 });
 
 $('.filterMenu .arabicBox .pop.green .link').click(function () {  // add selected keywords on right side
@@ -637,11 +675,15 @@ $('.arabicBox .mobCancelbtn').click(function () { // when pressing delete for mo
 function showArabicFilter() {
     $('.filterMenu .arabicBox,.filterMenu .languages .english').show();
     $('.filterMenu .englishBox,.filterMenu .languages .arabic').hide();
+    $('.filterMenu .arabicBox').addClass('show');
+    $('.filterMenu .englishBox').removeClass('show');
 }
 
 function showEnglishFilter() {
     $('.filterMenu .arabicBox,.filterMenu .languages .english').hide();
     $('.filterMenu .englishBox,.filterMenu .languages .arabic').show();
+    $('.filterMenu .arabicBox').removeClass('show');
+    $('.filterMenu .englishBox').addClass('show');
 }
 
 
@@ -721,9 +763,9 @@ initArticleSwiper();
 
 // init audio plugin
 
-$(function () {
-    $('audio').audioPlayer();
-});
+//$(function () {
+//    $('audio').audioPlayer();
+//});
 
 
 
@@ -751,24 +793,6 @@ function closeSearchPopup() {
 }
 
 
-function submitSearchPopup() {
-    //$('.searchField .field').addClass('loading');
-    //setTimeout(function () {
-    //    $('.searchField .field').removeClass('loading');
-    //},2500)
-    window.location.href = "http://thepolicyinitiativehtml.koeinbeta.com/search";
-}
-
-
-// search page redirect
-
-$(".srchinput").keypress(function (e) {  // redirect to search page when pressing enter in search box in header
-    var code = e.keyCode ? e.keyCode : e.which;
-    if (code.toString() == 13) {
-        window.location.href = "http://thepolicyinitiativehtml.koeinbeta.com/search";
-        return false;
-    }
-});
 
 
 

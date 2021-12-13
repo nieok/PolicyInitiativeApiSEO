@@ -17,10 +17,12 @@
 
 <!-- Place this data between the <head> tags of your website -->
 <title>@metas.customPageTitle</title> @*Page Title. Maximum length 60-70 characters*@
+
 <meta name="description" content="@(new UtilsHelper().GetStrippedHTML(metas.metaDescription, 5000))" /> @*Page description. No longer than 155 characters.*@
 <link rel="canonical" href="@metas.canonicalUrl" />
 <meta name="keywords" content="@metas.metaKeywords" />
 <meta name="robots" content="index" />
+<meta name="author" content="@projectName">
 <!--#region Schema.org markup for Google+ -->
 <meta itemprop="name" content="@metas.customPageTitle" /> @*The Name or Title Here*@
 <meta itemprop="description" content="@(new UtilsHelper().GetStrippedHTML(metas.metaDescription, 5000))" />
@@ -44,7 +46,3 @@
 <meta property="og:site_name" content="@projectName" />
 <meta property="og:image" content="@metas.metaImgSrc" />
 
-<!--#endregion -->
-<!--#region Facebook data -->
-<meta property="fb:app_id" content="187060489652248" />
-<!--#endregion -->

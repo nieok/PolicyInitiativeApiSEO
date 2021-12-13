@@ -14,11 +14,11 @@ namespace PolicyInitiativeFront.Controllers
         private CorporatePageRepository rpstry = new CorporatePageRepository();
         private CorporatePageSectionRepository sectionrpstry = new CorporatePageSectionRepository();
         // GET: about
-        public ActionResult Index()
+        public ActionResult Index(string lang="en")
         {
            
             var model = new List<object>();
-            var corporatePageTemplates = rpstry.GetPageDataById(Convert.ToInt32(ConfigurationManager.AppSettings["AboutPage"]), "en");
+            var corporatePageTemplates = rpstry.GetPageDataById(Convert.ToInt32(ConfigurationManager.AppSettings["AboutPage"]), lang);
 
 
             foreach (var item in corporatePageTemplates.corporatePageTemplates)
@@ -28,22 +28,23 @@ namespace PolicyInitiativeFront.Controllers
                     var data = new List<CorporatePageSection>();
                     if (item.frontHtmlId == "1")
                     {
-                        data = sectionrpstry.GetSectionDataById(item.id, "en", item.frontHtmlId, "1800x645xi");
+                        data = sectionrpstry.GetSectionDataById(item.id, lang, item.frontHtmlId, "1800x645xi");
 
                     }
                     else if (item.frontHtmlId == "2")
                     {
-                        data = sectionrpstry.GetSectionDataById(item.id, "en", item.frontHtmlId, "2000x744xi");
+                        data = sectionrpstry.GetSectionDataById(item.id, lang, item.frontHtmlId, "2000x744xi");
 
                     }
                     else
                     {
-                        data = sectionrpstry.GetSectionDataById(item.id, "en", item.frontHtmlId);
+                        data = sectionrpstry.GetSectionDataById(item.id, lang, item.frontHtmlId);
                     }
                     model.AddRange(data);
                 }
 
             }
+            ViewBag.language = lang;
             #region SEO
             MetasModel metas = new MetasModel();
             CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["AboutPage"]));
@@ -56,7 +57,7 @@ namespace PolicyInitiativeFront.Controllers
             metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? defaultPage.customPageTitle : currentPage.customPageTitle;
             metas.customUrlTitle = string.IsNullOrEmpty(currentPage.customUrlTitle) ? defaultPage.customUrlTitle : currentPage.customUrlTitle;
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"];
+            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"]+"about";
             ViewBag.metas = metas;
             #endregion
             return View(model);

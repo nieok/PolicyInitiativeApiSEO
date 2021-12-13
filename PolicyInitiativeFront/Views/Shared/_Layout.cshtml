@@ -26,46 +26,55 @@
     <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon.ico")" />
     <link rel="stylesheet" href="https://use.typekit.net/hng1okw.css">
     <link href="@Url.Content("~/Content/css/plugins.css?v=1")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/player.css?v=1")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/styles.css?v=183")" rel="stylesheet" />
- 
-    <script>document.documentElement.className = 'js';</script>
-    <!-- #region PhoneGap -->
-    <script type="text/javascript" charset="utf-8">
-        var appVersion = "";
-        var defaultData = undefined;
-        var firstOpen = false;
-        var orderPrice = "";
-        var orderNumber = "";
-        var medium;
-        var device = undefined;
-    </script>
+  
+        @*<link href="@Url.Content("~/Content/css/player.css?v=1")" rel="stylesheet" />*@
+    
+        <link href="@Url.Content("~/Content/css/styles.css?v=183")" rel="stylesheet" />
+        <link href="@Url.Content("~/Content/css/custom.css?v=1")" rel="stylesheet" />
+
+        <script>document.documentElement.className = 'js';</script>
+        <!-- #region PhoneGap -->
+        <script type="text/javascript" charset="utf-8">
+            var appVersion = "";
+            var defaultData = undefined;
+            var firstOpen = false;
+            var orderPrice = "";
+            var orderNumber = "";
+            var medium;
+            var device = undefined;
+        </script>
 
 
-    <meta name="twitter:widgets:autoload" content="off">
+        <meta name="twitter:widgets:autoload" content="off">
 
-</head>
+ </head>
 
-<body class="color1" ng-controller="myCtrl" >
+<body class="color1" ng-controller="myCtrl">
+
+    @if (!String.IsNullOrEmpty(ViewBag.metas.customH1Content))
+    {
+        <h1 hidden>@ViewBag.metas.customH1Content</h1>
+
+    }
     <input hidden id="RouteUrl" value="@apiUrl" />
     <input hidden id="FrontUrl" value="@frontUrl" />
 
-    <div id="fb-root"></div>
-    <div hidden>
+    @*<div id="fb-root"></div>*@
+    @*<div hidden>
         <div addthis-tool tool-class="addthis_inline_share_toolbox"></div>
-    </div>
-    <div id="wrapper" @Html.Raw(ViewBag.BodyAttributes)>
+    </div>*@
+    <div id="wrapper" @Html.Raw(ViewBag.BodyAttributes) style="opacity: 1;">
         @{Html.RenderPartial("header");}
         <div id="content">
             @RenderBody()
         </div>
-        @{Html.RenderPartial("footer");}
-        @{Html.RenderPartial("authorPopup");}
-        @{Html.RenderPartial("authorPopup-arabic");}
+
+        @*@{Html.RenderPartial("authorPopup");}
+        @{Html.RenderPartial("authorPopup-arabic");}*@
         @{Html.RenderPartial("filterMenu");}
         @{Html.RenderPartial("videoPopup");}
         @{Html.RenderPartial("searchPop");}
-
+        @{Html.RenderPartial("footer");}
 
     </div>
     @{ if (controllername == "contact")
@@ -74,13 +83,23 @@
         } }
 
     <script type="text/javascript" src="@(Url.Content("~/Scripts/plugins.js?v=1"))"></script>
-    <script type="text/javascript" src="@(Url.Content("~/Scripts/audioPlayer.js?v=1"))"></script>
+  
+    @*<script type="text/javascript" src="@(Url.Content("~/Scripts/audioPlayer.js?v=1"))"></script>*@
+
+   
     <script type="text/javascript" src="@(Url.Content("~/Scripts/myscript.js?v=13"))"></script>
 
     <script src="@Url.Content("~/")assets/vendor/angular/plugins.js"></script>
     <script src="@Url.Content("~/")assets/vendor/angular/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="@(Url.Content("~/Scripts/script.js?v=13"))"></script>
+
     @RenderSection("scripts", required: false)
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+    @if (controllername == "article")
+    {
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ad1a4bf250665c"></script>
+    }
 
 </body>
 </html>

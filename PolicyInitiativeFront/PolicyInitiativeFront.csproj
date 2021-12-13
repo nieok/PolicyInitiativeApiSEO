@@ -53,6 +53,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -117,9 +123,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ApplicationInsights">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
@@ -147,14 +150,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\aboutController.cs" />
+    <Compile Include="Controllers\articleController.cs" />
     <Compile Include="Controllers\contactController.cs" />
     <Compile Include="Controllers\errorPageController.cs" />
     <Compile Include="Controllers\GoogleSitemapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\initiativesController.cs" />
+    <Compile Include="Controllers\NewsLetterController.cs" />
     <Compile Include="Controllers\privacypolicyController.cs" />
+    <Compile Include="Controllers\searchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\teamController.cs" />
+    <Compile Include="Controllers\UtilsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,14 +174,17 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Models\KeywordRepository.cs" />
     <Compile Include="Models\LanguageRepository.cs" />
     <Compile Include="Models\LanguageResourceRepository.cs" />
     <Compile Include="Models\MetasModel.cs" />
     <Compile Include="Models\NewsCategoryRepository.cs" />
+    <Compile Include="Models\NewsletterUserRepository.cs" />
     <Compile Include="Models\settingsRepository.cs" />
     <Compile Include="Models\SocialMediaRepository.cs" />
     <Compile Include="Models\TeamCategoryRepository.cs" />
     <Compile Include="Models\TeamRepository.cs" />
+    <Compile Include="Models\TypeArticleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +228,45 @@
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\player.css" />
+    <Content Include="Content\css\plugins.css" />
+    <Content Include="Content\css\styles.css" />
+    <Content Include="Content\css\SymbioAR-Bold.svg" />
+    <Content Include="Content\css\SymbioAR-Light.svg" />
+    <Content Include="Content\css\SymbioAR-Regular.svg" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\lines.svg" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\logoblack.png" />
+    <Content Include="Content\images\logowhite.png" />
+    <Content Include="Content\images\marker.png" />
+    <Content Include="Content\images\plus.svg" />
+    <Content Include="Content\images\quote.svg" />
+    <Content Include="Content\images\trianglegreen.svg" />
+    <Content Include="Content\images\trianglered.svg" />
+    <Content Include="Content\images\xblack.svg" />
+    <Content Include="Content\images\xwhite.svg" />
+    <Content Include="Content\pictures\beirut.jpg" />
+    <Content Include="Content\pictures\change.jpg" />
+    <Content Include="Content\pictures\construct.jpg" />
+    <Content Include="Content\pictures\corruptiontalks.jpg" />
+    <Content Include="Content\pictures\curves.png" />
+    <Content Include="Content\pictures\election.jpg" />
+    <Content Include="Content\pictures\elections2022.jpg" />
+    <Content Include="Content\pictures\initiative.jpg" />
+    <Content Include="Content\pictures\keys.jpg" />
+    <Content Include="Content\pictures\music1.mp3" />
+    <Content Include="Content\pictures\newofferbg.jpg" />
+    <Content Include="Content\pictures\podcast1.jpg" />
+    <Content Include="Content\pictures\podcast2.jpg" />
+    <Content Include="Content\pictures\podcast3.jpg" />
+    <Content Include="Content\pictures\river.jpg" />
+    <Content Include="Content\pictures\slide1.jpg" />
+    <Content Include="Content\pictures\souk.jpg" />
+    <Content Include="Content\pictures\team1.jpg" />
+    <Content Include="Content\pictures\team2.jpg" />
+    <Content Include="Content\pictures\tv.png" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -266,6 +315,19 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Content\css\styles.less" />
+    <Content Include="Content\css\SymbioAR-Bold.eot" />
+    <Content Include="Content\css\SymbioAR-Bold.ttf" />
+    <Content Include="Content\css\SymbioAR-Bold.woff" />
+    <Content Include="Content\css\SymbioAR-Bold.woff2" />
+    <Content Include="Content\css\SymbioAR-Light.eot" />
+    <Content Include="Content\css\SymbioAR-Light.ttf" />
+    <Content Include="Content\css\SymbioAR-Light.woff" />
+    <Content Include="Content\css\SymbioAR-Light.woff2" />
+    <Content Include="Content\css\SymbioAR-Regular.eot" />
+    <Content Include="Content\css\SymbioAR-Regular.ttf" />
+    <Content Include="Content\css\SymbioAR-Regular.woff" />
+    <Content Include="Content\css\SymbioAR-Regular.woff2" />
     <None Include="Models\dblinq.dbml.layout">
       <DependentUpon>dblinq.dbml</DependentUpon>
     </None>
@@ -284,6 +346,13 @@
     <Content Include="Views\initiatives\Index.cshtml" />
     <Content Include="Views\initiatives\details.cshtml" />
     <Content Include="Views\contact\Index.cshtml" />
+    <Content Include="Views\article\index.cshtml" />
+    <Content Include="Views\article\video.cshtml" />
+    <Content Include="Views\article\podcast.cshtml" />
+    <Content Include="Views\article\data.cshtml" />
+    <Content Include="Views\search\Index.cshtml" />
+    <Content Include="Views\search\search.cshtml" />
+    <Content Include="Views\Shared\twitterBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

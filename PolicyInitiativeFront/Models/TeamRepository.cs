@@ -35,7 +35,7 @@ namespace PolicyInitiativeFront.Models
         {
             return db.Directors.FirstOrDefault(d => !d.isDeleted && d.id == id);
         }
-        public List<Director> GetAllTeam(string imgsize = "",string category ="")
+        public List<Director> GetAllTeam(string imgsize = "",string category ="",string language = "en")
         {
             var news = GetAllIsPublished().Where(d=>d.TeamCategory.title.ToLower() == category.ToLower()).ToList();
             var model = new List<Director>();
@@ -43,13 +43,14 @@ namespace PolicyInitiativeFront.Models
         
             foreach (var item in news)
             {
+                var trandlateditem = language == "en" ? null : db.Directors.FirstOrDefault(lang => lang.languageId == 2 && lang.languageParentId == item.id);
                 model.Add(new Director
                 {
                     id = item.id,
-                    fullName =  item.fullName ,
+                    fullName = trandlateditem == null ? item.fullName : trandlateditem.fullName,
                     urlTitle = GetUrlTitle(item.fullName),
-                    jobTitle=item.jobTitle,
-                    biography = item.biography,
+                    jobTitle= trandlateditem == null ? item.jobTitle : trandlateditem.jobTitle,
+                    biography = trandlateditem == null ? item.biography : trandlateditem.biography,
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/directors/" : "images/" + imgsize + "/") + item.imgSrc,
 
                 });
