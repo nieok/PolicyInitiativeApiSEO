@@ -73,6 +73,51 @@
  }
 
 
- .Widget{
-     margin-top:20px;
- }
+.Widget {
+    max-width: 57%;
+    margin: 44px auto 40px auto;
+}
+
+
+.Results .keyword {
+    background: unset !important;
+}
+
+mark {
+    background-color: #ffe471!important;
+}
+
+.Article .quote{border-top:3px solid #050505;border-bottom:3px solid #050505;padding:24px 0px 22px!important;max-width:calc(100% - 200px);margin-left:auto;margin-right:auto;}
+.Article .quote:before{left:-99px;top:-3px;}
+.Article .quote:after{right:-99px;bottom:-3px;}
+.articlePage .at-resp-share-element .at-share-btn{padding:0px!important;margin:0px 0px 13px!important;}
+.articlePage .at-resp-share-element .at-share-btn:last-child{margin-bottom:0px!important;}
+.articlePage .at-share-btn-elements .at-icon-wrapper.at-share-btn.at-svc-facebook{background:url(../images/fbkicon.svg) no-repeat!important;width:28px!important;height:29px!important;}
+.articlePage .at-share-btn-elements .at-icon-wrapper.at-share-btn.at-svc-twitter{background:url(../images/twittericon.svg) no-repeat!important;width:28px!important;height:28px!important;}
+.articlePage .at-share-btn-elements .at-icon-wrapper.at-share-btn.at-svc-email{background:url(../images/emailicon.svg) no-repeat!important;width:29px!important;height:29px!important;}
+.articlePage .at-share-btn-elements .at-icon-wrapper.at-share-btn svg{display:none;}
+@media (max-width: 900px){
+.articlePage .at-resp-share-element .at-share-btn-elements{display:flex!important;}
+.articlePage .at-resp-share-element .at-share-btn{margin-bottom:0px!important;margin-left:16px!important;}
+.articlePage .at-resp-share-element .at-share-btn:nth-child(1){margin-left:0px!important;}
+.articlePage .Options ul.items>li{padding-bottom:0px!important;}
+.articlePage .Options .lang{top:2px;}
+.articlePage .Options .lang.ar{top:4px;}
+}
+@media (max-width: 767px){
+.Article .quote{max-width:calc(100% - 76px);padding:15px 0px 13px!important;}
+.Article .quote:before{left:-38px;}
+.Article .quote:after{right:-38px;}
+.articlePage .Options .lang{bottom:-3px!important;}
+.articlePage .Options .lang.ar{bottom:-4px!important;}
+
+    .Widget {
+        max-width: 84%;
+        width: 100%;
+        margin: 59px auto 50px auto;
+    }
+
+}
+@media (max-width: 360px){
+.articlePage .at-resp-share-element .at-share-btn{margin-left:10px!important;}
+}

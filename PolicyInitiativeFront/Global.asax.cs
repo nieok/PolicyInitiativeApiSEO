@@ -13,7 +13,6 @@ namespace PolicyInitiativeFront
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private string _DefaultLanguage = "en";
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

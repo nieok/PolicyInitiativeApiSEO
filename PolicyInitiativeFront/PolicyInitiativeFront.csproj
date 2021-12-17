@@ -206,6 +206,7 @@
     <Content Include="assets\vendor\js\plugins.js" />
     <Content Include="assets\vendor\tether.min.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
     <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
     <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
     <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
@@ -216,10 +217,14 @@
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\PolicyInitiativeFront.dll" />
+    <Content Include="bin\PolicyInitiativeFront.pdb" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csi.exe" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\ServiceStack.Text.dll" />
+    <Content Include="bin\ServiceStack.Text.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
     <Content Include="bin\System.Web.Mvc.dll" />
     <Content Include="bin\System.Web.Optimization.dll" />
@@ -230,7 +235,9 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\player.css" />
+    <Content Include="Content\css\plugin.min.css" />
     <Content Include="Content\css\plugins.css" />
+    <Content Include="Content\css\Style.min.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\css\SymbioAR-Bold.svg" />
     <Content Include="Content\css\SymbioAR-Light.svg" />
@@ -311,6 +318,7 @@
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
     <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\PolicyInitiativeFront.dll.config" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

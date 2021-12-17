@@ -210,7 +210,7 @@ namespace PolicyInitiativeFront.Models
     #endregion
 		
 		public dblinqDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["policyinitiativeDbConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

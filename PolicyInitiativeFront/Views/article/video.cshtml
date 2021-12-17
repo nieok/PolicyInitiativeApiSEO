@@ -54,7 +54,7 @@
 </div>
 
 
-<div class="Article @(( ViewBag.language == "ar") ? "arabic" : "")">
+<div class="Article video @(( ViewBag.language == "ar") ? "arabic" : "")">
     <div class="container">
 
 
@@ -120,7 +120,8 @@
             <div class="container">
                 <div class="top">
                     <h2 class="name">More from videos</h2>
-                    <a class="all">view all</a>
+                    <a ng-click="searchByType()" class="all">view all</a>
+                    <input hidden class="type" value="@Model.types" />
                 </div>
                 <div class="wrap">
                     <div class="screen">

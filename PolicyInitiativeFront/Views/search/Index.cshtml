@@ -24,19 +24,29 @@
     <div class="Tags">
         <div class="container">
             <ul class="list">
+                <li ng-repeat="item in authorList" ng-if="authorList.length != 0">
+                    <div class="item">
+                        <div class="name yellow">{{item}}</div><div  style="width: 14px;"></div>
+                    </div>
+                </li>
                 <li ng-repeat="item in typeList" ng-if="typeList.length != 0">
                     <div class="item">
-                        <div class="name red">{{item}}</div><div class="delete"></div>
+                        <div class="name red">{{item}}</div><div  style="width: 14px;"></div>
                     </div>
                 </li>
                 <li ng-repeat="item in keywordList" ng-if="keywordList.length != 0">
                     <div class="item">
-                        <div class="name green">{{item}}</div><div class="delete"></div>
+                        <div class="name green">{{item}}</div><div  style="width: 14px;"></div>
                     </div>
                 </li>
-                <li ng-if="datefrom != '' && dateto !=''">
+                <li ng-if="datefrom != '' && dateto !='' && datefrom != null && dateto != null">
                     <div class="item">
-                        <div class="name yellow">{{datefrom}} > {{dateto}}</div><div class="delete"></div>
+                        <div class="name yellow">{{datefrom}} > {{dateto}}</div><div  style="width: 14px;"></div>
+                    </div>
+                </li>
+                <li  ng-if="category !=''">
+                    <div class="item">
+                        <div class="name green">{{category}}</div><div  style="width: 14px;"></div>
                     </div>
                 </li>
             </ul>

@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "The Policy Initiative";
     var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
     var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
@@ -37,7 +38,7 @@
                                 @if (!String.IsNullOrEmpty(item.imgSrc))
                                 {
                                     <div class="pic">
-                                        <img data-src="@Url.Content(item.imgSrc)" class="swiper-lazy" />
+                                        <img data-src="@Url.Content(item.imgSrc)" class="swiper-lazy" alt="@item.title"/>
                                     </div>
                                 }
 
@@ -74,55 +75,147 @@
     <!-- note add class "loadmore"  to itemsList -->
     <div class="container">
         <ul class="grid">
-            @*<li class="grid-item" ng-repeat="item in news" ng-class="{'newPost': item.newPost == true}">
-                <div class="item englishBox" ng-if="item.hasArabic == false">
-                    <div class="pic"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" ng-if="item.imgSrc != null" /></a></div>
+
+            @if (ViewBag.featured.Count != 0)
+            {
+                foreach (var item in ViewBag.featured)
+                {
+            <li class="grid-item">
+
+                @if (!item.hasArabic)
+                {
+                <div class="item englishBox">
+                    @if (!String.IsNullOrEmpty(item.imgSrc))
+                    {
+                        <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                    }
                     <div class="top">
-                        <div class="date" ng-bind="item.date"></div>
+                        @if (!String.IsNullOrEmpty(item.Date))
+                        {
+                            <div class="date">@item.Date</div>
+
+                        }
                         <div class="arabic" onclick="arabic(event)">عربي</div>
                     </div>
-                    <h2 class="title"><a href="{{item.detailUrl}}" ng-bind="item.title"></a></h2>
-                    <div class="author" ng-bind="item.authors.title"></div>
+                    <h2 class="title"><a href="@Url.Content(item.detailUrl)"> @item.title</a></h2>
+                    @{ int comaCount = 0;}
+                    @foreach (var auth in item.authors)
+                    {
+                       
+                        <div class="author" ng-click="openAuthorPopup('@auth.title','@auth.bio')">@auth.title</div>
+                       
+                        comaCount++;
+                        if (item.authors.Count > comaCount)
+                        {
+                            <text> ,</text>
+
+                        }
+
+                    }
                     <div class="text">
-                        <a href="{{item.detailUrl}}">
-                            <p ng-bind-html="item.smallDescription"></p> <span class="read">read</span>
+                        <a href="@Url.Content(item.detailUrl)">
+                            @if (!String.IsNullOrEmpty(item.smallDescription))
+                            {
+                                <p>@Html.Raw(item.smallDescription)</p>
+                            }<span class="read">read</span>
+
                         </a>
 
                     </div>
                 </div>
-                <div class="item arabicBox" ng-if="item.hasArabic == false">
-                    <div class="pic"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" ng-if="item.imgSrc != null" /></a></div>
+                <div class="item arabicBox">
+                    @if (!String.IsNullOrEmpty(item.imgSrc))
+                    {
+                        <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                    }
                     <div class="top">
-                        <div class="date" ng-bind="item.date"></div>
+                        @if (!String.IsNullOrEmpty(item.Date))
+                        {
+                            <div class="date">@item.Date</div>
+
+                        }
                         <div class="english" onclick="english(event)">eng</div>
                     </div>
-                    <h2 class="title"><a href="{{item.detailUrl}}" ng-bind="item.artitle"></a></h2>
-                    <div class="author" ng-bind="item.authors.artitle"></div>
+                    <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
+                    @{ int comaCount1 = 0;}
+                    @foreach (var auth in item.arauthors)
+                    {
+                       
+                     <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">@auth.title</div>
+                       
+                        comaCount1++;
+                        if (item.arauthors.Count > comaCount1)
+                        {
+                            <text> ,</text>
+
+                        }
+
+                    }
                     <div class="text">
-                        <a href="{{item.detailUrl}}">
-                            <p ng-bind-html="item.arsmallDescription"></p>
+                        <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                            @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                            {
+                                <p>@Html.Raw(item.arsmallDescription)</p>}
+
+
                             <span class="read">اقرأ</span>
                         </a>
 
                     </div>
                 </div>
-                <div class="item arabicBox" ng-if="item.hasArabic == true">
-                    <div class="pic"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" ng-if="item.imgSrc != null" /></a></div>
-                    <div class="top">
-                        <div class="date" ng-bind="item.date"></div>
-                    </div>
-                    <h2 class="title"><a href="{{item.detailUrl}}?lang=ar" ng-bind="item.artitle"></a></h2>
-                    <div class="author" ng-bind="item.authors.artitle"></div>
-                    <div class="text">
-                        <a href="{{item.detailUrl}}?lang=ar">
-                            <p ng-bind-html="item.arsmallDescription"></p>
-                            <span class="read">اقرأ</span>
-                        </a>
+                }
+                else
+                {
+            <div class="item arabicBox">
+                @if (!String.IsNullOrEmpty(item.imgSrc))
+                {
+                    <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                    </div>
+                }
+                <div class="top">
+                    @if (!String.IsNullOrEmpty(item.Date))
+                    {
+                        <div class="date">@item.Date</div>
+
+                    }
                 </div>
-            </li>*@
-  
+                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
+                @{ int comaCount1 = 0;}
+                @foreach (var auth in item.arauthors)
+                {
+                  
+                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">@auth.title</div>
+                 
+                    comaCount1++;
+                    if (item.arauthors.Count > comaCount1)
+                    {
+                        <text> ,</text>
+
+                    }
+
+                }
+                <div class="text">
+                    <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                        {
+                            <p>@Html.Raw(item.arsmallDescription)</p>}
+
+                        <span class="read">اقرأ</span>
+                    </a>
+
+                </div>
+            </div>
+                }
+
+
+            </li>
+                }
+
+            }
+
+
         </ul>
     </div>
 </div>

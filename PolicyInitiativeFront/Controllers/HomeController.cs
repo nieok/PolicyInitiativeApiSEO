@@ -44,9 +44,11 @@ namespace PolicyInitiativeFront.Controllers
 
             }
             var settings = settingsRepository.GetFirstOrDefault();
-            var featuredBanner = newsrpstry.GetAllHomeFeaturedBanner("");
+            var featuredBanner = newsrpstry.GetAllHomeFeaturedBanner("1086x400xi");
+            var featured = newsrpstry.GetAllFeatured(0,4,"en","335x319xi");
 
             ViewBag.featuredBanner = featuredBanner;
+            ViewBag.featured = featured;
             #region SEO
             MetasModel metas = new MetasModel();
             CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["HomePage"]));

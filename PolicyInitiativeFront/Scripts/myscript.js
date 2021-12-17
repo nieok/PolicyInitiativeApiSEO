@@ -280,12 +280,12 @@ $(window).load(function () {
 //_________________________________________________________________________________________________
 
 
-$(window).load(function () {
-    setTimeout(function () {
-        initMasonryList();
-    }, 500);
+//$(window).load(function () {
+//    setTimeout(function () {
+//        initMasonryList();
+//    }, 500);
     
-});
+//});
 
 
 // show arabic/english boxes
@@ -804,11 +804,14 @@ function closeSearchPopup() {
 // play/stop youtube when opening video popup
 //_________________________________________________________________________________________________
 
-
+if ($(".Article").hasClass('video')) {
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+
 
 var youtubeVideo1;
 

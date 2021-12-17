@@ -45,7 +45,7 @@
                                     if (!String.IsNullOrEmpty(item.email))
                                     {
                                         <span class="contact">
-                                            <a class="call" href="tel:@item.phone">@item.phone</a>
+                                           T <a class="call" href="tel:@item.phone">@item.phone</a>
                                             <a href="mailto:@item.email">@item.email</a>
                                         </span>
                                     }
@@ -72,7 +72,7 @@
                     }
                 }
             </div>
-            <a class="logo" href="@Url.Content("~/home")"><img src="@Url.Content("~/content/images/logo2.png")" /></a>
+            <a class="logo" href="@Url.Content("~/home")"><img src="@Url.Content("~/content/images/logo2.png")" alt="footer-logo" /></a>
         </div>
     </div>
 </footer>

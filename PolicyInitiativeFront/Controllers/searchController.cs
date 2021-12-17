@@ -35,7 +35,7 @@ namespace PolicyInitiativeFront.Controllers
         public ActionResult search(string title="")
         {
             var news = newsRepository.GetSearchData(title).ToList();
-
+            ViewBag.count = news.Count();
             ViewBag.key = title;
             #region SEO
             MetasModel metas = new MetasModel();
