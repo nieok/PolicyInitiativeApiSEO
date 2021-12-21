@@ -73,12 +73,18 @@
  }
 
 
-.Widget {
+.articlePage .Widget {
     max-width: 57%;
     margin: 44px auto 40px auto;
 }
-
-
+.initiativePage .Widget {
+    max-width: 57%;
+    margin: 100px auto -70px auto
+}
+.initiativeSubpage .Widget {
+    max-width: 57%;
+    margin: 100px auto auto auto;
+}
 .Results .keyword {
     background: unset !important;
 }
@@ -111,13 +117,33 @@ mark {
 .articlePage .Options .lang{bottom:-3px!important;}
 .articlePage .Options .lang.ar{bottom:-4px!important;}
 
-    .Widget {
-        max-width: 84%;
+    .articlePage .Widget {
+        max-width: 89%;
         width: 100%;
         margin: 59px auto 50px auto;
+    }
+
+    .initiativePage .Widget {
+        max-width: 87%;
+        margin: 100px auto auto auto;
+    }
+    .initiativeSubpage .Widget {
+        max-width: 89%;
+        margin: auto auto 56px auto;
     }
 
 }
 @media (max-width: 360px){
 .articlePage .at-resp-share-element .at-share-btn{margin-left:10px!important;}
+}
+
+
+.form-error {
+    color: white;
+    font-size: 10px;
+    font-family: presicav;
+    float: right;
+}
+.newletterPop .field .datainput {
+    margin-bottom: 10px;
 }

@@ -22,45 +22,46 @@
 {
     if (item.frontHtmlId == "1")
     {
-        <div class="Initiatives">
-            <div class="container">
-                <div class="titleTab">
-                    <h2 class="title">@item.title</h2>
-                </div>
-                <div class="wrap">
-                    @if (!String.IsNullOrEmpty(item.smallDescription))
-                    {
-                        <div class="top">
-                            <div class="text">@Html.Raw(item.smallDescription)</div>
-                        </div>
-                    }
-
-                    @if (ViewBag.categories.Count != 0)
-                    {
-                        <div class="graph">
-                            <div class="lines">
-                                <img src="@Url.Content("~/content/pictures/curves.png")" />
-                                @{int count = 1; }
-                                @foreach (var sub in ViewBag.categories)
-                                {
-                                    Random r = new Random();
-                                    string[] words = { "purple", "blue", "green" };
-                                    string word = words[r.Next(0, words.Length)];
-                                    string classitem = "item" + count;
-                                    <a href="@Url.Content("~/initiatives/details/"+sub.id+"/"+ sub.urlTitle)" class="item @classitem @word">@sub.title</a>
-
-                                    count++;
-                                }
-
-                            </div>
-
-                        </div>
-                    }
-
-
-
-                </div>
-            </div>
+<div class="Initiatives">
+    <div class="container">
+        <div class="titleTab">
+            <h2 class="title">@item.title</h2>
         </div>
+        <div class="wrap">
+            @if (!String.IsNullOrEmpty(item.smallDescription))
+            {
+                <div class="top">
+                    <div class="text">@Html.Raw(item.smallDescription)</div>
+                </div>
+            }
+
+            @if (ViewBag.categories.Count != 0)
+            {
+                <div class="graph">
+                    <div class="lines">
+                        <img src="@Url.Content("~/content/pictures/curves.png")" />
+                        @{int count = 1; }
+                        @foreach (var sub in ViewBag.categories)
+                        {
+                            string classitem = "item" + count;
+                            <a href="@Url.Content("~/initiatives/details/"+sub.id+"/"+ sub.urlTitle)" class="item @classitem @sub.color">@sub.title</a>
+
+                            count++;
+                        }
+
+                    </div>
+
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+    @if (ViewBag.settings.showTwitter == true)
+    {
+        { Html.RenderPartial("twitterBox"); }
+    }
+</div>
     }
 }

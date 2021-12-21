@@ -34,9 +34,11 @@ namespace PolicyInitiativeFront.Models
         public List<ArcticlesRepeater> arcticlesRepeater { get; set; }
         public List<ArticleRelatedView> relatedarticles { get; set; }
         public List<ArticleRelatedView> relatedperiodicals { get; set; }
-
+        public string articleTemplate { get; set; }
+        public string ARarticleTemplate { get; set; }
         public string types { get; set; } 
         public string auth { get; set; } 
+        public string newsCategory { get; set; } 
 
 
         public bool isArabic { set; get; }
@@ -50,6 +52,8 @@ namespace PolicyInitiativeFront.Models
         public string imgSrc { get; set; }
         public string Date { get; set; }
         public string detailUrl { get; set; }
+        public string articleTemplate { get; set; }
+        public string ARarticleTemplate { get; set; }
         public string smallDescription { get; set; }
         public string urlTitle { get; set; }
         public List<ArticleAuthor> authors { get; set; }
@@ -177,13 +181,9 @@ namespace PolicyInitiativeFront.Models
                         bio = entryItem.bio,
                     });
 
-
-
-
-
-
                 }
                 var entryTranslatedItem =  item.NewsCommunications.FirstOrDefault(lang => lang.languageId == 2);
+                var arabictemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.ArticleTemplate.id).label;
                 model.Add(new NewsCommunication
                 {
 
@@ -199,6 +199,8 @@ namespace PolicyInitiativeFront.Models
                     arauthors = authorsarlist,
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
                     detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title),
+                    articleTemplate = item.ArticleTemplate.label,
+                    ARarticleTemplate = arabictemplate,
                 });
             }
             return model;
@@ -279,7 +281,7 @@ namespace PolicyInitiativeFront.Models
                 subtitle = langquery == "en" ? model.subtitle : (model.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? model.NewsCommunications.FirstOrDefault(d => d.languageId == 2).subtitle : model.subtitle),
                 hasArabic = langquery == "ar" ? true : false,
                 isArabic = model.hasArabic,
-                categoryId=model.categoryId,
+                newsCategory = model.categoryId != null ? db.NewsCategories.FirstOrDefault(d=>d.id == model.categoryId).title : "",
                 articleTemplateId=model.articleTemplateId,
                 arabictitle = translatedItem != null ? (string.IsNullOrEmpty(translatedItem.title) ? "" : translatedItem.title) : "",
                 urlTitle = GetUrlTitle(model.title),
@@ -309,6 +311,8 @@ namespace PolicyInitiativeFront.Models
                     smallDescription = x.smallDescription,
                     detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + x.id + "/" + GetUrlTitle(x.title) ,
                     Date = x.date.HasValue ? x.date.Value.ToString("dd.MM.yy") : "",
+                    articleTemplate=x.ArticleTemplate.label,
+                    ARarticleTemplate=db.ArticleTemplates.FirstOrDefault(d=>d.languageId == 2 && d.languageParentId == x.articleTemplateId).label,
                     authors = db.ArticlesAuthors.Where(z => z.ArticlesId == x.id).Select(z => new ArticleAuthor
                     {
                         title = z.Author.title
@@ -345,6 +349,8 @@ namespace PolicyInitiativeFront.Models
                     urlTitle = GetUrlTitle(x.title),
                     hasArabic = x.hasArabic,
                     smallDescription = x.smallDescription,
+                    articleTemplate = x.ArticleTemplate.label,
+                    ARarticleTemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == x.articleTemplateId).label,
                     detailUrl =  ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + x.id + "/" + GetUrlTitle(x.title) ,
                     Date = x.date.HasValue ? x.date.Value.ToString("dd.MM.yy") : "",
                     authors = db.ArticlesAuthors.Where(z => z.ArticlesId == x.id).Select(z => new ArticleAuthor
@@ -352,7 +358,7 @@ namespace PolicyInitiativeFront.Models
                         title = z.Author.title
                     }).ToList(),
                 }).ToList(),
-                relatedperiodicals = relatedTypes.Where(d => d.id != model.id).Select(x => new ArticleRelatedView
+                relatedperiodicals =  relatedTypes.Where(d => d.id != model.id).Select(x => new ArticleRelatedView
                 {
 
                     id = x.id,
@@ -360,6 +366,8 @@ namespace PolicyInitiativeFront.Models
                     urlTitle = GetUrlTitle(x.title),
                     hasArabic = x.hasArabic,
                     smallDescription = x.smallDescription,
+                    articleTemplate = x.ArticleTemplate.label,
+                    ARarticleTemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == x.articleTemplateId).label,
                     detailUrl =ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + x.id + "/" + GetUrlTitle(x.title),
                     Date = x.date.HasValue ? x.date.Value.ToString("dd.MM.yy") : "",
                     authors = db.ArticlesAuthors.Where(z => z.ArticlesId == x.id).Select(z => new ArticleAuthor
@@ -372,8 +380,25 @@ namespace PolicyInitiativeFront.Models
             return model;
 
         }
-     
 
+        public List<NewsCommunication> GetAllArticles()//sitemap
+        {
+            var news = GetAllIsPublished().OrderByDescending(d => d.date);
+            var model = new List<NewsCommunication>();
+
+            foreach (var item in news)
+            {
+                model.Add(new NewsCommunication
+                {
+
+                    id = item.id,
+                    title = item.title,
+                    urlTitle = GetUrlTitle(item.title),
+
+                });
+            }
+            return model;
+        }
         public NewsCommunication GetById(int id)
         {
             return db.NewsCommunications.FirstOrDefault(d => !d.isDeleted && d.id == id && d.isPublished == true);
@@ -440,7 +465,9 @@ namespace PolicyInitiativeFront.Models
 
                 });
             }
+
             return model;
+
         }
 
 
@@ -452,6 +479,27 @@ namespace PolicyInitiativeFront.Models
 
             foreach (var item in news)
             {
+                var authors = db.ArticlesAuthors.Where(x => x.ArticlesId == item.id).Select(d => d.Author);
+                var authorslist = new List<ArticleAuthor>();
+                var authorsarlist = new List<ArticleAuthor>();
+                foreach (var entryItem in authors)
+                {
+                    var translated = entryItem.Authors.FirstOrDefault(lang => lang.languageId == 2);
+
+                    authorsarlist.Add(new ArticleAuthor
+                    {
+                        title = translated == null ? entryItem.title : translated.title,
+                        bio = translated == null ? entryItem.bio : translated.bio,
+                    });
+
+                    authorslist.Add(new ArticleAuthor
+                    {
+                        title = entryItem.title,
+                        bio = entryItem.bio,
+                    });
+
+                }
+                var arabictemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.ArticleTemplate.id).label;
                 model.Add(new NewsCommunication
                 {
 
@@ -462,8 +510,8 @@ namespace PolicyInitiativeFront.Models
                     Date = item.date.Value.ToString("dd.MM.yy"),
                     smallDescription = item.smallDescription,
                     arabicDesc = item.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? item.NewsCommunications.FirstOrDefault(d => d.languageId == 2).smallDescription : null,
-                    authorsList = item.ArticlesAuthors.Select(d => string.Join(",", d.Author.title)).FirstOrDefault(),
-                    authorsarList = item.ArticlesAuthors.Select(d => d.Author.Authors.FirstOrDefault(x => x.languageId == 2) != null ? string.Join(",", d.Author.Authors.FirstOrDefault(x => x.languageId == 2).title) : null).FirstOrDefault(),
+                    authors = authorslist,
+                    arauthors = authorsarlist,
                     detailUrl = item.articleTemplateId == null ? item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
                     : (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title)))
                     : (item.articleTemplateId == 1 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 2 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 3 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 4 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : null),
@@ -471,7 +519,8 @@ namespace PolicyInitiativeFront.Models
                     //detailUrl = item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
                     //: (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title))),
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
-
+                    articleTemplate = item.ArticleTemplate.label,
+                    ARarticleTemplate = arabictemplate,
                 });
             }
             return model;

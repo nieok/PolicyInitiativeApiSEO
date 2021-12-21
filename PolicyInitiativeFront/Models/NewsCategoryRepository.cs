@@ -45,6 +45,7 @@ namespace PolicyInitiativeFront.Models
                 {
                     id = item.id,
                     title = item.title,
+                    color=item.color == "1" ? "purple" : (item.color == "2" ? "blue" : " green"),
                     urlTitle = GetUrlTitle(item.title),
                 });
             }

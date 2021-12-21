@@ -25,18 +25,18 @@
         <div class="container">
             <ul class="list">
                 <li ng-repeat="item in authorList" ng-if="authorList.length != 0">
-                    <div class="item">
-                        <div class="name yellow">{{item}}</div><div  style="width: 14px;"></div>
+                    <div class="item" ng-class="{'arabic' : isArabic(item) == true}">
+                        <div class="name yellow">{{item}}</div><div class="delete" style="width: 14px;"></div>
                     </div>
                 </li>
                 <li ng-repeat="item in typeList" ng-if="typeList.length != 0">
-                    <div class="item">
-                        <div class="name red">{{item}}</div><div  style="width: 14px;"></div>
+                    <div class="item" ng-class="{'arabic' : isArabic(item) == true}">
+                        <div class="name red">{{item}}</div><div class="delete"  style="width: 14px;"></div>
                     </div>
                 </li>
                 <li ng-repeat="item in keywordList" ng-if="keywordList.length != 0">
-                    <div class="item">
-                        <div class="name green">{{item}}</div><div  style="width: 14px;"></div>
+                    <div class="item" ng-class="{'arabic' : isArabic(item) == true}">
+                        <div class="name green">{{item}}</div><div class="delete" style="width: 14px;"></div>
                     </div>
                 </li>
                 <li ng-if="datefrom != '' && dateto !='' && datefrom != null && dateto != null">
@@ -44,9 +44,9 @@
                         <div class="name yellow">{{datefrom}} > {{dateto}}</div><div  style="width: 14px;"></div>
                     </div>
                 </li>
-                <li  ng-if="category !=''">
+                <li  ng-if="category !=''" ng-class="{'arabic' : isArabic(category) == true}">
                     <div class="item">
-                        <div class="name green">{{category}}</div><div  style="width: 14px;"></div>
+                        <div class="name green">{{category}}</div><div  class="delete" style="width: 14px;"></div>
                     </div>
                 </li>
             </ul>
@@ -56,6 +56,8 @@
     <div class="itemsList">
         <div class="container">
             <ul class="grid">
+
+                <li class="no-results ng-hide">No results found</li>
                 @*<li class="grid-item" ng-repeat="item in newsList">
                     <div class="item englishBox" ng-if="item.hasArabic == false">
                         <div class="pic" ng-if="item.imgSrc != null"><a href="{{item.detailUrl}}"><img ng-src="{{item.imgSrc}}" alt="{{item.title}}" /></a></div>

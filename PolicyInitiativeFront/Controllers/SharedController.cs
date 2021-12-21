@@ -31,12 +31,14 @@ namespace PolicyInitiativeFront.Controllers
         public TypeArticleRepository typesrpstry = new TypeArticleRepository();
         public KeywordRepository keywordRepository = new KeywordRepository();
         private dblinqDataContext db = new dblinqDataContext();
-
+        private settingsRepository settingsRepository = new settingsRepository();
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ViewBag.medias = socialrpstry.GetAllIsPublished();
             ViewBag.types = typesrpstry.GetAllTypes();
+            var settings = settingsRepository.GetFirstOrDefault();
+            ViewBag.settings = settings;
             ViewBag.keywords = keywordRepository.GetAllKeywords();
             ViewBag.contactInfo = rpstry.GetContactInfoData();
             base.OnActionExecuting(filterContext); // re-added in edit

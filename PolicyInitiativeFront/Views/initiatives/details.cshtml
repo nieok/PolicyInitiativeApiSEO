@@ -57,16 +57,16 @@
                                     <div class="arabic" onclick="arabic(event)">عربي</div>
                                 </div>
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">@item.title</a></h2>
-                                @if (!String.IsNullOrEmpty(item.authorsList))
+                                @foreach (var sub in item.authors)
                                 {
-                                    <div class="author">@item.authorsList</div>
+                                    <div class="author" ng-click="openAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
 
                                 }
                                 @if (!String.IsNullOrEmpty(item.smallDescription))
                                 {
                                     <div class="text">
                                         <a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">
-                                            @Html.Raw(item.smallDescription) <span class="read">read</span>
+                                            @Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span>
                                         </a>
                                     </div>
                                 }
@@ -81,16 +81,16 @@
                                     <div class="english" onclick="english(event)">eng</div>
                                 </div>
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
-                                @if (!String.IsNullOrEmpty(item.authorsarList))
+                                @foreach (var sub in item.arauthors)
                                 {
-                                    <div class="author">@item.authorsarList</div>
+                                    <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
                                 }
                                 @if (!String.IsNullOrEmpty(item.arabicDesc))
                                 {
                                     <div class="text">
                                         <a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">
                                             @Html.Raw(item.arabicDesc)
-                                            <span class="read">اقرأ</span>
+                                            <span class="read">@item.ARarticleTemplate</span>
                                         </a>
                                     </div>
                                 }
@@ -109,16 +109,16 @@
                                     }
                                 </div>
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
-                                @if (!String.IsNullOrEmpty(item.authorsarList))
+                                @foreach (var sub in item.arauthors)
                                 {
-                                    <div class="author">@item.authorsarList</div>
+                                    <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
                                 }
                                 @if (!String.IsNullOrEmpty(item.arabicDesc))
                                 {
                                     <div class="text">
                                         <a href="@Url.Content(item.detailUrl + "?lang=ar")">
                                             @Html.Raw(item.arabicDesc)
-                                            <span class="read">اقرأ</span>
+                                            <span class="read">@item.ARarticleTemplate</span>
                                         </a>
                                     </div>
                                 }
@@ -132,6 +132,10 @@
 
         </ul>
     </div>
+    @if (ViewBag.settings.showTwitter == true)
+    {
+        { Html.RenderPartial("twitterBox"); }
+    }
 </div>
 
 

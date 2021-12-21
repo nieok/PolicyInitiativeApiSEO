@@ -22,6 +22,12 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         }
     });
 
+    $scope.isArabic = function(text) {
+        var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
+        result = pattern.test(text);
+        return result;
+    }
+
     $scope.submitSearchPopup=function () {
         //$('.searchField .field').addClass('loading');
         //setTimeout(function () {
@@ -208,7 +214,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             }
                           
                             if (value.arsmallDescription != null) {
-                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '<span class="read">اقرأ</span></a>'
+                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '<span class="read">'+ value.ARarticleTemplate +'</span></a>'
                             }
 
                             values = values + img + datediv + titlediv + arauthordiv + ardesdiv + '</div> </div> </li>';
@@ -255,7 +261,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             }
 
                             if (value.smallDescription != null) {
-                                desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '<span class="read">read</span></a>'
+                                desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '<span class="read">' + value.articleTemplate+'</span></a>'
                             }
                             var count1 = 1;
                             if (value.authorsarList.length != 0) {
@@ -273,7 +279,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             }
 
                             if (value.arsmallDescription != null) {
-                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '<span class="read">اقرأ</span></a>'
+                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '<span class="read">' + value.ARarticleTemplate +'</span></a>'
                             }
 
 
@@ -483,7 +489,10 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
             $scope.datefrom = res.data.datefrom;
 
             $('.itemsList').addClass('loadmore');
+            if ($scope.data.length == 0) {
+                $('.no-results').removeClass('ng-hide');
 
+            }
             var $items = '';
             var values = '';
             angular.forEach($scope.data, function (value, key) {
@@ -523,7 +532,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     }
 
                     if (value.arsmallDescription != null) {
-                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '<span class="read">اقرأ</span></a>'
+                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '<span class="read">'+ value.ARarticleTemplate +'</span></a>'
                     }
 
                     values = values + img + datediv + titlediv + arauthordiv + ardesdiv + '</div> </div> </li>';
@@ -570,7 +579,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     }
 
                     if (value.smallDescription != null) {
-                        desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '<span class="read">read</span></a>'
+                        desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '<span class="read">'+ value.articleTemplate +'</span></a>'
                     }
                     var count1 = 1;
                     if (value.authorsarList.length != 0) {
@@ -588,7 +597,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     }
 
                     if (value.arsmallDescription != null) {
-                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '<span class="read">اقرأ</span></a>'
+                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '<span class="read">'+ value.ARarticleTemplate +'</span></a>'
                     }
 
 

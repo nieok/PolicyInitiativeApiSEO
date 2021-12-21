@@ -12,13 +12,13 @@ namespace PolicyInitiativeFront.Controllers
     {
         private CorporatePageRepository rpstry = new CorporatePageRepository();
         private NewsCommunicationRepository articlerpstry = new NewsCommunicationRepository();
-        private settingsRepository settingsRepository = new settingsRepository();
+      
         public ActionResult index(int id, string lang = "en", string src ="")
         {
-            var settings = settingsRepository.GetFirstOrDefault();
+           
             var news = articlerpstry.GetArticleById(id, lang , src, "712x401xi", "417x312xi", "858x383xi");
 
-            ViewBag.settings = settings;
+         
             #region SEO
             MetasModel metas = new MetasModel();
             NewsCommunication currentPage = articlerpstry.GetById(id);
