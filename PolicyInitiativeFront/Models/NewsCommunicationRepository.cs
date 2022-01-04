@@ -39,6 +39,7 @@ namespace PolicyInitiativeFront.Models
         public string types { get; set; } 
         public string auth { get; set; } 
         public string newsCategory { get; set; } 
+        public string templatetitle { get; set; } 
 
 
         public bool isArabic { set; get; }
@@ -48,6 +49,7 @@ namespace PolicyInitiativeFront.Models
     {
         public int id { get; set; }
         public string title { get; set; }
+        public string artitle { get; set; }
         public bool hasArabic { get; set; }
         public string imgSrc { get; set; }
         public string Date { get; set; }
@@ -55,6 +57,7 @@ namespace PolicyInitiativeFront.Models
         public string articleTemplate { get; set; }
         public string ARarticleTemplate { get; set; }
         public string smallDescription { get; set; }
+        public string arsmallDescription { get; set; }
         public string urlTitle { get; set; }
         public List<ArticleAuthor> authors { get; set; }
         public List<ArticleAnalysis> analysis { get; set; }
@@ -62,6 +65,7 @@ namespace PolicyInitiativeFront.Models
     public class ArticleAuthor
     {
         public string title { get; set; }
+        public string artitle { get; set; }
         public string bio { get; set; }
     }
     public class ArcticlesRepeater
@@ -209,18 +213,15 @@ namespace PolicyInitiativeFront.Models
         {
             var model = db.NewsCommunications.FirstOrDefault(d => !d.isDeleted && d.id == id && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null));
             var authorsart = db.ArticlesAuthors.Where(x => x.ArticlesId == model.id);
-            var articleTypes = db.ArticlesTypes.Where(x => x.ArticlesId == model.id);
+            //var articleTypes = db.ArticlesTypes.Where(x => x.ArticlesId == model.id);
             var relatedinitiatives = src == "init" ? (model.categoryId !=null ? db.NewsCommunications.Where(x => x.categoryId == model.categoryId && x.id != model.id && !x.isDeleted && x.isPublished).ToList() : null): null;
             var related = new List<NewsCommunication>();
             var relatedTypes = new List<NewsCommunication>();
 
-           
-            foreach (var item in articleTypes)
-            {
-                var getrelated = db.ArticlesTypes.Where(x => x.TypeId == item.TypeId && x.ArticlesId != model.id).Select(d => d.NewsCommunication).OrderByDescending(d => d.date).ToList();
 
-                relatedTypes.AddRange(getrelated);
-            }
+            var getrelatedTemplate = db.NewsCommunications.Where(x => x.articleTemplateId == model.articleTemplateId && x.id != model.id).OrderByDescending(d => d.date).ToList();
+
+            relatedTypes.AddRange(getrelatedTemplate);
 
 
             foreach (var item in authorsart)
@@ -272,17 +273,19 @@ namespace PolicyInitiativeFront.Models
 
 
             }
-
+            related = related.Distinct().ToList();
             model = (new NewsCommunication
             {
 
                 id = model.id,
                 title = langquery == "en" ? model.title : (model.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? model.NewsCommunications.FirstOrDefault(d => d.languageId == 2).title : model.title),
+                artitle =  (model.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? model.NewsCommunications.FirstOrDefault(d => d.languageId == 2).title : model.title),
                 subtitle = langquery == "en" ? model.subtitle : (model.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? model.NewsCommunications.FirstOrDefault(d => d.languageId == 2).subtitle : model.subtitle),
                 hasArabic = langquery == "ar" ? true : false,
                 isArabic = model.hasArabic,
                 newsCategory = model.categoryId != null ? db.NewsCategories.FirstOrDefault(d=>d.id == model.categoryId).title : "",
                 articleTemplateId=model.articleTemplateId,
+                templatetitle = model.ArticleTemplate.title,
                 arabictitle = translatedItem != null ? (string.IsNullOrEmpty(translatedItem.title) ? "" : translatedItem.title) : "",
                 urlTitle = GetUrlTitle(model.title),
                 videoUrl = string.IsNullOrEmpty(model.videoUrl) ? null : model.videoUrl,
@@ -298,7 +301,7 @@ namespace PolicyInitiativeFront.Models
                 imgSrc = model.imgSrc == "" || model.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + model.imgSrc,
                
                 
-                types= string.Join("," , articleTypes.Select(d=>d.TypeArticle.title)),
+                //types= string.Join("," , articleTypes.Select(d=>d.TypeArticle.title)),
                 auth= string.Join("," , authors.Select(d=>d.title)),
                 authors = authorslist,
                 relatedinitiatives = relatedinitiatives != null ? relatedinitiatives.Select(x=>new ArticleRelatedView
@@ -306,16 +309,19 @@ namespace PolicyInitiativeFront.Models
 
                     id = x.id,
                     title = x.title,
+                    artitle = x.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? x.NewsCommunications.FirstOrDefault(d => d.languageId == 2).title : null,
                     urlTitle = GetUrlTitle(x.title),
                     hasArabic = x.hasArabic,
                     smallDescription = x.smallDescription,
+                    arsmallDescription = x.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? x.NewsCommunications.FirstOrDefault(d => d.languageId == 2).smallDescription : null,
                     detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + x.id + "/" + GetUrlTitle(x.title) ,
                     Date = x.date.HasValue ? x.date.Value.ToString("dd.MM.yy") : "",
                     articleTemplate=x.ArticleTemplate.label,
                     ARarticleTemplate=db.ArticleTemplates.FirstOrDefault(d=>d.languageId == 2 && d.languageParentId == x.articleTemplateId).label,
                     authors = db.ArticlesAuthors.Where(z => z.ArticlesId == x.id).Select(z => new ArticleAuthor
                     {
-                        title = z.Author.title
+                        title = z.Author.title,
+                        artitle = z.Author.Authors.FirstOrDefault(d => d.languageId == 2).title,
                     }).ToList(),
 
                 }).ToList() : null,
@@ -325,7 +331,7 @@ namespace PolicyInitiativeFront.Models
                     title = x.title,
                     captionImage = x.captionImage,
                     Description=x.Description,
-                    ArabicDescription=x.ArabieDescription,
+                    ArabicDescription =x.ArabieDescription,
                     arabicCaptionImage = x.arabicCaptionImage,
                     #region Image Gallery 
                     images = x.articlesRepeaterMedias.Where(e => e.mediaType == 1 && e.articleRepeaterId == x.id).Select(e => new ImageView
@@ -346,16 +352,19 @@ namespace PolicyInitiativeFront.Models
 
                     id = x.id,
                     title = x.title,
+                    artitle = x.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? x.NewsCommunications.FirstOrDefault(d => d.languageId == 2).title : null,
                     urlTitle = GetUrlTitle(x.title),
                     hasArabic = x.hasArabic,
                     smallDescription = x.smallDescription,
+                    arsmallDescription = x.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? x.NewsCommunications.FirstOrDefault(d => d.languageId == 2).smallDescription : null,
                     articleTemplate = x.ArticleTemplate.label,
                     ARarticleTemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == x.articleTemplateId).label,
                     detailUrl =  ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + x.id + "/" + GetUrlTitle(x.title) ,
                     Date = x.date.HasValue ? x.date.Value.ToString("dd.MM.yy") : "",
                     authors = db.ArticlesAuthors.Where(z => z.ArticlesId == x.id).Select(z => new ArticleAuthor
                     {
-                        title = z.Author.title
+                        title = z.Author.title,
+                        artitle= z.Author.Authors.FirstOrDefault(d=>d.languageId == 2).title,
                     }).ToList(),
                 }).ToList(),
                 relatedperiodicals =  relatedTypes.Where(d => d.id != model.id).Select(x => new ArticleRelatedView
@@ -363,16 +372,19 @@ namespace PolicyInitiativeFront.Models
 
                     id = x.id,
                     title = x.title,
+                    artitle = x.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? x.NewsCommunications.FirstOrDefault(d => d.languageId == 2).title : null,
                     urlTitle = GetUrlTitle(x.title),
                     hasArabic = x.hasArabic,
                     smallDescription = x.smallDescription,
+                    arsmallDescription = x.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? x.NewsCommunications.FirstOrDefault(d => d.languageId == 2).smallDescription : null,
                     articleTemplate = x.ArticleTemplate.label,
                     ARarticleTemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == x.articleTemplateId).label,
                     detailUrl =ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + x.id + "/" + GetUrlTitle(x.title),
                     Date = x.date.HasValue ? x.date.Value.ToString("dd.MM.yy") : "",
                     authors = db.ArticlesAuthors.Where(z => z.ArticlesId == x.id).Select(z => new ArticleAuthor
                     {
-                        title = z.Author.title
+                        title = z.Author.title,
+                        artitle = z.Author.Authors.FirstOrDefault(d => d.languageId == 2).title,
                     }).ToList(),
                 }).ToList(),
             });
@@ -469,8 +481,6 @@ namespace PolicyInitiativeFront.Models
             return model;
 
         }
-
-
 
         public List<NewsCommunication> GetAllByCategoryId(int id,string imgsize = "")
         {

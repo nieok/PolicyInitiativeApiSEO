@@ -102,23 +102,17 @@
                     @{ int comaCount = 0;}
                     @foreach (var auth in item.authors)
                     {
-                       
-                        <div class="author" ng-click="openAuthorPopup('@auth.title','@auth.bio')">@auth.title</div>
-                       
                         comaCount++;
-                        if (item.authors.Count > comaCount)
-                        {
-                            <text> ,</text>
+                        <div class="author" ng-click="openAuthorPopup('@auth.title','@auth.bio')"> @if (item.authors.Count > comaCount){<text>@auth.title, </text> }else{@auth.title}</div>
 
-                        }
 
                     }
                     <div class="text">
                         <a href="@Url.Content(item.detailUrl)">
                             @if (!String.IsNullOrEmpty(item.smallDescription))
                             {
-                                <p>@Html.Raw(item.smallDescription)</p>
-                            }<span class="read">read</span>
+                                <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                            }
 
                         </a>
 
@@ -142,25 +136,18 @@
                     @{ int comaCount1 = 0;}
                     @foreach (var auth in item.arauthors)
                     {
-                       
-                     <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">@auth.title</div>
-                       
                         comaCount1++;
-                        if (item.arauthors.Count > comaCount1)
-                        {
-                            <text> ,</text>
-
-                        }
+                     <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')"> @if(item.arauthors.Count > comaCount1){ <text>@auth.title, </text>}else{@auth.title}</div>
 
                     }
                     <div class="text">
                         <a href="@Url.Content(item.detailUrl + "?lang=ar")">
                             @if (!String.IsNullOrEmpty(item.arsmallDescription))
                             {
-                                <p>@Html.Raw(item.arsmallDescription)</p>}
+                                <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>}
 
 
-                            <span class="read">اقرأ</span>
+                            
                         </a>
 
                     </div>
@@ -185,24 +172,17 @@
                 @{ int comaCount1 = 0;}
                 @foreach (var auth in item.arauthors)
                 {
-                  
-                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">@auth.title</div>
-                 
                     comaCount1++;
-                    if (item.arauthors.Count > comaCount1)
-                    {
-                        <text> ,</text>
-
-                    }
+                     <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')"> @if (item.arauthors.Count > comaCount1){<text>@auth.title, </text>}else{@auth.title}</div>
 
                 }
                 <div class="text">
                     <a href="@Url.Content(item.detailUrl + "?lang=ar")">
                         @if (!String.IsNullOrEmpty(item.arsmallDescription))
                         {
-                            <p>@Html.Raw(item.arsmallDescription)</p>}
+                        <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>}
 
-                        <span class="read">اقرأ</span>
+                      
                     </a>
 
                 </div>

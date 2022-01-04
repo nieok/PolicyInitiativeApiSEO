@@ -13,6 +13,11 @@ namespace PolicyInitiativeFront
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
+            name: "sitemap",
+            url: "GoogleSiteMap",
+            defaults: new { controller = "GoogleSitemap", action = "CreateSitemapXml", id = UrlParameter.Optional, }
+            );
+            routes.MapRoute(
             name: "tags",
             url: "search/tags",
             defaults: new { controller = "search", action = "Index" }

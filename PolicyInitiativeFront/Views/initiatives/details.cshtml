@@ -57,11 +57,21 @@
                                     <div class="arabic" onclick="arabic(event)">عربي</div>
                                 </div>
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">@item.title</a></h2>
-                                @foreach (var sub in item.authors)
+                                @{ int comaCount1 = 0;}
+                                @foreach (var auth in item.authors)
+                                {
+                                    comaCount1++;
+                                    <div class="author" ng-click="openAuthorPopup('@auth.title','@auth.bio')"> @if (item.authors.Count > comaCount1)
+                                    {<text>@auth.title, </text>}
+                                else
+                                {@auth.title}</div>
+
+                                }
+                                @*@foreach (var sub in item.authors)
                                 {
                                     <div class="author" ng-click="openAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
 
-                                }
+                                }*@
                                 @if (!String.IsNullOrEmpty(item.smallDescription))
                                 {
                                     <div class="text">
@@ -81,10 +91,22 @@
                                     <div class="english" onclick="english(event)">eng</div>
                                 </div>
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
-                                @foreach (var sub in item.arauthors)
+                                @{ int comaCount2 = 0;}
+                                @foreach (var auth in item.arauthors)
+                                {
+                                    comaCount2++;
+                                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">
+                                        @if (item.arauthors.Count > comaCount2)
+                                        {<text>@auth.title, </text>}
+                                    else
+                                    {@auth.title}
+                                    </div>
+
+                                }
+                                @*@foreach (var sub in item.arauthors)
                                 {
                                     <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
-                                }
+                                }*@
                                 @if (!String.IsNullOrEmpty(item.arabicDesc))
                                 {
                                     <div class="text">
@@ -109,10 +131,22 @@
                                     }
                                 </div>
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
-                                @foreach (var sub in item.arauthors)
+                                @{ int comaCount2 = 0;}
+                                @foreach (var auth in item.arauthors)
+                                {
+                                    comaCount2++;
+                                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">
+                                        @if (item.arauthors.Count > comaCount2)
+                                        {<text>@auth.title, </text>}
+                                    else
+                                    {@auth.title}
+                                    </div>
+
+                                }
+                                @*@foreach (var sub in item.arauthors)
                                 {
                                     <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
-                                }
+                                }*@
                                 @if (!String.IsNullOrEmpty(item.arabicDesc))
                                 {
                                     <div class="text">

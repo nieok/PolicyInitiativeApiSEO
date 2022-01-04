@@ -29,10 +29,6 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
     }
 
     $scope.submitSearchPopup=function () {
-        //$('.searchField .field').addClass('loading');
-        //setTimeout(function () {
-        //    $('.searchField .field').removeClass('loading');
-        //},2500)
         if ($scope.keyword != "") {
             window.location.href = FrontUrl + "search/results?title=" + $scope.keyword;
         }
@@ -40,13 +36,11 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
     $scope.submitContactMssg = function () {
         var itemForm = $scope.contactForm;
         var form = itemForm.$$element;
-
         $scope.careerId = $('.careerId').val();
         $scope.fileSrc = $('.drop-zone__thumb').attr('data-label');
         $scope.coverletterSrc = $('.drop-zone__thumb1').attr('data-label');
         console.log($scope.countrycode);
         if (itemForm.$valid) {
-
             console.log('formValid');
             $('.Apply .applyButton').hide();
             $('.Apply .loader').fadeIn();
@@ -56,7 +50,6 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                 $('.Apply .loader').hide();
 
             }, 1500);
-
             HandleRequest();
         } else {
             console.log('formValid NOT');
@@ -174,7 +167,6 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                 $('.itemsList').addClass('loadmore');
                 var $items = '';
                 var values = '';
-
                 if ($scope.batch != 0) {
                     angular.forEach($scope.data, function (value, key) {
                         var datediv = '';
@@ -185,7 +177,6 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                         var authordiv = '';
                         var desdiv = '';
 
-
                         if (value.hasArabic == true) {
 
                             values = values + '<li class="grid-item"> <div class="item arabicBox">';
@@ -193,55 +184,47 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                 img = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
 
                             }
-
                             if (value.date != null) {
                                 datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div >';
                             }
-
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
                             var count = 1;
                             if (value.authorsList.length != 0) {
-                                angular.forEach(value.authorsList, function (value1, key) {
+                                angular.forEach(value.authorsarList, function (value1, key) {
                                     if (value.authorsarList.length == count) {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title + '</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title +'</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
 
                                     } else {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title + ',</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title +',</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
                                     }
                                     count++;
                                 });
 
                             }
-                          
                             if (value.arsmallDescription != null) {
-                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '<span class="read">'+ value.ARarticleTemplate +'</span></a>'
+                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">'+ value.ARarticleTemplate +'</span></a>'
                             }
-
                             values = values + img + datediv + titlediv + arauthordiv + ardesdiv + '</div> </div> </li>';
 
                         } else {
 
-
                             values = values + '<li class="grid-item">';
-
                             var englishBox = ' <div class="item englishBox">';
                             var arabicBox = ' <div class="item arabicBox">';
                             var arabicdate = '';
                             var arabictitle = '';
                             var arimg = '';
 
-
                             if (value.imgSrc != null) {
                                 img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
                                 arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
 
                             }
-
                             if (value.date != null) {
                                 datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
                             }
                             if (value.date != null) {
-                                arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="english" onclick="english(event)">عربي</div></div> ';
+                                arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="english" onclick="english(event)">eng</div></div> ';
                             }
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
                             arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
@@ -252,16 +235,15 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                     if (value.authorsList.length == count) {
                                         authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" +')">' + value1.title + '</div> <input hidden class="EngBio-' +  count +'" value="'  +  value1.bio +'"/> ';
                                     } else {
-                                        authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'"+ ')">' + value1.title + ',</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
+                                        authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'"+ ')">' + value1.title +", " + '</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
 
                                     }
                                     count++;
                                 });
 
                             }
-
                             if (value.smallDescription != null) {
-                                desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '<span class="read">' + value.articleTemplate+'</span></a>'
+                                desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate+'</span></a>'
                             }
                             var count1 = 1;
                             if (value.authorsarList.length != 0) {
@@ -271,22 +253,18 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                         arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
 
                                     } else {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title + ',</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title +", " + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
                                     }
                                     count1++;
                                 });
                                 
                             }
-
                             if (value.arsmallDescription != null) {
-                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '<span class="read">' + value.ARarticleTemplate +'</span></a>'
+                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate +'</span></a>'
                             }
-
 
                             values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + arauthordiv + ardesdiv + '</div> </div> </li>';
                         }
-
-
 
                     });
                     $items = $(values);
@@ -358,6 +336,8 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         localStorage.removeItem('dateto');
         localStorage.removeItem('authorList');
         localStorage.removeItem('category');
+        localStorage.removeItem('articleTemplateId');
+        localStorage.removeItem('articleTemplateTitle');
         $scope.authorList = $('.authorList').val();
         if ($scope.authorList.length != 0) {
             localStorage.setItem("authorList", $scope.authorList);
@@ -372,11 +352,12 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         localStorage.removeItem('dateto');
         localStorage.removeItem('authorList');
         localStorage.removeItem('category');
+        localStorage.removeItem('articleTemplateId');
+        localStorage.removeItem('articleTemplateTitle');
         $scope.category = $('.init').val();
         if ($scope.category != "") {
             localStorage.setItem("category", $scope.category);
         }
-     
         window.location.href = fronturl + '/search/tags';
     }
     $scope.searchByType = function () {
@@ -386,11 +367,29 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         localStorage.removeItem('dateto');
         localStorage.removeItem('authorList');
         localStorage.removeItem('category');
+        localStorage.removeItem('articleTemplateId');
+        localStorage.removeItem('articleTemplateTitle');
         $scope.typeList = $('.type').val();
         if ($scope.typeList.length != 0) {
             localStorage.setItem("typeList", $scope.typeList);
         }
       
+        window.location.href = fronturl + '/search/tags';
+    }
+    $scope.searchByTemplate = function () {
+        localStorage.removeItem('keywordList');
+        localStorage.removeItem('typeList');
+        localStorage.removeItem('datefrom');
+        localStorage.removeItem('dateto');
+        localStorage.removeItem('authorList');
+        localStorage.removeItem('category');
+        localStorage.removeItem('articleTemplateId');
+        localStorage.removeItem('articleTemplateTitle');
+        $scope.articleTemplateId = $('.articleTemplate').val();
+        $scope.articleTemplateTitle = $('.articleTemplateTitle').val();
+        localStorage.setItem("articleTemplateTitle", $scope.articleTemplateTitle);
+        localStorage.setItem("articleTemplateId", $scope.articleTemplateId);
+   
         window.location.href = fronturl + '/search/tags';
     }
     $scope.searchfitler = function () {
@@ -400,10 +399,10 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         localStorage.removeItem('dateto');
         localStorage.removeItem('authorList');
         localStorage.removeItem('category');
+        localStorage.removeItem('articleTemplateId');
+        localStorage.removeItem('articleTemplateTitle');
         $scope.typeList = [];
         $scope.keywordList = [];
-        $scope.datefrom = "";
-        $scope.dateto = "";
         var typegetvalue = $('.filterMenu .inner.show .Values .list .keyword.green');
         var keywordgetvalue = $('.filterMenu .inner.show .Values .list .keyword.red');
         angular.forEach(typegetvalue, function (value, key) {
@@ -419,11 +418,21 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         if ($scope.keywordList.length != 0) {
             localStorage.setItem("keywordList", $scope.keywordList);
         }
+        var datef = $scope.datefrom;
+        if (datef != undefined) {
+            datef = datef.toLocaleDateString();
+            localStorage.setItem("datefrom", datef);
+        }
+       
+        var datet = $scope.dateto;
+        if (datet != undefined) {
+            datet = datet.toLocaleDateString();
+            localStorage.setItem("dateto", datet); }
 
-        localStorage.setItem("datefrom", $scope.datefrom);
-        localStorage.setItem("dateto", $scope.dateto); 
+
         window.location.href = fronturl + '/search/tags';
     }
+
     this.$onInit = function () {
 
     }
@@ -440,6 +449,13 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
     $scope.newsList = [];
     $scope.data = [];
     $scope.numberOfProducts = 4;
+    if (localStorage.getItem("articleTemplateId") != undefined) {
+        $scope.articleTemplateId = localStorage.getItem("articleTemplateId");
+        $scope.articleTemplateTitle = localStorage.getItem("articleTemplateTitle");
+    } else {
+        $scope.articleTemplateId = 0;
+        $scope.articleTemplateTitle = "";
+    }
     if (localStorage.getItem("category") != undefined) {
         $scope.category = localStorage.getItem("category");
     } else {
@@ -469,27 +485,100 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
         });
 
     }
+
+    $scope.removeTemplate = function () {
+        $('.itemsList .grid').masonry('destroy');
+        localStorage.removeItem("datefrom");
+        localStorage.removeItem("dateto");
+        $('.grid-item').remove();
+        $scope.batch = 0;
+        $scope.articleTemplateId = 0;
+        $scope.articleTemplateTitle = "";
+        $scope.getData();
+    }
+    $scope.removeDate = function () {
+        $('.itemsList .grid').masonry('destroy');
+        localStorage.removeItem("datefrom");
+        localStorage.removeItem("dateto");
+        $('.grid-item').remove();
+        $scope.batch = 0;
+        $scope.datefrom = "";
+        $scope.dateto = "";
+        $scope.getData();   
+    }
+    $scope.categoryFilter = function (item) {
+     
+        $('.itemsList .grid').masonry('destroy');
+        localStorage.removeItem("category");
+        $('.grid-item').remove();
+        $scope.batch = 0;
+        $scope.category = "";
+        $scope.getData();    
+       
+    }
+    $scope.AuthorFilter = function (item) {
+        angular.forEach($scope.authorList, function (value, key) {
+            if (value == item) {
+                $('.itemsList .grid').masonry('destroy');
+                localStorage.setItem("authorList", $scope.authorList);
+                $('.grid-item').remove();
+                $scope.batch = 0;
+                $scope.authorList.splice(key, 1);
+                $scope.getData();
+            }
+        });
+    }
+    $scope.removeKeywordFilter = function (item) {
+        angular.forEach($scope.keywordList, function (value, key) {
+            if (value == item) {
+                $('.itemsList .grid').masonry('destroy');
+                localStorage.setItem("keywordList", $scope.keywordList);
+                $('.grid-item').remove();
+                $scope.batch = 0;
+                $scope.keywordList.splice(key, 1);
+                $scope.getData();
+            }
+
+        });
+
+    }
+    $scope.removeTypeFilter = function (item) {
+        angular.forEach($scope.typeList, function (value, key) {
+            if (value == item) {
+                $('.itemsList .grid').masonry('destroy');
+                localStorage.setItem("typeList", $scope.typeList);
+                $('.grid-item').remove();
+                $scope.batch = 0;
+                $scope.typeList.splice(key, 1);
+                $scope.getData();
+            }
+
+        });
+
+    }
     $scope.watch = function () {
         $scope.getData();
     }
     $scope.showloader = function (title) {
         $('.label.' + title).addClass('load');
     }
+
     $scope.getData = function () {
         $http({
             method: 'Post',
             url: RouteUrl + 'api/NewsCommunications/SearchData',
             data: {
-             batch: $scope.batch, pageNumber: $scope.numberOfProducts, category: $scope.category, authorList: $scope.authorList, datefrom: $scope.datefrom, dateto: $scope.dateto, typeList: $scope.typeList, keywordList: $scope.keywordList,  imgsize: "515x413xi"
+                batch: $scope.batch, pageNumber: $scope.numberOfProducts, articleTemplateId: $scope.articleTemplateId,category: $scope.category, authorList: $scope.authorList, datefrom: $scope.datefrom, dateto: $scope.dateto, typeList: $scope.typeList, keywordList: $scope.keywordList,  imgsize: "515x413xi"
             }
         }).then(function (res) {
             $scope.data = res.data.news;
             $scope.typeList = res.data.typeList;
             $scope.dateto = res.data.dateto;
             $scope.datefrom = res.data.datefrom;
+            $scope.articleTemplate = res.data.articleTemplate;
 
             $('.itemsList').addClass('loadmore');
-            if ($scope.data.length == 0) {
+            if ($scope.data.length == 0 && $scope.batch ==0) {
                 $('.no-results').removeClass('ng-hide');
 
             }
@@ -519,7 +608,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
                     var count = 1;
                     if (value.authorsList.length != 0) {
-                        angular.forEach(value.authorsList, function (value1, key) {
+                        angular.forEach(value.authorsarList, function (value1, key) {
                             if (value.authorsarList.length == count) {
                                 arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title + '</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
 
@@ -532,7 +621,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     }
 
                     if (value.arsmallDescription != null) {
-                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '<span class="read">'+ value.ARarticleTemplate +'</span></a>'
+                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">'+ value.ARarticleTemplate +'</span></a>'
                     }
 
                     values = values + img + datediv + titlediv + arauthordiv + ardesdiv + '</div> </div> </li>';
@@ -548,18 +637,16 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     var arabictitle = '';
                     var arimg = '';
 
-
                     if (value.imgSrc != null) {
                         img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
                         arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
 
                     }
-
                     if (value.Date != null) {
                         datediv = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
                     }
                     if (value.Date != null) {
-                        arabicdate = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="english" onclick="english(event)">عربي</div></div> ';
+                        arabicdate = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="english" onclick="english(event)">eng</div></div> ';
                     }
                     titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
                     arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
@@ -570,16 +657,15 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                             if (value.authorsList.length == count) {
                                 authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" + ')">' + value1.title + '</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
                             } else {
-                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" + ')">' + value1.title + ',</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
+                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" + ')">' + value1.title+", " + '</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
 
                             }
                             count++;
                         });
-
                     }
 
                     if (value.smallDescription != null) {
-                        desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '<span class="read">'+ value.articleTemplate +'</span></a>'
+                        desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">'+ value.articleTemplate +'</span></a>'
                     }
                     var count1 = 1;
                     if (value.authorsarList.length != 0) {
@@ -589,22 +675,18 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                                 arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
 
                             } else {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title + ',</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title+", " + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
                             }
                             count1++;
                         });
 
                     }
-
                     if (value.arsmallDescription != null) {
-                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '<span class="read">'+ value.ARarticleTemplate +'</span></a>'
+                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">'+ value.ARarticleTemplate +'</span></a>'
                     }
-
 
                     values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + arauthordiv + ardesdiv + '</div> </div> </li>';
                 }
-
-
 
             });
             $items = $(values);
@@ -616,29 +698,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
 
                 $('.itemsList').removeClass('loadmore');
             }, 2000);
-            //$('.itemsList').removeClass('loadmore');
-            //updateLayout1();
-            //angular.forEach($scope.data, function (value, key) {
-            //    $scope.newsList.push(value);
-
-            //});
-            //if ($scope.data.length == 0) {
-            //    $('.itemsList').removeClass('loadmore');
-            //}
-            //setTimeout(function () {
-            //    $('.itemsList .arabic').click(function () {   // show arabic box
-            //        $(this).parents('.grid-item').find('.englishBox').hide();
-            //        $(this).parents('.grid-item').find('.arabicBox').show();
-            //        initMasonryList(); // call masonry
-            //    });
-            //    $('.itemsList .english').click(function () {   // show english box
-            //        $(this).parents('.grid-item').find('.englishBox').show();
-            //        $(this).parents('.grid-item').find('.arabicBox').hide();
-            //        initMasonryList(); // call masonry
-            //    });
-
-
-            //}, 200);
+    
         });
     }
     $scope.getData();
@@ -654,12 +714,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                         $scope.batch = $scope.batch + 1;
                         $('.grid-item').removeClass('newPost');
                         $scope.getData();
-                        //setTimeout(function () {
-                        //    if ($('.itemsList').hasClass('loadmore')) {
-                        //        initMasonryListNewPost(); // recall masonry
-                        //    }
-                        //    $('.itemsList').removeClass('loadmore');
-                        //}, 2222);
+                    
                     } else {
                         $('.box').addClass('hideborder');
                         $('.itemsList').removeClass('loadmore');
@@ -751,12 +806,7 @@ app.controller('myNewsLetter', function ($scope, $http, $window, $rootScope) {
                         $('.newletterPop .inner').removeClass('show');
                         $('.newletterPop .inner').removeClass('ng-hide');
                     }, 4000);
-                    //setTimeout(function () {
-                    //    closeNewsletterPop();
-                    //}, 4500);
-                    // Set back to pristine.
                     itemForm.$setPristine();
-                    // Since Angular 1.3, set back to untouched state.
                     itemForm.$setUntouched();
                 }
             }, function (res) {
@@ -765,10 +815,7 @@ app.controller('myNewsLetter', function ($scope, $http, $window, $rootScope) {
                 }
             })
         }
-
     }
-
-
 });
 app.directive('formEmail', function () {
     return {

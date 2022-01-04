@@ -106,7 +106,7 @@ namespace PolicyInitiativeFront.Controllers
                 #region search
                 item = xmlDoc.CreateElement("url");
                 item2 = xmlDoc.CreateElement("loc");
-                item2.InnerText = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "search/results";
+                item2.InnerText = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "search";
                 item3 = xmlDoc.CreateElement("lastmod");
                 item3.InnerText = DateTime.Now.ToString("yyyy-MM-dd");
                 item4 = xmlDoc.CreateElement("changefreq");

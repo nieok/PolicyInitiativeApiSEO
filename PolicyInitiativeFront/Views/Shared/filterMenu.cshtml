@@ -63,11 +63,11 @@
                         <ul class="sort">
                             <li> <!-- we have missing class on field -->
                                 <label for="fromdate" class="titre">from</label>
-                                <div class="field"><input  id="fromdate" type="date" onfocus="$(this).parents('.field').addClass('active')"  ng-model="fromdate" /></div>
+                                <div class="field"><input  id="fromdate" type="date" onfocus="$(this).parents('.field').addClass('active')"  ng-model="datefrom" /></div>
                             </li>
                             <li>
                                 <label for="todate" class="titre">to</label>
-                                <div class="field"><input id="todate" type="date" onfocus="$(this).parents('.field').addClass('active')" ng-model="todate" /></div>
+                                <div class="field"><input id="todate" type="date" onfocus="$(this).parents('.field').addClass('active')" ng-model="dateto" /></div>
                             </li>
                         </ul>
                     </div>
@@ -131,11 +131,11 @@
                         <ul class="sort">
                             <li> <!-- we have missing class on field -->
                                 <label for="fromdate" class="titre">من</label>
-                                <div class="field"><input id="fromdate" type="date" /></div>
+                                <div class="field"><input id="fromdate" type="date"  ng-model="datefrom"/></div>
                             </li>
                             <li>
                                 <label for="todate" class="titre">الى</label>
-                                <div class="field"><input id="todate" type="date" /></div>
+                                <div class="field"><input id="todate" type="date" ng-model="dateto" /></div>
                             </li>
                         </ul>
                     </div>

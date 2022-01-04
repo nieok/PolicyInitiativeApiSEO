@@ -389,7 +389,17 @@ function english(event) {   // show english box
 //_________________________________________________________________________________________________
 
 
+function arabic1(event) {   // show arabic box
+    $(event.target).parents('.swiper-slide').find('.englishBox').hide();
+    $(event.target).parents('.swiper-slide').find('.arabicBox').show();
+    initMasonryList(); // call masonry
+};
 
+function english1(event) {   // show english box
+    $(event.target).parents('.swiper-slide').find('.englishBox').show();
+    $(event.target).parents('.swiper-slide').find('.arabicBox').hide();
+    initMasonryList(); // call masonry
+};
 
 
 
