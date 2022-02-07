@@ -34,7 +34,23 @@
     font-family: 'SymbioARLight';
     font-size: 27px;
     line-height: 29px;
+    
  }
+
+.About.Arabic{padding-top:36px;}
+.About.Arabic .info:only-child .text{padding-left:0px;padding-right:78px;}
+.About.Arabic .text .small{font-size:26px;}
+.About.Arabic .titleTab .title{font-size:40px;line-height: 41px;font-family: 'SymbioARBold';}
+
+@media (max-width:900px){
+.About .picDiv{margin-bottom:22px;}
+}
+
+@media (max-width: 767px){
+.About.Arabic .info:only-child .text{padding-right:0px;font-size:19px;line-height:24px;}
+.About.Arabic .text .small{font-size:19px;}
+.About.Arabic .titleTab .title{font-size: 28px;line-height:31px;}
+}
 
 .About.Arabic .author {
    font-family: 'SymbioARBold';
@@ -42,7 +58,9 @@
    line-height: 33px;
 }
 
-
+.Team.Arabic .subMenu .link {
+    font-family: 'SymbioARLight' !important;
+}
 .Team.Arabic .teamlist .titleTab .position:before {
     left:unset !important;
     right:-15px !important;
@@ -50,16 +68,20 @@
 .Team.Arabic .teamlist .titleTab .position {
     margin-left: unset !important;
     margin-right: 30px;
-    padding-left:unset !important;
+    padding-left: unset !important;
+    font-family: 'SymbioARLight' !important;
 }
 
 .Team.Arabic .teamlist ul.cols > li:nth-child(1) {
     margin-right: -9px !important;
 }
 .Team.Arabic .teamlist .titleTab{
-    font-family: 'SymbioARLight';
+  /*  font-family: 'SymbioARLight';*/
     font-size: 27px;
     line-height: 29px;
+}
+.Team.Arabic .teamlist .titleTab .title {
+    font-family: 'SymbioARBold' !important;
 }
 .Team.Arabic .teamlist .text{
     font-family: 'SymbioARLight';
@@ -127,13 +149,13 @@ mark {
 }
 
 
-.grid-item .item.englishBox .read {
+/*.grid-item .item.englishBox .read {
     margin-left: 6px;
 }
 
 .grid-item .item.arabicBox .read {
     margin-right: 6px;
-}
+}*/
 
 .itemSwiper .item.arabicBox{
     display:none;
@@ -180,6 +202,8 @@ mark {
 .Widget iframe{border:1px solid #050505!important;}
 .Initiatives{padding-bottom:40px;}
 .Initiatives .Widget {padding-top:111px;}
+.itemsList .grid>li.no-results{width:100%;margin:0px;text-align:center;font-size:20px;padding-top:26px;}
+
 @media (max-width: 767px){
 .itemSwiper+.itemSwiper{margin-top:78px!important;}
 .articlePage .Widget{padding-top:72px;}

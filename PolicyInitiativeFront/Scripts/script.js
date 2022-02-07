@@ -448,6 +448,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
     $scope.authorList = [];
     $scope.newsList = [];
     $scope.data = [];
+    $scope.articleTemplateTitle = "";
     $scope.numberOfProducts = 4;
     if (localStorage.getItem("articleTemplateId") != undefined) {
         $scope.articleTemplateId = localStorage.getItem("articleTemplateId");
@@ -785,6 +786,10 @@ app.controller('myNewsLetter', function ($scope, $http, $window, $rootScope) {
                         $('.newletterPop .wrap').removeClass('hide');
                         $('.newletterPop .sendbtn').removeClass('loading');
                     }, 4000);
+                    setTimeout(function () {
+                        $('.exit').click();
+                    }, 5000);
+              
                 }
                 if (res.data.status == 400) {
                     $scope.model.email = "",
@@ -808,6 +813,9 @@ app.controller('myNewsLetter', function ($scope, $http, $window, $rootScope) {
                     }, 4000);
                     itemForm.$setPristine();
                     itemForm.$setUntouched();
+                    setTimeout(function () {
+                        $('.exit').click();
+                    }, 5000);
                 }
             }, function (res) {
                 if (res.data == "Failure") {

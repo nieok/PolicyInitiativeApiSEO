@@ -283,6 +283,7 @@
     <Content Include="Scripts\audioPlayer.js" />
     <Content Include="Scripts\myscript.js" />
     <Content Include="Scripts\plugins.js" />
+    <Content Include="Scripts\plugins.min.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

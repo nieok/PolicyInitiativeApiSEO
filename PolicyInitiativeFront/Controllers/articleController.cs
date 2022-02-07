@@ -43,7 +43,7 @@ namespace PolicyInitiativeFront.Controllers
             }
            
             metas.customH1Content = string.IsNullOrEmpty(currentPage.customH1Content) ? defaultPage.customH1Content : currentPage.customH1Content;
-            metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? defaultPage.customPageTitle + " - " + currentPage.title : currentPage.customPageTitle;
+            metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? ConfigurationManager.AppSettings["ProjectName"] + " - " + currentPage.title : currentPage.customPageTitle;
             metas.customUrlTitle = string.IsNullOrEmpty(currentPage.customUrlTitle) ? defaultPage.customUrlTitle : currentPage.customUrlTitle;
             metas.metaObjectType = "corporatepage";
             metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + currentPage.id + "/" + news.urlTitle;
