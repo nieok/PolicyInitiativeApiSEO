@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "The Policy Initiative - Public Engagement";
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    ViewBag.BodyAttributes = "class=engagePage";
+}
+
+
+
+
+<h1 class="hiddenHeader">The Policy Initiative Public Engagement</h1>
+
+
+<div class="Options">
+    <div class="container">
+    <ul class="items">
+        <li><div class="filterBtn"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 26.334 25.981"><g transform="translate(-24.453 -157.5)"><path d="M0,0H24.834" transform="translate(25.203 161.021)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="1.5"/><line x2="24.834" transform="translate(25.203 170.26)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/><line x2="24.834" transform="translate(25.203 179.98)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(32.532 158)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1"/><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(39.373 167.075)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1"/><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(30.949 176.151)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1"/></g></svg></div></li>
+        <li><div class="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 25.961 25.966"><path d="M25.608,22.449l-5.056-5.056a1.216,1.216,0,0,0-.862-.355h-.827a10.543,10.543,0,1,0-1.826,1.826v.827a1.216,1.216,0,0,0,.355.862l5.056,5.056a1.212,1.212,0,0,0,1.719,0L25.6,24.173a1.223,1.223,0,0,0,.005-1.724ZM10.548,17.038a6.491,6.491,0,1,1,6.491-6.491A6.487,6.487,0,0,1,10.548,17.038Z" fill="#070606"/></svg></div></li>
+        <li><div class="mailboxBtn"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" viewBox="0 0 32.75 29.75"><g transform="translate(-47.25 -297.25)"><g transform="translate(0 10)"><g transform="translate(3.268 -15.052)"><rect width="25" height="25" rx="0.5" transform="translate(44.732 303.052)" fill="none" stroke="#040405" stroke-width="1.5"/></g></g><g transform="translate(-91.847 111.179)"><circle cx="7.5" cy="7.5" r="7.5" transform="translate(156.847 200.821)" fill="#070708"/><path d="M168.47,209.377h-3.013v2.944h-2.234v-2.944h-3v-2.112h3v-2.944h2.234v2.944h3.013Z" fill="#fff"/></g></g></svg></div>
+         @{Html.RenderPartial("newsletterPop");}
+        </li>
+    </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="itemsList version2">
+    <!-- note add class "loadmore"  to itemsList -->
+    <div class="container">
+        <ul class="grid">
+             <li class="grid-item">
+                <div class="item englishBox">
+                        <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                        </div>
+                        <h2 class="title"><a href="">The Democratic Economy conference addressing the role and challenges facing Lebanon’s alternative labor movement</a></h2>
+                        <div class="text">
+                            <a href="">Nadim El Kaak speaks on Current situation of syndicates: reality and challenges <span class="read">read</span></a>
+                        </div>
+                </div>
+                 <div class="item arabicBox">
+                      <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">مؤتمر</span></div>
+                            <div class="english">eng</div>
+                        </div>
+                        <h2 class="title"><a href="">التشريع “للضرورة الخاصة بهم”</a></h2>
+                        <div class="text">
+                            <a href="">في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور، 
+                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                             <span class="read">اقرأ</span>
+                            </a>
+
+
+                        </div>
+                </div>
+            </li>
+                                    
+            <li class="grid-item">
+                     <div class="item arabicBox">
+                     <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem2.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">مؤتمر</span></div>
+                            <div class="english">eng</div>
+                        </div>
+                        <h2 class="title"><a href="">التشريع “للضرورة الخاصة بهم”</a></h2>
+                       
+                        <div class="text">
+                            <a href="">في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور، 
+                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                             <span class="read">اقرأ</span>
+                            </a>
+
+
+                        </div>
+                </div>
+                <div class="item englishBox">
+                        <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem2.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                        </div>
+                        <h2 class="title"><a href="">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
+                      
+                        <div class="text">
+                            <a href="">Nadim El Kaak speaks on Current situation of syndicates: reality and challenges <span class="read">read</span></a>
+                        </div>
+                </div>
+
+            </li>
+            <li class="grid-item">
+                <div class="item">
+                        <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem3.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                        </div>
+                        <h2 class="title"><a href="">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
+                     
+                </div>
+            </li>
+           
+            <li class="grid-item">
+                <div class="item englishBox">
+                        <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                        </div>
+                        <h2 class="title"><a href="">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
+                       
+                        <div class="text">
+                            <a href="">Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a>
+                        </div>
+                </div>
+                 <div class="item arabicBox">
+                      <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">مؤتمر</span></div>
+                            <div class="english">eng</div>
+                        </div>
+                        <h2 class="title"><a href="">التشريع “للضرورة الخاصة بهم”</a></h2>
+                      
+                        <div class="text">
+                            <a href="">في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور، 
+                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                             <span class="read">اقرأ</span>
+                            </a>
+
+
+                        </div>
+                </div>
+            </li>
+                                    
+            <li class="grid-item">
+                <div class="item englishBox">
+                        <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem2.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                        </div>
+                        <h2 class="title"><a href="">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
+                      
+                        <div class="text">
+                            <a href="">Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a>
+                        </div>
+                </div>
+                <div class="item arabicBox">
+                     <div class="pic"><a href=""><img src="@Url.Content("~/content/pictures/dem2.jpg")" /></a></div>
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">مؤتمر</span></div>
+                            <div class="english">eng</div>
+                        </div>
+                        <h2 class="title"><a href="">التشريع “للضرورة الخاصة بهم”</a></h2>
+                   
+                        <div class="text">
+                            <a href="">في الثالث عشر والرابع عشر من تشرين الثاني 2015، دعا رئيس مجلس النواب اللبناني إلى عقد جلسة نيابية تحت عنوان “التشريع بحكم الضرورة”. وكان قد مضى عام بكامله على آخر اجتماع للبرلمان اللبناني الذي، وبحسب الدستور، 
+                            لا يملك السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                            السلطة للتشريع ما لم ينتخب رئيساً للجمهورية
+                             <span class="read">اقرأ</span>
+                            </a>
+
+
+                        </div>
+                </div>
+            </li>
+            <li class="grid-item">
+                <div class="item">
+                        <div class="top">
+                            <div class="date">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                        </div>
+                        <h2 class="title"><a href="">On Municipal Elections in Lebanon and the Prospects of change</a></h2>
+                      
+                        <div class="text">
+                            <a href="">Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a>
+                        </div>
+                </div>
+            </li>
+
+
+            
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "The Policy Initiative";
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    ViewBag.BodyAttributes = "class=homePage";
+}
+
+
+
+
+
+
+
+
+
+
+<div class="swipersholder animation-element">
+<div class="itemSwiper itemsList">
+    <div class="container">
+        <div class="top">
+            <h2 class="name">Public Engagement</h2>
+            <a class="all">view all</a>
+        </div>
+        <div class="wrap">
+         <div class="screen">
+             <ul class="swiper-wrapper">
+                 <li class="swiper-slide">
+                     <a class="item englishBox" href="">
+                         <div class="pic"><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></div>
+                         <div class="top">
+                             <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                             <div class="arabic" onclick="arabic1(event)">عربي</div>
+                         </div>
+                         <h3 class="title">On Municipal Elections in Lebanon and the Prospects of change</h3>
+                         <div class="text">
+                             Five months have passed since caretaker Prime Minister Saad Hariri
+                             was nominated to form a new government. Since then, he has struggled to strike
+                             a balance between domestic and regional interests.
+                             While it might take some time for ostensibly disparate interests to align  <span class="more">Read more</span>
+                         </div>
+                         <div class="endline"></div>
+                     </a>
+                     <a class="item arabicBox" href="">
+                         <div class="pic"><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></div>
+                         <div class="top">
+                             <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">مؤتمر</span></div>
+                             <div class="english" onclick="english1(event)">eng</div>
+                         </div>
+                         <h3 class="title">نطاق آخر قائم من التعرض للسموم</h3>
+                         <div class="text">
+                             بعد أكثر من سبعة عشر عاما على غزو العراق واحتلاله في العام 2003، وبعد أكثر من ثلاثين عاما على بدء حرب الخليج في 1990-1991، قُدم مشروع قانون إلى الكونغرس الأميركي من الممكن أن يزيل “عبء الإثبات” من أجل “إرساء رابط مباشر” بين التعرّض لمواد سامة وبين الأعراض الصحيّة
+                             <span class="more">اقرأ </span>
+                         </div>
+                         <div class="endline"></div>
+                     </a>
+                 </li><li class="swiper-slide">
+                        <a class="item englishBox" href="">
+                          <div class="pic"><img src="@Url.Content("~/content/pictures/dem4.jpg")" /></div>
+                         <div class="top">
+                            <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                             <div class="arabic"  onclick="arabic1(event)">عربي</div>
+                         </div>
+                         <h3 class="title">On Municipal Elections in Lebanon and the Prospects of change</h3>
+                        <div class="text">
+                              Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align  <span class="more">Read more</span>
+                           </div>
+                            <div class="endline"></div>
+                     </a>
+                     <a class="item arabicBox" href="">
+                          <div class="pic"><img src="@Url.Content("~/content/pictures/dem4.jpg")" /></div>
+                        <div class="top">
+                            <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">مؤتمر</span></div>
+                            <div class="english" onclick="english1(event)">eng</div>
+                         </div>
+                         <h3 class="title">نطاق آخر قائم من التعرض للسموم</h3>
+                         <div class="text">
+                             بعد أكثر من سبعة عشر عاما على غزو العراق واحتلاله في العام 2003، وبعد أكثر من ثلاثين عاما على بدء حرب الخليج في 1990-1991، قُدم مشروع قانون إلى الكونغرس الأميركي من الممكن أن يزيل “عبء الإثبات” من أجل “إرساء رابط مباشر” بين التعرّض لمواد سامة وبين الأعراض الصحيّة
+                             <span class="more">اقرأ </span>
+                           </div>
+                         <div class="endline"></div>
+                     </a>
+                 </li>
+                  <li class="swiper-slide">
+                     <a class="item englishBox" href="">
+                          <div class="pic"><img src="@Url.Content("~/content/pictures/dem2.jpg")" /></div>
+                         <div class="top">
+                            <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                             <div class="arabic">عربي</div>
+                         </div>
+                         <h3 class="title">On Municipal Elections in Lebanon and the Prospects of change</h3>
+                        <div class="text">
+                              Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align  <span class="more">Read more</span>
+                           </div>
+                         <div class="endline"></div>
+                     </a>
+                 </li>
+                  <li class="swiper-slide">
+                     <a class="item englishBox" href="">
+                          <div class="pic"><img src="@Url.Content("~/content/pictures/dem3.jpg")" /></div>
+                        <div class="top">
+                            <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                         </div>
+                         <h3 class="title">On Municipal Elections in Lebanon and the Prospects of change</h3>
+                        <div class="text">
+                              Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align  <span class="more">Read more</span>
+                           </div>
+                         <div class="endline"></div>
+                     </a>
+                 </li>
+                  <li class="swiper-slide">
+                     <a class="item englishBox" href="">
+                          <div class="pic"><img src="@Url.Content("~/content/pictures/dem1.jpg")" /></div>
+                        <div class="top">
+                            <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                         </div>
+                         <h3 class="title">On Municipal Elections in Lebanon and the Prospects of change</h3>
+                         <div class="text">
+                              Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align  <span class="more">Read more</span>
+                           </div>
+                         <div class="endline"></div>
+                     </a>
+                          </li>
+                       <li class="swiper-slide">
+                     <a class="item englishBox" href="">
+                          <div class="pic"><img src="@Url.Content("~/content/pictures/dem2.jpg")" /></div>
+                         <div class="top">
+                            <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+                            <div class="arabic">عربي</div>
+                         </div>
+                         <h3 class="title">On Municipal Elections in Lebanon and the Prospects of change</h3>
+                         <div class="text">
+                              Five months have passed since caretaker Prime Minister Saad Hariri
+                            was nominated to form a new government. Since then, he has struggled to strike
+                            a balance between domestic and regional interests.
+                            While it might take some time for ostensibly disparate interests to align  <span class="more">Read more</span>
+                           </div>
+                         <div class="endline"></div>
+                     </a>
+                 </li>
+             
+             </ul>
+         </div>
+          
+        </div>
+          <div class="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none"/><circle cx="24" cy="24" r="23.5" fill="none"/></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2"/></g></g></g></svg></div>
+            <div class="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none"/><circle cx="24" cy="24" r="23.5" fill="none"/></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2"/></g></g></g></svg></div>
+    </div>
+</div>
+    </div>

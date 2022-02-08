@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "The Policy Initiative - Article";
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    ViewBag.BodyAttributes = "class=articlePage";
+}
+
+
+
+
+<div class="Article">
+    <div class="container">
+
+
+         <div class="picDiv"> 
+            <div class="item">
+                <div class="pic"><img src="@Url.Content("~/content/pictures/corruptiontalks.jpg")" /></div>
+            </div>
+        </div>
+
+        <div class="date red">05.04.21 <span class="dash">|</span><span class="categ">CONFERENCE</span></div>
+        <h1 class="title">The Imminent Crisis Lebanon: A Race to Form a Transitional Government or a Race to the Bottom? </h1>
+        <div class="seperator"></div>
+
+        <div class="text">
+            <p>We wanted to write this book since we first met at a conference on local governments at the current Institut Français du Proche-Orient of Beirut in 2000, which led to a publication that remains a reference on the topic. Mona was presenting her work on local governments’ participatory practices in south Beirut, and Sami was speaking of fiscal decentralization in Lebanon. Fourteen years later, the opportunity to realize this dated, wild project materialized. We had authored a consultancy report on local governments and decentralization in Lebanon together, and published papers and reports separately. Mona had authored a paper in French on the municipalities run by Hizballah in Lebanon, while Sami had produced several reports on the issue, including a comprehensive document for ICMA. In 2014, while Mona was on leave from the American University of Beirut, she took up the offer made by Sami to lead a project on local governance in the Arab World, funded by the Open Society Foundation, at the Lebanese Center for Policy Studies, which Sami directs</p>
+            <p> We were both driven by our urge to produce critical knowledge on decentralization, beyond the normative discourse celebrating it as a panacea, while underscoring its potential opportunities to debunk authoritarian and centralized structures of government that make sure to undermine avenues for alternative power structures to emerge and challenge their actions. We were keen on a comparative approach, placing Lebanon in dialogue with other countries in the Arab world that were relatively well engaged in a decentralization process, or at least where local governments were elected and operational. We thus invited experts and scholars working on decentralization, local governance, and service provision in those countries, and asked them to author a paper according to a framework of analysis we devised, in order to enhance possibilities of comparisons across country</p>
+        </div>
+
+
+
+    </div>
+</div>

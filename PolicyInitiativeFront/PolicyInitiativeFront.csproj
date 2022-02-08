@@ -149,12 +149,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\about2Controller.cs" />
     <Compile Include="Controllers\aboutController.cs" />
     <Compile Include="Controllers\articleController.cs" />
     <Compile Include="Controllers\contactController.cs" />
+    <Compile Include="Controllers\detailsController.cs" />
+    <Compile Include="Controllers\enagagementController.cs" />
     <Compile Include="Controllers\errorPageController.cs" />
+    <Compile Include="Controllers\foundersController.cs" />
     <Compile Include="Controllers\GoogleSitemapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\homewithswiperController.cs" />
     <Compile Include="Controllers\initiativesController.cs" />
     <Compile Include="Controllers\NewsLetterController.cs" />
     <Compile Include="Controllers\privacypolicyController.cs" />
@@ -243,6 +248,7 @@
     <Content Include="Content\css\SymbioAR-Light.svg" />
     <Content Include="Content\css\SymbioAR-Regular.svg" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\favicon2.ico" />
     <Content Include="Content\images\lines.svg" />
     <Content Include="Content\images\logo2.png" />
     <Content Include="Content\images\logoblack.png" />
@@ -259,25 +265,36 @@
     <Content Include="Content\pictures\construct.jpg" />
     <Content Include="Content\pictures\corruptiontalks.jpg" />
     <Content Include="Content\pictures\curves.png" />
+    <Content Include="Content\pictures\dem1.jpg" />
+    <Content Include="Content\pictures\dem2.jpg" />
+    <Content Include="Content\pictures\dem3.jpg" />
+    <Content Include="Content\pictures\dem4.jpg" />
     <Content Include="Content\pictures\election.jpg" />
     <Content Include="Content\pictures\elections2022.jpg" />
     <Content Include="Content\pictures\initiative.jpg" />
     <Content Include="Content\pictures\keys.jpg" />
+    <Content Include="Content\pictures\learn1.jpg" />
+    <Content Include="Content\pictures\learn2.jpg" />
+    <Content Include="Content\pictures\learn3.jpg" />
     <Content Include="Content\pictures\music1.mp3" />
     <Content Include="Content\pictures\newofferbg.jpg" />
     <Content Include="Content\pictures\podcast1.jpg" />
     <Content Include="Content\pictures\podcast2.jpg" />
     <Content Include="Content\pictures\podcast3.jpg" />
     <Content Include="Content\pictures\river.jpg" />
+    <Content Include="Content\pictures\school1.jpg" />
+    <Content Include="Content\pictures\school2.jpg" />
+    <Content Include="Content\pictures\school3.jpg" />
     <Content Include="Content\pictures\slide1.jpg" />
     <Content Include="Content\pictures\souk.jpg" />
     <Content Include="Content\pictures\team1.jpg" />
     <Content Include="Content\pictures\team2.jpg" />
     <Content Include="Content\pictures\tv.png" />
+    <Content Include="Content\pictures\worker1.jpg" />
+    <Content Include="Content\pictures\worker2.jpg" />
+    <Content Include="Content\pictures\worker3.jpg" />
+    <Content Include="Content\pictures\worker4.jpg" />
     <Content Include="Global.asax" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Models\NewsCommunicationRepository.cs" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\audioPlayer.js" />
@@ -362,6 +379,14 @@
     <Content Include="Views\search\Index.cshtml" />
     <Content Include="Views\search\search.cshtml" />
     <Content Include="Views\Shared\twitterBox.cshtml" />
+    <Content Include="Views\about2\Index.cshtml" />
+    <Content Include="Views\about2\arabic.cshtml" />
+    <Content Include="Views\enagagement\Index.cshtml" />
+    <Content Include="Views\founders\Index.cshtml" />
+    <Content Include="Views\founders\arabic.cshtml" />
+    <Content Include="Views\details\Index.cshtml" />
+    <Content Include="Views\details\arabic.cshtml" />
+    <Content Include="Views\homewithswiper\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

@@ -59,7 +59,7 @@
 }
 
 .Team.Arabic .subMenu .link {
-    font-family: 'SymbioARLight' !important;
+   font-family: 'SymbioARBold';
 }
 .Team.Arabic .teamlist .titleTab .position:before {
     left:unset !important;
@@ -69,12 +69,11 @@
     margin-left: unset !important;
     margin-right: 30px;
     padding-left: unset !important;
+    line-height:26px;
     font-family: 'SymbioARLight' !important;
 }
 
-.Team.Arabic .teamlist ul.cols > li:nth-child(1) {
-    margin-right: -9px !important;
-}
+
 .Team.Arabic .teamlist .titleTab{
   /*  font-family: 'SymbioARLight';*/
     font-size: 27px;
@@ -137,6 +136,8 @@ mark {
 .articlePage .at-resp-share-element .at-share-btn{margin-left:10px!important;}
   
 }
+
+.Menu .link{text-transform:unset;}
 
 .form-error {
     color: white;
@@ -203,9 +204,99 @@ mark {
 .Initiatives{padding-bottom:40px;}
 .Initiatives .Widget {padding-top:111px;}
 .itemsList .grid>li.no-results{width:100%;margin:0px;text-align:center;font-size:20px;padding-top:26px;}
+.aboutus{padding:54px 0px 73px;}
+.aboutus .container{padding-left:134px;}
+.aboutus .item .pic{position:relative;}
+.aboutus .item .pic img{display:block;width:100%;}
+.aboutus .item .pic:after{content:'';position:absolute;right:0px;top:0px;width:100%;height:100%;background:rgba(0,0,0,0.82);display:none;}
+.aboutus .item .pic.red:after{background:rgba(206,59,56,0.82);}
+.aboutus .item .pic.green:after{background:rgba(18,109,97,0.82);}
+.aboutus .item .pic.yellow:after{background:rgba(165,169,24,0.82);}
+.aboutus .item .text{margin-top:22px;font-family: montserrat;font-weight: 300;font-size: 20px;line-height: 27px; color: #050505;}
+.aboutus .list>li+li{margin-top:28px;}
+.aboutus .item .info{position:absolute;top:0px;left:0px;width:100%;height:100%;align-items:center;z-index:1;display:flex;
+                     flex-wrap:wrap;padding-left:105px;padding-right:57px;}
+.aboutus .item .info.right{justify-content:flex-end;align-items:flex-start;padding-top:95px;}
+.aboutus .item .info.middle{padding-left:233px;}
+.aboutus .item .caption{font-family:presicav;font-weight:300;font-size:25px;color:#fff;max-width:455px;line-height:31px;}
+.aboutTemplate2 .Options{top:159px;}
+.aboutTemplate2 .Options .lang{margin-bottom:63px;}
+.aboutus.arabic .item .text{font-family: 'SymbioARLight';font-weight: normal;font-size: 27px;line-height: 29px;}
+.aboutus.arabic{direction:rtl;}
+.aboutus.arabic .item .caption{font-family: 'SymbioARLight';font-weight: normal;}
+.aboutus.arabic .item .info.middle{padding-right:283px;padding-left:57px;}
+.engagePage .Options{top:189px;}
+.itemsList.version2{margin-top:107px;}
+.itemsList.version2 .date{color:#E75451;}
+.itemsList.version2 .dash{margin:0px 5px 0px 2px;}
+.itemsList.version2 .arabicBox .categ{font-family:SymbioARBold;font-size:16px;}
+.itemsList.version2 .arabicBox .dash{margin:0px 2px 0px 5px;}
+.teamlist ul.cols>li:nth-child(1){width:269px;margin-right:14px;}
+.teamlist ul.cols>li:nth-child(2){width:calc(100% - 283px);}
+.teamlist .pic img{width:100%;}
+.Team.Arabic .teamlist ul.cols>li:nth-child(1){margin-right:0px;margin-left:14px;}
+.Article .date.red{color:#E75451;}
+.Article .date .dash{margin:0px 5px 0px 2px;}
+.Article.arabic .date .categ{font-family:SymbioARBold;font-size:16px;}
+.Article.arabic .date .dash{margin:0px 2px 0px 5px;}
+.itemSwiper .date.red{color:#E75451;}
+.itemSwiper .date .dash{margin:0px 5px 0px 2px;}
+.itemsList .arabicBox .english{color:#050505;}
+.itemSwiper .arabicBox .date .dash{margin:0px 2px 0px 5px;}
+.itemSwiper .arabicBox .date .categ{font-family:SymbioARBold;font-size:16px;}
+.itemSwiper .title{max-width:none;}
+.itemSwiper .endline{ margin-top: 23px;}
+.itemSwiper .endline:after{display:block;content:'';background: #050505; width: 110px; height: 4px;}
+
+@media (max-width:1260px){
+.homePage .Menu{bottom:56px;}
+}
+
+@media (max-width:1060px){
+.homePage .Menu .link{font-size:15px;}
+.homePage .Menu ul.items>li+li{margin-left:23px;}
+.homePage .Menu{bottom:56px;}
+}
+@media (max-width:900px){
+.homePage .Menu{bottom:auto;}
+.aboutTemplate2 .Options {position: absolute; right: 0px;top: 0px; width: 100%;top: 127px!important;}
+.aboutTemplate2 .Options ul.items {align-items: flex-end;padding: 0px 57px;justify-content: flex-end;height:auto!important;flex-wrap:nowrap;}
+.aboutTemplate2 .Options ul.items>li{width:auto;margin-left:0px!important;}
+.aboutTemplate2 .searchBtn.formobile { display: block; position: fixed; z-index: 4; top: 43px;right: 152px;}
+.aboutTemplate2 .searchBtn.formobile svg path{fill:#fff;}
+.aboutTemplate2 .Options .mailboxBtn, .aboutTemplate2 .Options .searchBtn{display:none;}
+.aboutTemplate2 .Options .lang{margin-bottom:0px;}
+.aboutus{padding-top:95px;}
+.aboutus .container{padding-left:57px;}
+.engagePage .Options .mailboxBtn{display:none;}
+.engagePage .Options ul.items > li:nth-child(3){margin:0px;}
+.itemsList.version2{margin-top:32px;}
+.teamlist .pic img{width:auto;}
+}
 
 @media (max-width: 767px){
 .itemSwiper+.itemSwiper{margin-top:78px!important;}
 .articlePage .Widget{padding-top:72px;}
 .Initiatives{padding-bottom:0px;}
+.Menu{min-height:364px;}
+.aboutus .container{padding-left:32px;}
+.aboutus{padding:81px 0px 33px;}
+.aboutus .item .caption{font-size:14px;line-height:15px;max-width:256px;}
+.aboutus .item .text{font-size:15px;line-height:23px;margin-top:16px;}
+.aboutus .item .info{padding-right:30px;}
+.aboutus .list>li+li{margin-top:19px;}
+.aboutus .item .info.middle{padding-left:113px;}
+.aboutTemplate2 .searchBtn.formobile{right:81px;}
+.aboutTemplate2 .Options {top:117px!important;}
+.aboutTemplate2 .Options ul.items{padding:0px 32px;justify-content:flex-start;}
+.aboutTemplate2 .Options .lang{position:relative;left:auto;bottom:auto;}
+.aboutus .item .info.right{padding-left:30px;padding-top:35px;}
+.aboutus.arabic .item .text{font-size:19px;line-height: 24px;}
+.aboutus.arabic .item .caption{font-size:17px;line-height:20px;}
+.aboutus.arabic .item .info{padding-left:30px;padding-right:80px;}
+.aboutus.arabic .item .info.middle{padding-right:77px;}
+.itemsList.version2{margin-top:22px;}
+.Team.Arabic .teamlist .titleTab .position{line-height:18px;}
+.Team.Arabic .teamlist .text{font-size:19px;line-height:24px;}
+.itemSwiper .endline{margin-top:20px;}
 }
