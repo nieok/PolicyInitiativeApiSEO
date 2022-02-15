@@ -39,6 +39,8 @@ namespace PolicyInitiativeFront.Models
         public string types { get; set; } 
         public string auth { get; set; } 
         public string newsCategory { get; set; } 
+        public string publicnewsCategory { get; set; } 
+        public string arnewsCategory { get; set; } 
         public string templatetitle { get; set; } 
 
 
@@ -157,7 +159,7 @@ namespace PolicyInitiativeFront.Models
 
         public List<NewsCommunication> GetAllFeatured(int batch = 0, int pageNumber = 4, string language = "en", string imgsize = "")
         {
-            var news = GetAllIsPublished().Where(d => d.isFeatured && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null)).OrderByDescending(d => d.date).ToList();
+            var news = GetAllIsPublished().Where(d => d.isFeatured && !d.isPublicEngagement && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null)).OrderByDescending(d => d.date).ToList();
             var model = new List<NewsCommunication>();
             var requestedLanguageId = langrpstry.GetByCode(language).id;
            
@@ -299,10 +301,10 @@ namespace PolicyInitiativeFront.Models
                 topimgSrc = model.topimgSrc == "" || model.topimgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize2 == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize2 + "/") + model.topimgSrc,
                 fileSrc = model.fileSrc == "" || model.fileSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + "content/uploads/files/" + "/" + model.fileSrc,
                 imgSrc = model.imgSrc == "" || model.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + model.imgSrc,
-               
-                
-                //types= string.Join("," , articleTypes.Select(d=>d.TypeArticle.title)),
-                auth= string.Join("," , authors.Select(d=>d.title)),
+                isPublicEngagement=model.isPublicEngagement,
+                publicnewsCategory = model.engagementCategoryId.HasValue ? model.EngagementCategory.title : "",
+                arnewsCategory = model.engagementCategoryId.HasValue ? db.EngagementCategories.FirstOrDefault(d => d.languageParentId == model.engagementCategoryId).title : "",
+                auth = string.Join("," , authors.Select(d=>d.title)),
                 authors = authorslist,
                 relatedinitiatives = relatedinitiatives != null ? relatedinitiatives.Select(x=>new ArticleRelatedView
                 {
@@ -425,7 +427,7 @@ namespace PolicyInitiativeFront.Models
             news=news.Where(d=>d.title.ToLower().Contains(title.ToLower()) || (d.smallDescription != null && d.smallDescription.ToLower().Contains(title.ToLower())) 
             //|| d.articlesRepeaters.Any(d=>(d.Description.ToLower().Contains(title.ToLower()) && d.Description != null ) || (d.ArabieDescription != null && d.ArabieDescription.ToLower().Contains(title.ToLower())))
             || (d.description != null && d.description.ToLower().Contains(title.ToLower()))  
-            || d.NewsCategory.title.ToLower().Contains(title.ToLower())).OrderByDescending(d => d.date);
+            || d.NewsCategory.title.ToLower().Contains(title.ToLower()) || d.EngagementCategory.title.ToLower().Contains(title.ToLower())).OrderByDescending(d => d.date);
            
             var getType = db.TypeArticles.FirstOrDefault(d => d.title.ToLower().Contains(title.ToLower()));
 
@@ -462,6 +464,7 @@ namespace PolicyInitiativeFront.Models
                 {
                     id = item.id,
                     title =  item.title,
+                    ExternalLink =  item.ExternalLink,
                     artitle = item.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? item.NewsCommunications.FirstOrDefault(d => d.languageId == 2).title : null,
                     urlTitle = GetUrlTitle(item.title),
                     hasArabic = item.hasArabic,
@@ -536,5 +539,82 @@ namespace PolicyInitiativeFront.Models
             return model;
         }
 
+
+
+        public List<NewsCommunication> GetAllEngagement(int batch = 0, int pageNumber = 4, string language = "en", string imgsize = "")
+        {
+            var news = GetAllIsPublished().Where(d => d.isPublicEngagement && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null)).OrderByDescending(d => d.date).ToList();
+            var model = new List<NewsCommunication>();
+            var requestedLanguageId = langrpstry.GetByCode(language).id;
+
+
+            news = news.Skip(pageNumber * batch).Take(pageNumber).ToList();
+
+            foreach (var item in news)
+            {
+           
+                var entryTranslatedItem = item.NewsCommunications.FirstOrDefault(lang => lang.languageId == 2);
+                var arabictemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.ArticleTemplate.id).label;
+                var arnewsCategory = db.EngagementCategories.FirstOrDefault(d => d.languageParentId == item.engagementCategoryId);
+                model.Add(new NewsCommunication
+                {
+
+                    id = item.id,
+                    title = item.title,
+                    urlTitle = GetUrlTitle(item.title),
+                    smallDescription = item.smallDescription,
+                    arsmallDescription = entryTranslatedItem != null ? entryTranslatedItem.smallDescription : null,
+                    artitle = entryTranslatedItem != null ? entryTranslatedItem.title : null,
+                    Date = item.date.HasValue ? item.date.Value.ToString("dd.MM.yy") : "",
+                    hasArabic = item.hasArabic,
+                    newsCategory = item.engagementCategoryId.HasValue ? item.EngagementCategory.title :"",
+                    arnewsCategory= item.engagementCategoryId.HasValue && arnewsCategory != null ? arnewsCategory.title : "",
+                    imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
+                    detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title),
+                    articleTemplate = item.ArticleTemplate.label,
+                    ARarticleTemplate = arabictemplate,
+                    ExternalLink =item.ExternalLink,
+                });
+            }
+            return model;
+        }
+
+        public List<NewsCommunication> GetAllFeaturedEngagement(int batch = 0, int pageNumber = 4, string language = "en", string imgsize = "")
+        {
+            var news = GetAllIsPublished().Where(d => d.isPublicEngagement && d.isPEFeatured && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null)).OrderByDescending(d => d.date).ToList();
+            var model = new List<NewsCommunication>();
+            var requestedLanguageId = langrpstry.GetByCode(language).id;
+
+
+            news = news.Skip(pageNumber * batch).Take(pageNumber).ToList();
+
+            foreach (var item in news)
+            {
+
+                var entryTranslatedItem = item.NewsCommunications.FirstOrDefault(lang => lang.languageId == 2);
+                var arabictemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.ArticleTemplate.id).label;
+                var arnewsCategory = db.EngagementCategories.FirstOrDefault(d => d.languageParentId == item.engagementCategoryId);
+                model.Add(new NewsCommunication
+                {
+
+                    id = item.id,
+                    title = item.title,
+                    urlTitle = GetUrlTitle(item.title),
+                    smallDescription = item.smallDescription,
+                    arsmallDescription = entryTranslatedItem != null ? entryTranslatedItem.smallDescription : null,
+                    artitle = entryTranslatedItem != null ? entryTranslatedItem.title : null,
+                    Date = item.date.HasValue ? item.date.Value.ToString("dd.MM.yy") : "",
+                    hasArabic = item.hasArabic,
+                    newsCategory = item.engagementCategoryId.HasValue ? item.EngagementCategory.title : "",
+                    arnewsCategory = item.engagementCategoryId.HasValue && arnewsCategory != null ? arnewsCategory.title : "",
+                    imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
+                    detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title),
+                    articleTemplate = item.ArticleTemplate.label,
+                    ARarticleTemplate = arabictemplate,
+                    ExternalLink = item.ExternalLink,
+                });
+            }
+            return model;
+        }
     }
 }

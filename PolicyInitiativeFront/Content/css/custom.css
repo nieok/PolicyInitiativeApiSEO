@@ -300,3 +300,11 @@ mark {
 .Team.Arabic .teamlist .text{font-size:19px;line-height:24px;}
 .itemSwiper .endline{margin-top:20px;}
 }
+
+.swipersholder a{
+    color:black;
+}
+
+.swipersholder .title a:hover {
+    color: red;
+}

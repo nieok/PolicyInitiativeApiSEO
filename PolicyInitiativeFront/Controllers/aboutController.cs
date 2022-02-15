@@ -28,7 +28,8 @@ namespace PolicyInitiativeFront.Controllers
                     var data = new List<CorporatePageSection>();
                     if (item.frontHtmlId == "1")
                     {
-                        data = sectionrpstry.GetSectionDataById(item.id, lang, item.frontHtmlId, "1800x645xi");
+                        //data = sectionrpstry.GetSectionDataById(item.id, lang, item.frontHtmlId, "1800x645xi");
+                        data = sectionrpstry.GetSectionDataById(item.id, lang, item.frontHtmlId, "1009x430xi");
 
                     }
                     else if (item.frontHtmlId == "2")

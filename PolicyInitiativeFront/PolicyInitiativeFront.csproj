@@ -154,14 +154,13 @@
     <Compile Include="Controllers\articleController.cs" />
     <Compile Include="Controllers\contactController.cs" />
     <Compile Include="Controllers\detailsController.cs" />
-    <Compile Include="Controllers\enagagementController.cs" />
+    <Compile Include="Controllers\engagementController.cs" />
     <Compile Include="Controllers\errorPageController.cs" />
     <Compile Include="Controllers\foundersController.cs" />
     <Compile Include="Controllers\GoogleSitemapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\homewithswiperController.cs" />
     <Compile Include="Controllers\initiativesController.cs" />
-    <Compile Include="Controllers\NewsLetterController.cs" />
     <Compile Include="Controllers\privacypolicyController.cs" />
     <Compile Include="Controllers\searchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -201,6 +200,7 @@
     <Content Include="assets\vendor\angular\jquery.elevatezoom.min.js" />
     <Content Include="assets\vendor\angular\official-addthis-angularjs.min.js" />
     <Content Include="assets\vendor\angular\plugins.js" />
+    <Content Include="assets\vendor\angular\plugins.min.js" />
     <Content Include="assets\vendor\bootstrap.js" />
     <Content Include="assets\vendor\bootstrap.min.js" />
     <Content Include="assets\vendor\font-awesome\font-awesome.min.css" />
@@ -381,7 +381,7 @@
     <Content Include="Views\Shared\twitterBox.cshtml" />
     <Content Include="Views\about2\Index.cshtml" />
     <Content Include="Views\about2\arabic.cshtml" />
-    <Content Include="Views\enagagement\Index.cshtml" />
+    <Content Include="Views\engagement\Index.cshtml" />
     <Content Include="Views\founders\Index.cshtml" />
     <Content Include="Views\founders\arabic.cshtml" />
     <Content Include="Views\details\Index.cshtml" />

@@ -8,13 +8,20 @@ using System.Web.Mvc;
 
 namespace PolicyInitiativeFront.Controllers
 {
-    public class enagagementController : SharedController
+    public class engagementController : SharedController
     {
+        private CorporatePageRepository rpstry = new CorporatePageRepository();
+        private CorporatePageSectionRepository sectionrpstry = new CorporatePageSectionRepository();
+        public NewsCommunicationRepository newsrpstry = new NewsCommunicationRepository();
+        private settingsRepository settingsRepository = new settingsRepository();
         // GET: enagagement
         public ActionResult Index()
         {
+            var settings = settingsRepository.GetFirstOrDefault();
+            var featured = newsrpstry.GetAllEngagement(0, 4, "en", "335x319xi");
+            ViewBag.featured = featured;
             MetasModel metas = new MetasModel();
-            CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["AboutPage"]));
+            CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["EngagePage"]));
             CorporatePage defaultPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["DefaultPage"]));
 
             metas.metaDescription = string.IsNullOrEmpty(currentPage.metaDescription) ? defaultPage.metaDescription : currentPage.metaDescription;
@@ -26,6 +33,7 @@ namespace PolicyInitiativeFront.Controllers
             metas.metaObjectType = "corporatepage";
             metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "about";
             ViewBag.metas = metas;
+            ViewBag.settings = settings;
             return View();
         }
     }

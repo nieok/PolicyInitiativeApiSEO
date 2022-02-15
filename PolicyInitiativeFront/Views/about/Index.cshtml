@@ -26,12 +26,83 @@
         </ul>
     </div>
 </div>
-
-
-<div class="About video @((ViewBag.language == "ar") ? "Arabic" : "")">
+<div class="aboutus @((ViewBag.language == "ar") ? "arabic" : "")">
+    <h1 class="hiddenHeader">The Policy Initiative About</h1>
     <div class="container">
-        <ul class="list">
-            @foreach (var item in Model)
+        <div class="wrap">
+            <ul class="list">
+                @{ int count = 0;}
+                @foreach (var item in Model)
+                {
+                    if (item.frontHtmlId == "1")
+                    {
+                        <li>
+                            <a class="item">
+                                <div class="pic">
+                                    @if (!String.IsNullOrEmpty(item.imgSrc))
+                                    {
+                                        <img src="@Url.Content(item.imgSrc)" alt="@item.title" />
+
+                                    }
+                                    <div class="info @((count == 0) ? "right" : (count == 1 ? "left": (count == 2 ? "middle" : "") ))">
+                                        <h2 class="caption">@item.title</h2>
+                                    </div>
+                                </div>
+                                @if (!String.IsNullOrEmpty(item.description))
+                                {
+                                    <div class="text">
+                                        @Html.Raw(item.description)
+                                    </div>
+                                }
+                              
+                            </a>
+                        </li>
+                        count++;
+                    }
+                }
+                        @*<li>
+                            <a class="item">
+                                <div class="pic">
+                                    <img src="@Url.Content("~/content/pictures/school2.jpg")" alt="students" />
+                                    <div class="info left">
+                                        <h2 class="caption">People are at center<br /> of our work</h2>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    To fulfill this, TPI aims to critically and empirically assess existing policies and generate meaningful alternatives. We also seek to engage with like-minded entities to harness the immense political and intellectual energy that still exists in the country.
+                                    <br /> <br />
+                                    We also strive to reach as many constituencies as possible through various media. In the absence of a capable government, our main interlocutor is the public itself, including syndicates, labor unions, civil society organizations, and alternative political groups as well as the donor community.
+                                    <br /> <br />
+                                    People are at center of our work. TPI’s five founders, Sami Atallah, Hala Bejjani, Karim Daher, Mona Fawaz, and Nizar Saghieh, have decades-long track records of research, activism, and fighting for a better Lebanon by pushing for better policies. They join TPI with their expertise and their own teams and institutions.
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item">
+                                <div class="pic">
+                                    <img src="@Url.Content("~/content/pictures/school3.jpg")" alt="students" />
+                                    <div class="info middle">
+                                        <h2 class="caption">Now is the right time <br />to provide an <br />alternative course</h2>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    The team at TPI is diverse, young, skilled, and has worked together for years. Each team member boasts a deep knowledge of the topics we cover with their skillset and experience. Our team sets TPI’s agenda and constantly rethinks how policy is made, how narratives should be shaped, and what solutions can be adopted.
+                                    <br /> <br />
+                                    Our fellows magnify and broaden TPI’s scope of knowledge with their expertise, methods, and cutting-edge research that will help our work in Lebanon. They are based all over the world and hail from numerous fields, including the social sciences, economics and finance, environment, law, public health, urban studies, and media, among many others.
+                                    <br /> <br />
+                                    With the financial, economic, social, and intellectual collapse of the country, purposely pushed by Lebanon’s elite, now is the right time to provide an alternative course. And TPI is here for that.
+                                </div>
+                            </a>
+                        </li>*@
+                    </ul>
+        </div>
+    </div>
+</div>
+
+@*<div class="About video @((ViewBag.language == "ar") ? "Arabic" : "")">
+    <div class="container">
+        <ul class="list">*@
+            @*@foreach (var item in Model)
             {
                 if (item.frontHtmlId == "1")
                 {
@@ -59,7 +130,7 @@
                      <li>
                         <div class="item">
                             <input hidden class="videoId" value="@item.videoId" />
-                            <!-- note: if we dont have a pic or video, delete the div: 'picDiv' -->
+                             note: if we dont have a pic or video, delete the div: 'picDiv' 
                             <div class="picDiv">
                                 <div class="pic">
                                     <img src="@Url.Content("~/content/pictures/tv.png")" />
@@ -82,9 +153,9 @@
                         </div>
                     </li>
                 }
-            }
+            }*@
 
          
-        </ul>
+        @*</ul>
     </div>
-</div>
+</div>*@

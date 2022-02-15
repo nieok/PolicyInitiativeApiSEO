@@ -1,10 +1,11 @@
-﻿var app = angular.module('myApp', ['ui.router', 'ngMessages', 'ngSanitize']);
+﻿var app = angular.module('myApp', ['ui.router', 'ngMessages']);
 
 app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $stateParams, $rootScope, $sce) {
     var RouteUrl = $('#RouteUrl').val();
     var FrontUrl = $('#FrontUrl').val();
     $scope.pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var ishome = $('.home').val();
+    var isengage = $('.engage').val();
     $scope.keyword = "";
 
     $scope.ChangeEmail = function () {
@@ -164,7 +165,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                 url: RouteUrl + 'api/NewsCommunications/GetHomeData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts,
             }).then(function (res) {
                 $scope.data = res.data;
-                $('.itemsList').addClass('loadmore');
+                $('.itemsList.mids').addClass('loadmore');
                 var $items = '';
                 var values = '';
                 if ($scope.batch != 0) {
@@ -185,7 +186,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
 
                             }
                             if (value.date != null) {
-                                datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div >';
+                                datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div>';
                             }
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
                             var count = 1;
@@ -274,7 +275,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                         $('.itemsList .grid').append($items).masonry('appended', $items);
                         initMasonryList(); // recall masonry
 
-                        $('.itemsList').removeClass('loadmore');
+                        $('.itemsList.mids').removeClass('loadmore');
                     }, 2000);
                 }
             
@@ -290,7 +291,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
             if (ishome == "true") {
                 if (load == true && $(window).scrollTop() + $(window).height() > $(document).height() - 100) { 
                     if ($scope.data.length > 3) {
-                        $('.itemsList').addClass('loadmore');
+                        $('.itemsList.mids').addClass('loadmore');
                     }
                     load = false;
                     setTimeout(function () {
@@ -299,6 +300,180 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             $('.grid-item').removeClass('newPost');
                             $scope.getnews();
                  
+                        } else {
+                            $('.box').addClass('hideborder');
+                            $('.itemsList.mids').removeClass('loadmore');
+                        }
+
+                    }, 1500)
+                    if ($scope.data.length == 0) {
+                        $('.itemsList.mids').removeClass('loadmore');
+                    }
+                    setTimeout(function () {
+                        load = true;
+                    }, 2500)
+                }
+            }
+        });
+    }
+
+    if ($('body').hasClass('engagePage')) {
+        $scope.engagenews = function () {
+            $http({
+                method: 'GET',
+                url: RouteUrl + 'api/NewsCommunications/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts,
+            }).then(function (res) {
+                $scope.data = res.data;
+                $('.itemsList').addClass('loadmore');
+                var $items = '';
+                var values = '';
+                if ($scope.batch != 0) {
+                    angular.forEach($scope.data, function (value, key) {
+                        var datediv = '';
+                        var img = '';
+                        var titlediv = '';
+                        var ardesdiv = '';
+                        var desdiv = '';
+
+                        if (value.hasArabic == true) {
+
+                            values = values + '<li class="grid-item"> <div class="item arabicBox">';
+                            if (value.imgSrc != null) {
+                                if (value.ExternalLink == null) {
+                                    img = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+
+                                } else {
+                                    img = '<div class="pic"><a href=' + value.ExternalLink  + ' target="blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+
+                                }
+
+                            }
+                            if (value.date != null) {
+                                if (value.newsCategory == null) {
+                                    datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div>';
+                                } else {
+                                    datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div></div> ';
+                                }
+                            }
+
+                            if (value.ExternalLink == null) {
+                                titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
+
+                            } else {
+                                titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink  + ' target="_blank">' + value.title + '</a></h2> ';
+
+                            }
+                        
+                            if (value.arsmallDescription != null) {
+                                if (value.ExternalLink == null) {
+                                    ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                } else {
+                                    ardesdiv = '<div class="text"> <a href=' + value.ExternalLink  + ' target="_blank" >' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+
+                                }
+                            }
+                            values = values + img + datediv + titlediv +  ardesdiv + '</div> </div> </li>';
+
+                        } else {
+
+                            values = values + '<li class="grid-item">';
+                            var englishBox = ' <div class="item englishBox">';
+                            var arabicBox = ' <div class="item arabicBox">';
+                            var arabicdate = '';
+                            var arabictitle = '';
+                            var arimg = '';
+
+                            if (value.imgSrc != null) {
+
+                                if (value.ExternalLink == null) {
+                                    img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                } else {
+                                    img = '<div class="pic"><a href=' + value.ExternalLink + ' target="_blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    arimg = '<div class="pic"><a href=' + value.ExternalLink + ' target="_blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                }
+                                
+
+                            }
+                            if (value.date != null) {
+                                if (value.newsCategory == null) {
+                                    datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+
+                                } else {
+                                    datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">'+value.newsCategory+'</span></div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                                }
+
+                            }
+                        
+                            if (value.date != null) {
+                                if (value.newsCategory == null) {
+                                    arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="english(event)">eng</div></div> ';
+
+                                } else {
+                                    arabicdate = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div> <div class="english" onclick="english(event)">eng</div></div> ';
+                                }
+
+                            }
+                            if (value.ExternalLink == null) {
+                                titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
+                                arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
+                            } else {
+                                titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
+                                arabictitle = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
+                            }
+                            if (value.ExternalLink == null) {
+                                if (value.smallDescription != null) {
+                                    desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate + '</span></a>'
+                                }
+
+                                if (value.arsmallDescription != null) {
+                                    ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                }
+                            } else {
+                                if (value.smallDescription != null) {
+                                    desdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank">' + value.smallDescription + '  <span class="read">' + value.articleTemplate + '</span></a>'
+                                }
+
+                                if (value.arsmallDescription != null) {
+                                    ardesdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank">' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                }
+                            }
+                            values = values + englishBox + img + datediv + titlediv +  desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle +  ardesdiv + '</div> </div> </li>';
+                        }
+
+                    });
+                    $items = $(values);
+
+                    setTimeout(function () {
+
+                        $('.itemsList .grid').append($items).masonry('appended', $items);
+                        initMasonryList(); // recall masonry
+
+                        $('.itemsList').removeClass('loadmore');
+                    }, 2000);
+                }
+
+
+
+
+            });
+        }
+
+        $scope.engagenews();
+        var load = true;
+        $(window).on('scroll touchmove mousewheel', function () {
+            if (isengage == "true") {
+                if (load == true && $(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+                    if ($scope.data.length > 3) {
+                        $('.itemsList').addClass('loadmore');
+                    }
+                    load = false;
+                    setTimeout(function () {
+                        if ($scope.data.length > 3) {
+                            $scope.batch = $scope.batch + 1;
+                            $('.grid-item').removeClass('newPost');
+                            $scope.engagenews();
+
                         } else {
                             $('.box').addClass('hideborder');
                             $('.itemsList').removeClass('loadmore');
@@ -315,7 +490,6 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
             }
         });
     }
-
     $scope.openAuthorPopup = function (title, bio) {
         $scope.title = title;
         $scope.bio = bio;

@@ -280,12 +280,6 @@ $(window).load(function () {
 //_________________________________________________________________________________________________
 
 
-//$(window).load(function () {
-//    setTimeout(function () {
-//        initMasonryList();
-//    }, 500);
-    
-//});
 
 
 // show arabic/english boxes
@@ -302,12 +296,6 @@ function english(event) {   // show english box
 };
 
 //_________________________________________________________________________________________________
-
-
-
-
-
-
 
 
 // author popup
@@ -491,28 +479,6 @@ function closeNewsletterPop() {
 }
 
 
-//function submitNewslMssg() {
-//    $('.newletterPop .sendbtn').addClass('loading');
-
-//    setTimeout(function () {
-//        $('.newletterPop .txmssg').addClass('show');
-//        $('.newletterPop .wrap').addClass('hide');
-//    }, 1500);
-
-//    setTimeout(function () {
-//        $('.newletterPop .txmssg').removeClass('show');
-//        $('.newletterPop .wrap').removeClass('hide');
-//        $('.newletterPop .sendbtn').removeClass('loading');
-//    }, 3500);
-
-
-//}
-
-
-// ___________________________________________________________________________________________________
-
-
-
 
 
 // filter menu
@@ -693,8 +659,6 @@ function showEnglishFilter() {
 
 
 
-
-
 // article templates
 // calc width caption of image to be same like image
 
@@ -707,8 +671,6 @@ function calcCaptionWidth() {
 $(window).load(function () {
        // calcCaptionWidth();
 });
-
-
 
 
 // swipers in article pages

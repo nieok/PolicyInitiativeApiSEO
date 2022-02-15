@@ -80,15 +80,16 @@
             <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyBmRJICbrcT92eeEU6Cdc9DAlchb_1ZxKU"></script>
         } }
 
-    <script type="text/javascript" src="@(Url.Content("~/Scripts/plugins.min.js?v=1"))"></script>
+    <script type="text/javascript" src="@(Url.Content("~/Scripts/plugins.js?v=1"))"></script>
+    <script type="text/javascript" src="@(Url.Content("~/Scripts/myscript.js?v=1"))"></script>
 
     @if (controllername == "search" && actionname == "search")
     {
         <script src="https://cdn.jsdelivr.net/mark.js/8.6.0/jquery.mark.min.js" crossorigin="anonymous"></script>
     }
 
-    <script src="@Url.Content("~/")assets/vendor/angular/plugins.js"></script>
-    <script src="@Url.Content("~/")assets/vendor/angular/angular-sanitize.min.js"></script>
+    <script src="@Url.Content("~/")assets/vendor/angular/plugins.min.js"></script>
+    @*<script src="@Url.Content("~/")assets/vendor/angular/angular-sanitize.min.js"></script>*@
     <script type="text/javascript" src="@(Url.Content("~/Scripts/script.js?v=13"))"></script>
 
     @RenderSection("scripts", required: false)
