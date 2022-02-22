@@ -47,13 +47,15 @@
 
  </head>
 
-<body  @Html.Raw(ViewBag.BodyAttributes) ng-controller="myCtrl">
-
-    @if (!String.IsNullOrEmpty(ViewBag.metas.customH1Content))
+<body @Html.Raw(ViewBag.BodyAttributes) ng-controller="myCtrl">
+    @if (ViewBag.metas != null)
     {
-        <h1 hidden>@ViewBag.metas.customH1Content</h1>
-
+        if (!String.IsNullOrEmpty(ViewBag.metas.customH1Content))
+        {
+            <h1 hidden>@ViewBag.metas.customH1Content</h1>
+        }
     }
+
     <input hidden id="RouteUrl" value="@apiUrl" />
     <input hidden id="FrontUrl" value="@frontUrl" />
 
@@ -68,7 +70,7 @@
         </div>
 
         @{Html.RenderPartial("authorPopup");}
-            @{Html.RenderPartial("authorPopup-arabic");}
+        @{Html.RenderPartial("authorPopup-arabic");}
         @{Html.RenderPartial("filterMenu");}
         @{Html.RenderPartial("videoPopup");}
         @{Html.RenderPartial("searchPop");}

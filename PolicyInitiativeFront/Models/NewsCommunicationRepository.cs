@@ -275,6 +275,7 @@ namespace PolicyInitiativeFront.Models
 
 
             }
+            var translatedEngage = db.EngagementCategories.FirstOrDefault(d => d.languageId == 2);
             related = related.Distinct().ToList();
             model = (new NewsCommunication
             {
@@ -303,7 +304,7 @@ namespace PolicyInitiativeFront.Models
                 imgSrc = model.imgSrc == "" || model.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + model.imgSrc,
                 isPublicEngagement=model.isPublicEngagement,
                 publicnewsCategory = model.engagementCategoryId.HasValue ? model.EngagementCategory.title : "",
-                arnewsCategory = model.engagementCategoryId.HasValue ? db.EngagementCategories.FirstOrDefault(d => d.languageParentId == model.engagementCategoryId).title : "",
+                arnewsCategory = model.engagementCategoryId.HasValue ? (translatedEngage != null ? db.EngagementCategories.FirstOrDefault(d => d.languageParentId == model.engagementCategoryId).title : "") : "",
                 auth = string.Join("," , authors.Select(d=>d.title)),
                 authors = authorslist,
                 relatedinitiatives = relatedinitiatives != null ? relatedinitiatives.Select(x=>new ArticleRelatedView
@@ -474,9 +475,10 @@ namespace PolicyInitiativeFront.Models
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
                     authorsList = item.ArticlesAuthors.Select(d => string.Join(",", d.Author.title)).FirstOrDefault(),
                     authorsarList = item.ArticlesAuthors.Select(d => d.Author.Authors.FirstOrDefault(x => x.languageId == 2) != null ? string.Join(",", d.Author.Authors.FirstOrDefault(x => x.languageId == 2).title) : null).FirstOrDefault(),
-                    detailUrl = item.articleTemplateId == null ? item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
-                    : (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title)))
-                    : (item.articleTemplateId == 1 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 2 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 3 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 4 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : null),
+                    detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title),
+                    //detailUrl = item.articleTemplateId == null ? item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
+                    //: (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title)))
+                    //: (item.articleTemplateId == 1 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 2 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 3 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 4 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : null),
 
                 });
             }
@@ -525,10 +527,11 @@ namespace PolicyInitiativeFront.Models
                     arabicDesc = item.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? item.NewsCommunications.FirstOrDefault(d => d.languageId == 2).smallDescription : null,
                     authors = authorslist,
                     arauthors = authorsarlist,
-                    detailUrl = item.articleTemplateId == null ? item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
-                    : (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title)))
-                    : (item.articleTemplateId == 1 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 2 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 3 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 4 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : null),
-                    
+                    detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title),
+                    //detailUrl = item.articleTemplateId == null ? item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
+                    //: (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title)))
+                    //: (item.articleTemplateId == 1 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 2 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 3 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : item.articleTemplateId == 4 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title) : null),
+
                     //detailUrl = item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
                     //: (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title))),
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
