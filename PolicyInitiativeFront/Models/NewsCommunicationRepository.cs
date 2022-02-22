@@ -275,7 +275,7 @@ namespace PolicyInitiativeFront.Models
 
 
             }
-            var translatedEngage = db.EngagementCategories.FirstOrDefault(d => d.languageId == 2);
+            var translatedEngage = db.EngagementCategories.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == model.engagementCategoryId);
             related = related.Distinct().ToList();
             model = (new NewsCommunication
             {
