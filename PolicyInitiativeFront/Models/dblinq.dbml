@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="policyinitiativeDb" Class="dblinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=209.160.40.46;Initial Catalog=policyinitiativeDb;Persist Security Info=True;User ID=policyinitiativeUser;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=209.160.40.187;Initial Catalog=policyinitiativeDb;Persist Security Info=True;User ID=policyinitiativeUser1;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AgeGroup" Member="AgeGroups">
     <Type Name="AgeGroup">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -912,6 +912,7 @@
       <Association Name="Language_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageId" Type="TypeArticle" />
       <Association Name="Language_EngagementCategory" Member="EngagementCategories" ThisKey="id" OtherKey="languageId" Type="EngagementCategory" />
       <Association Name="Language_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageId" Type="NewsCommunication" />
+      <Association Name="Language_PublicEngagement" Member="PublicEngagements" ThisKey="id" OtherKey="languageId" Type="PublicEngagement" />
     </Type>
   </Table>
   <Table Name="dbo.LanguageResource" Member="LanguageResources">
@@ -1159,6 +1160,7 @@
       <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ArticleTemplate_ArticleTemplate" Member="ArticleTemplates" ThisKey="id" OtherKey="languageParentId" Type="ArticleTemplate" />
       <Association Name="ArticleTemplate_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="articleTemplateId" Type="NewsCommunication" />
+      <Association Name="ArticleTemplate_PublicEngagement" Member="PublicEngagements" ThisKey="id" OtherKey="articleTemplateId" Type="PublicEngagement" />
       <Association Name="ArticleTemplate_ArticleTemplate" Member="ArticleTemplate1" ThisKey="languageParentId" OtherKey="id" Type="ArticleTemplate" IsForeignKey="true" />
       <Association Name="Language_ArticleTemplate" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
     </Type>
@@ -1259,6 +1261,7 @@
       <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="EngagementCategory_EngagementCategory" Member="EngagementCategories" ThisKey="id" OtherKey="languageParentId" Type="EngagementCategory" />
       <Association Name="EngagementCategory_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="engagementCategoryId" Type="NewsCommunication" />
+      <Association Name="EngagementCategory_PublicEngagement" Member="PublicEngagements" ThisKey="id" OtherKey="engagementCategoryId" Type="PublicEngagement" />
       <Association Name="EngagementCategory_EngagementCategory" Member="EngagementCategory1" ThisKey="languageParentId" OtherKey="id" Type="EngagementCategory" IsForeignKey="true" />
       <Association Name="Language_EngagementCategory" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
     </Type>
@@ -1334,6 +1337,64 @@
       <Association Name="Language_NewsCommunication" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
       <Association Name="NewsCategory_NewsCommunication" Member="NewsCategory" ThisKey="categoryId" OtherKey="id" Type="NewsCategory" IsForeignKey="true" />
       <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunication1" ThisKey="languageParentId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PublicEngagement" Member="PublicEngagements">
+    <Type Name="PublicEngagement">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subtitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSubCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isArchived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateArchived" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="archivedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isFeatured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isReadyForPublish" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateUnPublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="unPublishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hasArabic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="audioSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DetailsImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="topimgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="articleTemplateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="engagementCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExternalLink" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="PublicEngagement_PublicEngagement" Member="PublicEngagements" ThisKey="id" OtherKey="languageParentId" Type="PublicEngagement" />
+      <Association Name="ArticleTemplate_PublicEngagement" Member="ArticleTemplate" ThisKey="articleTemplateId" OtherKey="id" Type="ArticleTemplate" IsForeignKey="true" />
+      <Association Name="EngagementCategory_PublicEngagement" Member="EngagementCategory" ThisKey="engagementCategoryId" OtherKey="id" Type="EngagementCategory" IsForeignKey="true" />
+      <Association Name="Language_PublicEngagement" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="PublicEngagement_PublicEngagement" Member="PublicEngagement1" ThisKey="languageParentId" OtherKey="id" Type="PublicEngagement" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

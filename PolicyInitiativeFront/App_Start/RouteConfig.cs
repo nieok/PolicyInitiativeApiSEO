@@ -47,7 +47,11 @@ namespace PolicyInitiativeFront
             url: "article/details/{id}/{title}",
             defaults: new { controller = "article", action = "Index", id = UrlParameter.Optional, title = UrlParameter.Optional }
             );
-
+            routes.MapRoute(
+            name: "engagement",
+            url: "engagement/details/{id}/{title}",
+            defaults: new { controller = "engagement", action = "details", id = UrlParameter.Optional, title = UrlParameter.Optional }
+            );
             routes.MapRoute(
                name: "initiativesdetails",
                url: "initiatives/details/{id}/{title}",

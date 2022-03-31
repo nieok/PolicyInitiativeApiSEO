@@ -55,7 +55,7 @@ namespace PolicyInitiativeFront.Controllers
             metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? defaultPage.customPageTitle : currentPage.customPageTitle;
             metas.customUrlTitle = string.IsNullOrEmpty(currentPage.customUrlTitle) ? defaultPage.customUrlTitle : currentPage.customUrlTitle;
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"];
+            metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
             ViewBag.metas = metas;
             #endregion
             return View(model);
@@ -110,7 +110,7 @@ namespace PolicyInitiativeFront.Controllers
             }
 
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "initiatives/details/" + id + "/" + category.urlTitle;
+            metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
 
             ViewBag.metas = metas;
             #endregion

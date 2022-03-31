@@ -201,7 +201,7 @@ mark {
 .itemSwiper .item a{display:block;}
 .Widget {margin-bottom:53px;padding-top:46px;}
 .Widget iframe{border:1px solid #050505!important;}
-.Initiatives{padding-bottom:40px;}
+/*.Initiatives{padding-bottom:40px;}*/
 .Initiatives .Widget {padding-top:111px;}
 .itemsList .grid>li.no-results{width:100%;margin:0px;text-align:center;font-size:20px;padding-top:26px;}
 .aboutus{padding:54px 0px 73px;}
@@ -277,7 +277,7 @@ mark {
 @media (max-width: 767px){
 .itemSwiper+.itemSwiper{margin-top:78px!important;}
 .articlePage .Widget{padding-top:72px;}
-.Initiatives{padding-bottom:0px;}
+/*.Initiatives{padding-bottom:0px;}*/
 .Menu{min-height:364px;}
 .aboutus .container{padding-left:32px;}
 .aboutus{padding:81px 0px 33px;}
@@ -347,4 +347,22 @@ mark {
 }
 .button-27 .Btnh{
     color:white;
-} 
+}
+
+@media (max-width: 767px){
+    footer ul.medias {
+        max-width: 114px !important;
+    }   
+}
+
+.Article .text sup{
+    font-size:11px;
+}
+
+.Initiatives.details {
+    padding: 49px 0 0px;
+}
+
+.Description {
+    padding: 10px 0 29px;
+}

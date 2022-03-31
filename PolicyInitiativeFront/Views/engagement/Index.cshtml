@@ -10,13 +10,14 @@
 <input hidden value="true" class="engage" />
 <div class="Options">
     <div class="container">
-    <ul class="items">
-        <li><div class="filterBtn"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 26.334 25.981"><g transform="translate(-24.453 -157.5)"><path d="M0,0H24.834" transform="translate(25.203 161.021)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="1.5"/><line x2="24.834" transform="translate(25.203 170.26)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/><line x2="24.834" transform="translate(25.203 179.98)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(32.532 158)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1"/><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(39.373 167.075)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1"/><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(30.949 176.151)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1"/></g></svg></div></li>
-        <li><div class="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 25.961 25.966"><path d="M25.608,22.449l-5.056-5.056a1.216,1.216,0,0,0-.862-.355h-.827a10.543,10.543,0,1,0-1.826,1.826v.827a1.216,1.216,0,0,0,.355.862l5.056,5.056a1.212,1.212,0,0,0,1.719,0L25.6,24.173a1.223,1.223,0,0,0,.005-1.724ZM10.548,17.038a6.491,6.491,0,1,1,6.491-6.491A6.487,6.487,0,0,1,10.548,17.038Z" fill="#070606"/></svg></div></li>
-        <li><div class="mailboxBtn"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" viewBox="0 0 32.75 29.75"><g transform="translate(-47.25 -297.25)"><g transform="translate(0 10)"><g transform="translate(3.268 -15.052)"><rect width="25" height="25" rx="0.5" transform="translate(44.732 303.052)" fill="none" stroke="#040405" stroke-width="1.5"/></g></g><g transform="translate(-91.847 111.179)"><circle cx="7.5" cy="7.5" r="7.5" transform="translate(156.847 200.821)" fill="#070708"/><path d="M168.47,209.377h-3.013v2.944h-2.234v-2.944h-3v-2.112h3v-2.944h2.234v2.944h3.013Z" fill="#fff"/></g></g></svg></div>
-         @{Html.RenderPartial("newsletterPop");}
-        </li>
-    </ul>
+        <ul class="items">
+            <li><div class="filterBtn"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 26.334 25.981"><g transform="translate(-24.453 -157.5)"><path d="M0,0H24.834" transform="translate(25.203 161.021)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="1.5" /><line x2="24.834" transform="translate(25.203 170.26)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" /><line x2="24.834" transform="translate(25.203 179.98)" fill="#1a1818" stroke="#080808" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" /><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(32.532 158)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1" /><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(39.373 167.075)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1" /><ellipse cx="3.415" cy="3.415" rx="3.415" ry="3.415" transform="translate(30.949 176.151)" fill="#030303" stroke="rgba(0,0,0,0)" stroke-width="1" /></g></svg></div></li>
+            <li><div class="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 25.961 25.966"><path d="M25.608,22.449l-5.056-5.056a1.216,1.216,0,0,0-.862-.355h-.827a10.543,10.543,0,1,0-1.826,1.826v.827a1.216,1.216,0,0,0,.355.862l5.056,5.056a1.212,1.212,0,0,0,1.719,0L25.6,24.173a1.223,1.223,0,0,0,.005-1.724ZM10.548,17.038a6.491,6.491,0,1,1,6.491-6.491A6.487,6.487,0,0,1,10.548,17.038Z" fill="#070606" /></svg></div></li>
+            <li>
+                <div class="mailboxBtn"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" viewBox="0 0 32.75 29.75"><g transform="translate(-47.25 -297.25)"><g transform="translate(0 10)"><g transform="translate(3.268 -15.052)"><rect width="25" height="25" rx="0.5" transform="translate(44.732 303.052)" fill="none" stroke="#040405" stroke-width="1.5" /></g></g><g transform="translate(-91.847 111.179)"><circle cx="7.5" cy="7.5" r="7.5" transform="translate(156.847 200.821)" fill="#070708" /><path d="M168.47,209.377h-3.013v2.944h-2.234v-2.944h-3v-2.112h3v-2.944h2.234v2.944h3.013Z" fill="#fff" /></g></g></svg></div>
+                @{Html.RenderPartial("newsletterPop");}
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -30,39 +31,56 @@
             {
                 foreach (var item in ViewBag.featured)
                 {
-                    <li class="grid-item">
+            <li class="grid-item">
 
-                        @if (!item.hasArabic)
+                @if (!item.hasArabic)
+                {
+                    <div class="item englishBox">
+                        @if (!String.IsNullOrEmpty(item.imgSrc))
                         {
-                        <div class="item englishBox">
-                            @if (!String.IsNullOrEmpty(item.imgSrc))
+                            if (String.IsNullOrEmpty(item.ExternalLink))
                             {
-                                if (String.IsNullOrEmpty(item.ExternalLink))
+                                if (!String.IsNullOrEmpty(item.description))
                                 {
                                     <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
                                 }
                                 else
                                 {
-                                    <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                    <div class="pic"><a style="cursor:auto!important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
                                 }
 
                             }
-                            <div class="top">
-                                @if (!String.IsNullOrEmpty(item.Date))
-                                {
-                                    <div class="date">
-                                        @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                        {<span class="dash">|</span><span class="categ">@item.newsCategory</span>}
-                                    </div>
-
-                                }
-                                <div class="arabic" onclick="arabic(event)">عربي</div>
-                            </div>
-
-                            @if (String.IsNullOrEmpty(item.ExternalLink))
+                            else
                             {
+                                <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                            }
+
+                        }
+                        <div class="top">
+                            @if (!String.IsNullOrEmpty(item.Date))
+                            {
+                                <div class="date">
+                                    @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                    {<span class="dash">|</span><span class="categ">@item.newsCategory</span>}
+                                </div>
+
+                            }
+
+                            @if (!item.hasOnlyEnglish)
+                            {
+                                <div class="arabic" onclick="arabic(event)">عربي</div>
+
+                            }
+                        </div>
+
+                        @if (String.IsNullOrEmpty(item.ExternalLink))
+                        {
+                            if (!String.IsNullOrEmpty(item.description))
+                            {
+
                                 <h2 class="title"><a href="@Url.Content(item.detailUrl)"> @item.title</a></h2>
 
                                 <div class="text">
@@ -72,36 +90,62 @@
                                             <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
                                         }
 
-
-
                                     </a>
 
                                 </div>
                             }
                             else
                             {
-                                <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank"> @item.title</a></h2>
+
+                                <h2 class="title"><a style="cursor:auto!important"> @item.title</a></h2>
 
                                 <div class="text">
-                                    <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                    <a style="cursor:auto!important">
                                         @if (!String.IsNullOrEmpty(item.smallDescription))
                                         {
-                                            <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                                            <p>@Html.Raw(item.smallDescription) </p>
                                         }
-
-
 
                                     </a>
 
                                 </div>
                             }
-                        </div>
+                        }
+                        else
+                        {
+                            <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank"> @item.title</a></h2>
+
+                            <div class="text">
+                                <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                    @if (!String.IsNullOrEmpty(item.smallDescription))
+                                    {
+                                        <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                                    }
+
+
+
+                                </a>
+
+                            </div>
+                        }
+                    </div>
+                    if (!item.hasOnlyEnglish)
+                    {
                         <div class="item arabicBox">
                             @if (!String.IsNullOrEmpty(item.imgSrc))
                             {
                                 if (String.IsNullOrEmpty(item.ExternalLink))
                                 {
-                                    <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                    if (!String.IsNullOrEmpty(item.description))
+                                    {
+                                        <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="pic"><a style="cursor:auto!important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                    }
                                 }
                                 else
                                 {
@@ -123,21 +167,37 @@
 
                             @if (String.IsNullOrEmpty(item.ExternalLink))
                             {
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
+                                if (!String.IsNullOrEmpty(item.description))
+                                {
+                                    <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
 
-                                <div class="text">
-                                    <a href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>}
+                                    <div class="text">
+                                        <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                            @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                            {
+                                                <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>}
 
 
 
+                                        </a>
 
+                                    </div>
+                                }
+                                else
+                                {
+                                    <h2 class="title"><a style="cursor:auto!important"> @item.artitle</a></h2>
 
-                                    </a>
+                                    <div class="text">
+                                        <a style="cursor:auto!important">
+                                            @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                            {
+                                                <p>@Html.Raw(item.arsmallDescription) </p>}
 
-                                </div>
+                                        </a>
+
+                                    </div>
+                                }
+
                             }
                             else
                             { <h2 class="title"><a href="@Url.Content(item.ExternalLink )" target="_blank"> @item.artitle</a></h2>
@@ -153,15 +213,25 @@
                             </div>
                         }
                         </div>
-                        }
-                        else
-                        {
+                    }
+
+                }
+                else
+                {
                     <div class="item arabicBox">
                         @if (!String.IsNullOrEmpty(item.imgSrc))
                         {
                             if (String.IsNullOrEmpty(item.ExternalLink))
                             {
-                                <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                if (!String.IsNullOrEmpty(item.description))
+                                {<div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                }
+                                else
+                                {
+                                    <div class="pic"><a style="cursor:auto!important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                }
                             }
                             else
                             {
@@ -181,18 +251,39 @@
                         </div>
                         @if (String.IsNullOrEmpty(item.ExternalLink))
                         {
-                            <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
+                            if (!String.IsNullOrEmpty(item.description))
+                            {
+                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
 
-                            <div class="text">
-                                <a href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                    @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                    {
-                                        <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>}
+                                <div class="text">
+                                    <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                        {
+                                            <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>}
 
 
-                                </a>
 
-                            </div>
+
+                                    </a>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <h2 class="title"><a style="cursor:auto!important"> @item.artitle</a></h2>
+
+                                <div class="text">
+                                    <a style="cursor:auto!important">
+                                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                        {
+                                            <p>@Html.Raw(item.arsmallDescription)  </p>}
+
+
+                                    </a>
+
+                                </div>
+                            }
+
                         }
                         else
                         {
@@ -210,10 +301,10 @@
                             </div>
                         }
                     </div>
-                        }
+                }
 
 
-                    </li>
+            </li>
                 }
 
             }

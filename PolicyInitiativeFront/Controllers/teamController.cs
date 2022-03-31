@@ -15,20 +15,18 @@ namespace PolicyInitiativeFront.Controllers
         private TeamRepository teamRepository = new TeamRepository();
         private TeamCategoryRepository teamcatRepository = new TeamCategoryRepository();
         // GET: about
-        public ActionResult Index(string category="team" ,string lang="en")
+        public ActionResult Index(int category= 1 ,string lang="en")
         {
-            var teams = teamRepository.GetAllTeam("220x220xi", category , lang).ToList();
-         
-            if(lang == "en")
+            var teams = teamRepository.GetAllTeam("220x220xi", category , lang);
+           
+            if (lang == "en")
             {
-                ViewBag.category = teamcatRepository.GetAllIsPublished().FirstOrDefault(d => d.title.ToLower() == category);
+                ViewBag.category = teamcatRepository.GetAllIsPublished().FirstOrDefault(d => d.id == category);
                
             }
             else
             {
-
-                ViewBag.category = teamcatRepository.GetAll().FirstOrDefault(d => d.title.ToLower() == category);
-               
+                ViewBag.category = teamcatRepository.GetAll().FirstOrDefault(d => d.id == category);
             }
             ViewBag.categories = teamcatRepository.GetAllTeamCategory(lang);
             ViewBag.language = lang;
@@ -44,8 +42,9 @@ namespace PolicyInitiativeFront.Controllers
             metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? defaultPage.customPageTitle : currentPage.customPageTitle;
             metas.customUrlTitle = string.IsNullOrEmpty(currentPage.customUrlTitle) ? defaultPage.customUrlTitle : currentPage.customUrlTitle;
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] +"team?category=" +category;
+            metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
             ViewBag.metas = metas;
+         
             #endregion
             return View(teams);
         }

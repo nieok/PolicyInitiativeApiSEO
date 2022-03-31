@@ -16,160 +16,174 @@
         </ul>
     </div>
 </div>
-
-<div class="Description">
+<div class="Initiatives details">
     <div class="container">
-        @if (!String.IsNullOrEmpty(Model.imgSrc))
-        {
-            <div class="pic">
-                <img src="@Url.Content(Model.imgSrc)" />
-                <div class="info">
-                    <h2 class="caption">@Model.title</h2>
-                </div>
-            </div>
-        }
-        @if (!String.IsNullOrEmpty(Model.description))
-        {
-            <div class="text">
-                @Html.Raw(Model.description)
-            </div>
-        }
-
+        <div class="titleTab">
+            <h2 class="title">Our programmatic initiatives</h2>
+        </div>
+        </div>
     </div>
-</div>
-
-<div class="itemsList">
-    <div class="container">
-        <ul class="grid">
-            @if (ViewBag.news.Count != null)
-            {
-                foreach (var item in ViewBag.news)
+        <div class="Description">
+            <div class="container">
+                @if (!String.IsNullOrEmpty(Model.imgSrc))
                 {
-                    if (!item.hasArabic)
-                    {
-                        <li class="grid-item">
-                            <div class="item englishBox">
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date">@item.Date</div>
-                                    }
-                                    <div class="arabic" onclick="arabic(event)">عربي</div>
-                                </div>
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">@item.title</a></h2>
-                                @{ int comaCount1 = 0;}
-                                @foreach (var auth in item.authors)
-                                {
-                                    comaCount1++;
-                                    <div class="author" ng-click="openAuthorPopup('@auth.title','@auth.bio')"> @if (item.authors.Count > comaCount1)
-                                    {<text>@auth.title, </text>}
-                                else
-                                {@auth.title}</div>
-
-                                }
-                                @*@foreach (var sub in item.authors)
-                                {
-                                    <div class="author" ng-click="openAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
-
-                                }*@
-                                @if (!String.IsNullOrEmpty(item.smallDescription))
-                                {
-                                    <div class="text">
-                                        <a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">
-                                            @Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span>
-                                        </a>
-                                    </div>
-                                }
-
-                            </div>
-                            <div class="item arabicBox">
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date">@item.Date</div>
-                                    }
-                                    <div class="english" onclick="english(event)">eng</div>
-                                </div>
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
-                                @{ int comaCount2 = 0;}
-                                @foreach (var auth in item.arauthors)
-                                {
-                                    comaCount2++;
-                                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">
-                                        @if (item.arauthors.Count > comaCount2)
-                                        {<text>@auth.title, </text>}
-                                    else
-                                    {@auth.title}
-                                    </div>
-
-                                }
-                                @*@foreach (var sub in item.arauthors)
-                                {
-                                    <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
-                                }*@
-                                @if (!String.IsNullOrEmpty(item.arabicDesc))
-                                {
-                                    <div class="text">
-                                        <a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">
-                                            @Html.Raw(item.arabicDesc)
-                                            <span class="read">@item.ARarticleTemplate</span>
-                                        </a>
-                                    </div>
-                                }
-                            </div>
-                        </li>
-
-                    }
-                    else
-                    {
-                        <li class="grid-item">
-                            <div class="item arabicBox">
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date">@item.Date</div>
-                                    }
-                                </div>
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
-                                @{ int comaCount2 = 0;}
-                                @foreach (var auth in item.arauthors)
-                                {
-                                    comaCount2++;
-                                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">
-                                        @if (item.arauthors.Count > comaCount2)
-                                        {<text>@auth.title, </text>}
-                                    else
-                                    {@auth.title}
-                                    </div>
-
-                                }
-                                @*@foreach (var sub in item.arauthors)
-                                {
-                                    <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
-                                }*@
-                                @if (!String.IsNullOrEmpty(item.arabicDesc))
-                                {
-                                    <div class="text">
-                                        <a href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                            @Html.Raw(item.arabicDesc)
-                                            <span class="read">@item.ARarticleTemplate</span>
-                                        </a>
-                                    </div>
-                                }
-                            </div>
-                        </li>
-                    }
-
+                    <div class="pic">
+                        <img src="@Url.Content(Model.imgSrc)" />
+                        <div class="info">
+                            <h2 class="caption">@Model.title</h2>
+                        </div>
+                    </div>
                 }
-            }
+                @if (!String.IsNullOrEmpty(Model.description))
+                {
+                    <div class="text">
+                        @Html.Raw(Model.description)
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <div class="itemsList">
+            <div class="container">
+                <ul class="grid">
+                    @if (ViewBag.news.Count != null)
+                    {
+                        foreach (var item in ViewBag.news)
+                        {
+                            if (!item.hasArabic)
+                            {
+                                <li class="grid-item">
+                                    <div class="item englishBox">
+                                        <div class="top">
+                                            @if (!String.IsNullOrEmpty(item.Date))
+                                            {
+                                                <div class="date">@item.Date</div>
+                                            }
+
+                                            @if (!item.hasOnlyEnglish)
+                                            {
+                                                <div class="arabic" onclick="arabic(event)">عربي</div>
+
+                                            }
+                                        </div>
+                                        <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">@item.title</a></h2>
+                                        @{ int comaCount1 = 0;}
+                                        @foreach (var auth in item.authors)
+                                        {
+                                            comaCount1++;
+                                            <input hidden class="EngBio-@auth.id" value="@auth.bio" />
+                                            <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                                @if (item.authors.Count > comaCount1)
+                                                {<text>@auth.title, </text>}
+                                            else
+                                            {@auth.title}
+                                            </div>
+
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(item.smallDescription))
+                                        {
+                                            <div class="text">
+                                                <a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">
+                                                    @Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span>
+                                                </a>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                    @if (!item.hasOnlyEnglish)
+                                    {
+                                        <div class="item arabicBox">
+                                            <div class="top">
+                                                @if (!String.IsNullOrEmpty(item.Date))
+                                                {
+                                                    <div class="date">@item.Date</div>
+                                                }
+                                                <div class="english" onclick="english(event)">eng</div>
+                                            </div>
+                                            <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
+                                            @{ int comaCount2 = 0;}
+                                            @foreach (var auth in item.arauthors)
+                                            {
+                                                comaCount2++;
+                                                <input hidden class="ARBio-@auth.id" value="@auth.bio" />
+                                                <div class="author" onclick="openArabicAuthorPopup('@auth.title','ARBio-@auth.id')">
+                                                    @if (item.arauthors.Count > comaCount2)
+                                                    {<text>@auth.title, </text>}
+                                                else
+                                                {@auth.title}
+                                                </div>
+
+                                            }
+
+                                            @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                            {
+                                                <div class="text">
+                                                    <a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">
+                                                        @Html.Raw(item.arabicDesc)
+                                                        <span class="read">@item.ARarticleTemplate</span>
+                                                    </a>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="grid-item">
+                                    <div class="item arabicBox">
+                                        <div class="top">
+                                            @if (!String.IsNullOrEmpty(item.Date))
+                                            {
+                                                <div class="date">@item.Date</div>
+                                            }
+                                        </div>
+                                        <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
+                                        @{ int comaCount2 = 0;}
+                                        @foreach (var auth in item.arauthors)
+                                        {
+                                            comaCount2++;
+                                            <input hidden class="OnlyARBio-@auth.id" value="@auth.bio" />
+                                            <div class="author" onclick="openArabicAuthorPopup('@auth.title','OnlyARBio-@auth.id')">
+                                                @if (item.arauthors.Count > comaCount2)
+                                                {<text>@auth.title, </text>}
+                                            else
+                                            {@auth.title}
+                                            </div>
+
+                                        }
+                                        @*@foreach (var sub in item.arauthors)
+                                            {
+                                                <div class="author" ng-click="openArabicAuthorPopup('@sub.title','@sub.bio')">@sub.title</div>
+                                            }*@
+                                        @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                        {
+                                            <div class="text">
+                                                <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                                    @Html.Raw(item.arabicDesc)
+                                                    <span class="read">@item.ARarticleTemplate</span>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </li>
+                            }
+
+                        }
+                    }
 
 
-        </ul>
-    </div>
-    @if (ViewBag.settings.showTwitter == true)
-    {
-        { Html.RenderPartial("twitterBox"); }
-    }
-</div>
+                </ul>
+            </div>
+            @*@if (ViewBag.settings.showTwitter == true)
+                {
+                    { Html.RenderPartial("twitterBox"); }
+                }*@
+        </div>
 
 

@@ -79,7 +79,7 @@ namespace PolicyInitiativeFront.Models
             entry.id = translatedItem != null ? translatedItem.id : entry.id;
             entry.title = translatedItem != null ? translatedItem.title : entry.title;
 
-            var corporatePageTemplates = db.CorporatePageSections.Where(d => !d.isDeleted && d.isPublished && d.corporatePageId == entry.id).OrderByDescending(d => d.priority).Select(d => new CorporatePageTemplateView
+            var corporatePageTemplates = entry.CorporatePageSections.Where(d => !d.isDeleted && d.isPublished ).OrderByDescending(d => d.priority).Select(d => new CorporatePageTemplateView
             {
                 id = d.id,
                 isPublished = d.isPublished,

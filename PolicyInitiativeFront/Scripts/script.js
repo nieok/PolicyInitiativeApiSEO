@@ -189,14 +189,14 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                 datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div>';
                             }
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
-                            var count = 1;
+                            var count = 5;
                             if (value.authorsList.length != 0) {
                                 angular.forEach(value.authorsarList, function (value1, key) {
                                     if (value.authorsarList.length == count) {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title +'</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="OnlyARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
 
                                     } else {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title +',</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + value1.id + "'" + ')">' + value1.title + ',</div> <input hidden class="OnlyARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
                                     }
                                     count++;
                                 });
@@ -222,7 +222,12 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
 
                             }
                             if (value.date != null) {
-                                datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                                if (value.hasOnlyEnglish == false) {
+                                    datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                                } else {
+                                    datediv = '<div class="top"> <div class="date">' + value.date + '</div></div> ';
+
+                                }
                             }
                             if (value.date != null) {
                                 arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="english" onclick="english(event)">eng</div></div> ';
@@ -230,13 +235,13 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
                             arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
 
-                            var count = 1;
+                            var count = 5;
                             if (value.authorsList.length != 0) {
                                 angular.forEach(value.authorsList, function (value1, key) {
                                     if (value.authorsList.length == count) {
-                                        authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" +')">' + value1.title + '</div> <input hidden class="EngBio-' +  count +'" value="'  +  value1.bio +'"/> ';
+                                        authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="EngBio-' + value1.id +'" value="'  +  value1.bio +'"/> ';
                                     } else {
-                                        authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'"+ ')">' + value1.title +", " + '</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
+                                        authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
 
                                     }
                                     count++;
@@ -246,15 +251,15 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             if (value.smallDescription != null) {
                                 desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate+'</span></a>'
                             }
-                            var count1 = 1;
+                            var count1 = 5;
                             if (value.authorsarList.length != 0) {
                                 angular.forEach(value.authorsarList, function (value1, key) {
 
                                     if (value.authorsarList.length == count1) {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
 
                                     } else {
-                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title +", " + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
+                                        arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="ARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
                                     }
                                     count1++;
                                 });
@@ -263,8 +268,12 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             if (value.arsmallDescription != null) {
                                 ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate +'</span></a>'
                             }
+                            if (value.hasOnlyEnglish == false) {
+                                values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + arauthordiv + ardesdiv + '</div> </div> </li>';
+                            } else {
+                                values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div> </li>';
 
-                            values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + arauthordiv + ardesdiv + '</div> </div> </li>';
+                            }
                         }
 
                     });
@@ -279,9 +288,6 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                     }, 2000);
                 }
             
-                
-            
-           
             });
         }
 
@@ -321,7 +327,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         $scope.engagenews = function () {
             $http({
                 method: 'GET',
-                url: RouteUrl + 'api/NewsCommunications/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts,
+                url: RouteUrl + 'api/PublicEngagements/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts,
             }).then(function (res) {
                 $scope.data = res.data;
                 $('.itemsList').addClass('loadmore');
@@ -340,10 +346,14 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             values = values + '<li class="grid-item"> <div class="item arabicBox">';
                             if (value.imgSrc != null) {
                                 if (value.ExternalLink == null) {
-                                    img = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    if (value.description != null) {
+                                        img = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    } else {
+                                        img = '<div class="pic"><a style="cursor:auto!important;"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
 
+                                    }
                                 } else {
-                                    img = '<div class="pic"><a href=' + value.ExternalLink  + ' target="blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    img = '<div class="pic"><a href=' + value.ExternalLink + ' target="blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
 
                                 }
 
@@ -357,22 +367,34 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             }
 
                             if (value.ExternalLink == null) {
-                                titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
+
+                                if (value.description != null) {
+                                    titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
+
+                                } else {
+                                    titlediv = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
+
+                                }
 
                             } else {
-                                titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink  + ' target="_blank">' + value.title + '</a></h2> ';
+                                titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
 
                             }
-                        
+
                             if (value.arsmallDescription != null) {
                                 if (value.ExternalLink == null) {
-                                    ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                    if (value.description != null) {
+                                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                    } else {
+                                        ardesdiv = '<div class="text"> <a style="cursor:auto!important;">' + value.arsmallDescription + '  </a>'
+
+                                    }
                                 } else {
-                                    ardesdiv = '<div class="text"> <a href=' + value.ExternalLink  + ' target="_blank" >' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                    ardesdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank" >' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
 
                                 }
                             }
-                            values = values + img + datediv + titlediv +  ardesdiv + '</div> </div> </li>';
+                            values = values + img + datediv + titlediv + ardesdiv + '</div> </div> </li>';
 
                         } else {
 
@@ -386,25 +408,42 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             if (value.imgSrc != null) {
 
                                 if (value.ExternalLink == null) {
-                                    img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
-                                    arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
-                                } else {
+                                    if (value.description != null) {
+                                        img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                        arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    } else {
+                                        img = '<div class="pic"><a style="cursor:auto!important;"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                        arimg = '<div class="pic"><a style="cursor:auto!important;">' + '<img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                    }
+                                 } else {
                                     img = '<div class="pic"><a href=' + value.ExternalLink + ' target="_blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
                                     arimg = '<div class="pic"><a href=' + value.ExternalLink + ' target="_blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
                                 }
-                                
+
 
                             }
                             if (value.date != null) {
-                                if (value.newsCategory == null) {
-                                    datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                                if (value.hasOnlyEnglish == false) {
+                                    if (value.newsCategory == null) {
 
+                                        datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+
+                                    } else {
+                                        datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                                    }
                                 } else {
-                                    datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">'+value.newsCategory+'</span></div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                                    if (value.newsCategory == null) {
+
+                                        datediv = '<div class="top"> <div class="date">' + value.date + '</div></div> ';
+
+                                    } else {
+                                        datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div> </div> ';
+                                    }
                                 }
 
+
                             }
-                        
+
                             if (value.date != null) {
                                 if (value.newsCategory == null) {
                                     arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="english(event)">eng</div></div> ';
@@ -415,19 +454,34 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
 
                             }
                             if (value.ExternalLink == null) {
-                                titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
-                                arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
+                                if (value.description != null) {
+                                    titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
+                                    arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
+                                } else {
+                                    titlediv = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
+                                    arabictitle = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
+                                }
                             } else {
                                 titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
                                 arabictitle = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
                             }
                             if (value.ExternalLink == null) {
-                                if (value.smallDescription != null) {
-                                    desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate + '</span></a>'
-                                }
+                                if (value.description != null) {
+                                    if (value.smallDescription != null) {
+                                        desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate + '</span></a>'
+                                    }
 
-                                if (value.arsmallDescription != null) {
-                                    ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                    if (value.arsmallDescription != null) {
+                                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                                    }
+                                } else {
+                                    if (value.smallDescription != null) {
+                                        desdiv = '<div class="text"> <a style="cursor:auto!important;">' + value.smallDescription + ' </a>'
+                                    }
+
+                                    if (value.arsmallDescription != null) {
+                                        ardesdiv = '<div class="text"> <a style="cursor:auto!important;">' + value.arsmallDescription + ' </a>'
+                                    }
                                 }
                             } else {
                                 if (value.smallDescription != null) {
@@ -438,7 +492,13 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                     ardesdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank">' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
                                 }
                             }
-                            values = values + englishBox + img + datediv + titlediv +  desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle +  ardesdiv + '</div> </div> </li>';
+
+                            if (value.hasOnlyEnglish == false) {
+                                values = values + englishBox + img + datediv + titlediv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + ardesdiv + '</div> </div> </li>';
+                            } else {
+                                values = values + englishBox + img + datediv + titlediv + desdiv + '</div></div></li>';
+
+                            }
                         }
 
                     });
@@ -785,10 +845,10 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     if (value.authorsList.length != 0) {
                         angular.forEach(value.authorsarList, function (value1, key) {
                             if (value.authorsarList.length == count) {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title + '</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="OnlyARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
 
                             } else {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + count + "'" + ')">' + value1.title + ',</div> <input hidden class="OnlyARBio-' + count + '" value="' + value1.bio + '"/> ';
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + value1.id + "'" + ')">' + value1.title + ',</div> <input hidden class="OnlyARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
                             }
                             count++;
                         });
@@ -818,7 +878,13 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
 
                     }
                     if (value.Date != null) {
-                        datediv = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                        if (value.hasOnlyEnglish == false) {
+                            datediv = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+
+                        } else {
+                            datediv = '<div class="top"> <div class="date">' + value.Date + '</div> </div> ';
+
+                        }
                     }
                     if (value.Date != null) {
                         arabicdate = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="english" onclick="english(event)">eng</div></div> ';
@@ -830,9 +896,9 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     if (value.authorsList.length != 0) {
                         angular.forEach(value.authorsList, function (value1, key) {
                             if (value.authorsList.length == count) {
-                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" + ')">' + value1.title + '</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
+                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
                             } else {
-                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + count + "'" + ')">' + value1.title+", " + '</div> <input hidden class="EngBio-' + count + '" value="' + value1.bio + '"/> ';
+                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
 
                             }
                             count++;
@@ -847,10 +913,10 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                         angular.forEach(value.authorsarList, function (value1, key) {
 
                             if (value.authorsarList.length == count1) {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
 
                             } else {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + count1 + "'" + ')">' + value1.title+", " + '</div> <input hidden class="ARBio-' + count1 + '" value="' + value1.bio + '"/> ';
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="ARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
                             }
                             count1++;
                         });
@@ -859,8 +925,10 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
                     if (value.arsmallDescription != null) {
                         ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">'+ value.ARarticleTemplate +'</span></a>'
                     }
+                    if (value.hasOnlyEnglish == false) {
+                        values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div></li>';
 
-                    values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + arauthordiv + ardesdiv + '</div> </div> </li>';
+                    }
                 }
 
             });

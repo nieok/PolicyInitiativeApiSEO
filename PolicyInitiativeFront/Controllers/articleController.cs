@@ -46,7 +46,7 @@ namespace PolicyInitiativeFront.Controllers
             metas.customPageTitle = string.IsNullOrEmpty(currentPage.customPageTitle) ? ConfigurationManager.AppSettings["ProjectName"] + " - " + currentPage.title : currentPage.customPageTitle;
             metas.customUrlTitle = string.IsNullOrEmpty(currentPage.customUrlTitle) ? defaultPage.customUrlTitle : currentPage.customUrlTitle;
             metas.metaObjectType = "corporatepage";
-            metas.canonicalUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + currentPage.id + "/" + news.urlTitle;
+            metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
             ViewBag.metas = metas;
             #endregion
 

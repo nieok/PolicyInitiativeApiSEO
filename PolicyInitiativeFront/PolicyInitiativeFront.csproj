@@ -184,6 +184,7 @@
     <Compile Include="Models\MetasModel.cs" />
     <Compile Include="Models\NewsCategoryRepository.cs" />
     <Compile Include="Models\NewsletterUserRepository.cs" />
+    <Compile Include="Models\PublicEngagementRepository.cs" />
     <Compile Include="Models\settingsRepository.cs" />
     <Compile Include="Models\SocialMediaRepository.cs" />
     <Compile Include="Models\TeamCategoryRepository.cs" />
@@ -389,6 +390,7 @@
     <Content Include="Views\homewithswiper\Index.cshtml" />
     <Content Include="Views\Shared\pagenotfound.cshtml" />
     <Content Include="Views\Shared\servererror.cshtml" />
+    <Content Include="Views\engagement\details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

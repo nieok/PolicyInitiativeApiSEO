@@ -80,132 +80,141 @@
             {
                 foreach (var item in ViewBag.featured)
                 {
-                    <li class="grid-item">
+            <li class="grid-item">
 
-                        @if (!item.hasArabic)
+                @if (!item.hasArabic)
+                {
+                    <div class="item englishBox">
+                        @if (!String.IsNullOrEmpty(item.imgSrc))
                         {
-                            <div class="item englishBox">
-                                @if (!String.IsNullOrEmpty(item.imgSrc))
-                                {
-                                    <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                            <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                }
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date">@item.Date</div>
-
-                                    }
-                                    <div class="arabic" onclick="arabic(event)">عربي</div>
-                                </div>
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl)"> @item.title</a></h2>
-                                @{ int comaCount = 0;}
-                                @foreach (var auth in item.authors)
-                                {
-                                    comaCount++;
-                                    <div class="author" ng-click="openAuthorPopup('@auth.title','@auth.bio')">
-                                        @if (item.authors.Count > comaCount)
-                                        {<text>@auth.title, </text> }
-                                    else
-                                    {@auth.title}
-                                    </div>
-
-
-                                }
-                                <div class="text">
-                                    <a href="@Url.Content(item.detailUrl)">
-                                        @if (!String.IsNullOrEmpty(item.smallDescription))
-                                        {
-                                            <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
-                                        }
-
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="item arabicBox">
-                                @if (!String.IsNullOrEmpty(item.imgSrc))
-                                {
-                                    <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                }
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date">@item.Date</div>
-
-                                    }
-                                    <div class="english" onclick="english(event)">eng</div>
-                                </div>
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
-                                @{ int comaCount1 = 0;}
-                                @foreach (var auth in item.arauthors)
-                                {
-                                    comaCount1++;
-                                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">
-                                        @if (item.arauthors.Count > comaCount1)
-                                        {<text>@auth.title, </text>}
-                                    else
-                                    {@auth.title}
-                                    </div>
-
-                                }
-                                <div class="text">
-                                    <a href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>}
-
-
-
-                                    </a>
-
-                                </div>
-                            </div>
                         }
-                        else
+                    <div class="top">
+                        @if (!String.IsNullOrEmpty(item.Date))
                         {
-                            <div class="item arabicBox">
-                                @if (!String.IsNullOrEmpty(item.imgSrc))
-                                {
-                                    <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                            <div class="date">@item.Date</div>
 
-                                }
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date">@item.Date</div>
-
-                                    }
-                                </div>
-                                <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
-                                @{ int comaCount1 = 0;}
-                                @foreach (var auth in item.arauthors)
-                                {
-                                    comaCount1++;
-                                    <div class="author" ng-click="openArabicAuthorPopup('@auth.title','@auth.bio')">
-                                        @if (item.arauthors.Count > comaCount1)
-                                        {<text>@auth.title, </text>}
-                                    else
-                                    {@auth.title}
-                                    </div>
-
-                                }
-                                <div class="text">
-                                    <a href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>}
-
-
-                                    </a>
-
-                                </div>
-                            </div>
                         }
+                        @if (!item.hasOnlyEnglish)
+                        {
+                        <div class="arabic" onclick="arabic(event)">عربي</div>}
+                    </div>
+                        <h2 class="title"><a href="@Url.Content(item.detailUrl)"> @item.title</a></h2>
+                        @{ int comaCount = 0;}
+                        @foreach (var auth in item.authors)
+                        {
+                            comaCount++;
+                            <input hidden class="EngBio-@auth.id" value="@auth.bio" />
+                            <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                @if (item.authors.Count > comaCount)
+                                {<text>@auth.title, </text> }
+                            else
+                            {@auth.title}
+                            </div>
 
 
-                    </li>
+                        }
+                        <div class="text">
+                            <a href="@Url.Content(item.detailUrl)">
+                                @if (!String.IsNullOrEmpty(item.smallDescription))
+                                {
+                                    <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                                }
+
+                            </a>
+
+                        </div>
+                    </div>
+                    if (!item.hasOnlyEnglish)
+                    {
+                        <div class="item arabicBox">
+                            @if (!String.IsNullOrEmpty(item.imgSrc))
+                            {
+                                <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                            }
+                            <div class="top">
+                                @if (!String.IsNullOrEmpty(item.Date))
+                                {
+                                    <div class="date">@item.Date</div>
+
+                                }
+                                <div class="english" onclick="english(event)">eng</div>
+                            </div>
+                            <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
+                            @{ int comaCount1 = 0;}
+                            @foreach (var auth in item.arauthors)
+                            {
+                                comaCount1++;
+                                <input hidden class="ARBio-@auth.id" value="@auth.bio" />
+                                <div class="author" onclick="openArabicAuthorPopup('@auth.title','@auth.id')">
+                                    @if (item.arauthors.Count > comaCount1)
+                                    {<text>@auth.title, </text>}
+                                else
+                                {@auth.title}
+                                </div>
+
+                            }
+                            <div class="text">
+                                <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                    @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                    {
+                                        <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>}
+
+
+
+                                </a>
+
+                            </div>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <div class="item arabicBox">
+                        @if (!String.IsNullOrEmpty(item.imgSrc))
+                        {
+                            <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                        }
+                        <div class="top">
+                            @if (!String.IsNullOrEmpty(item.Date))
+                            {
+                                <div class="date">@item.Date</div>
+
+                            }
+                        </div>
+                        <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
+                        @{ int comaCount1 = 0;}
+                        @foreach (var auth in item.arauthors)
+                        {
+                            comaCount1++;
+                            <input hidden class="OnlyARBio-@auth.id" value="@auth.bio" />
+                            <div class="author" onclick="openArabicAuthorPopup('@auth.title','OnlyARBio-@auth.id')">
+                                @if (item.arauthors.Count > comaCount1)
+                                {<text>@auth.title, </text>}
+                            else
+                            {@auth.title}
+                            </div>
+
+                        }
+                        <div class="text">
+                            <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                {
+                                    <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>}
+
+
+                            </a>
+
+                        </div>
+                    </div>
+                }
+
+
+            </li>
                 }
 
             }
@@ -229,36 +238,50 @@
                         <ul class="swiper-wrapper">
                             @foreach (var item in ViewBag.engagefeatured)
                             {
-                                <li class="swiper-slide">
-                                    @if (!item.hasArabic)
+                            <li class="swiper-slide">
+                                @if (!item.hasArabic)
+                                {
+                                <div class="item englishBox">
+                                    @if (!String.IsNullOrEmpty(item.imgSrc))
                                     {
-                                    <div class="item englishBox">
-                                        @if (!String.IsNullOrEmpty(item.imgSrc))
+                                        if (String.IsNullOrEmpty(item.ExternalLink))
                                         {
-                                            if (String.IsNullOrEmpty(item.ExternalLink))
+                                            if (!String.IsNullOrEmpty(item.description))
                                             {
                                                 <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
                                             }
                                             else
                                             {
-                                                <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                                <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
                                             }
 
                                         }
-                                        <div class="top">
-                                            @if (!String.IsNullOrEmpty(item.Date))
-                                            {
-                                                <div class="date red">
-                                                    @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                                    {<span class="dash">|</span><span class="categ">@item.newsCategory</span>}
-                                                </div>
+                                        else
+                                        {
+                                            <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                            }
+                                        }
+
+                                    }
+                                    <div class="top">
+                                        @if (!String.IsNullOrEmpty(item.Date))
+                                        {
+                                            <div class="date red">
+                                                @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                                {<span class="dash">|</span><span class="categ">@item.newsCategory</span>}
+                                            </div>
+
+                                        }
+                                        @if (!item.hasOnlyEnglish)
+                                        {
                                             <div class="arabic" onclick="arabic1(event)">عربي</div>
-                                        </div>
-                                        @if (String.IsNullOrEmpty(item.ExternalLink))
+
+                                        }
+                                    </div>
+                                    @if (String.IsNullOrEmpty(item.ExternalLink))
+                                    {
+                                        if (!string.IsNullOrEmpty(item.description))
                                         {
                                             <h2 class="title"> <a href="@Url.Content(item.detailUrl)">@item.title</a></h2>
                                             if (!String.IsNullOrEmpty(item.smallDescription))
@@ -272,96 +295,147 @@
                                         }
                                         else
                                         {
-                                            <h2 class="title"> <a href="@Url.Content(item.ExternalLink)" target="_blank">@item.title</a></h2>
+                                            <h2 class="title"><a style="cursor:auto !important">@item.title</a></h2>
                                             if (!String.IsNullOrEmpty(item.smallDescription))
                                             {
                                                 <div class="text">
-                                                    <a href="@Url.Content(item.ExternalLink)" target="_blank">
-                                                        <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
-                                                    </a>
-                                                </div>
-                                            }
-                                        }
-                                        <div class="endline"></div>
-                                    </div>
-                                    <div class="item arabicBox">
-                                        @if (!String.IsNullOrEmpty(item.imgSrc))
-                                        {
-                                            if (String.IsNullOrEmpty(item.ExternalLink))
-                                            {
-                                                <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                            }
-                                            else
-                                            {
-                                                <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                            }
-
-                                        }
-                                        <div class="top">
-                                            @if (!String.IsNullOrEmpty(item.Date))
-                                            {
-                                                <div class="date red">
-                                                    @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                                    {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
-                                                </div>
-
-                                            }
-                                            <div class="english" onclick="english1(event)">eng</div>
-                                        </div>
-                                        @if (String.IsNullOrEmpty(item.ExternalLink))
-                                        {
-                                            <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
-                                            if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                            {
-                                                <div class="text">
-                                                    <a href="@Url.Content(item.detailUrl+ "?lang=ar")">
-                                                        <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
-                                                    </a>
-                                                </div>}
-                                        }
-                                        else
-                                        {
-                                            <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank"> @item.artitle</a></h2>
-                                            if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                            {
-                                                <div class="text">
-                                                    <a href="@Url.Content(item.ExternalLink)" target="_blank">
-                                                        <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
+                                                    <a style="cursor:auto !important">
+                                                        <p>@Html.Raw(item.smallDescription)</p>
                                                     </a>
                                                 </div>}
                                         }
 
-                                        <div class="endline"></div>
-                                    </div>
                                     }
                                     else
                                     {
-                                <div class="item arabicBox">
-                                    @if (!String.IsNullOrEmpty(item.imgSrc))
-                                    {
-                                        if (String.IsNullOrEmpty(item.ExternalLink))
+                                        <h2 class="title"> <a href="@Url.Content(item.ExternalLink)" target="_blank">@item.title</a></h2>
+                                        if (!String.IsNullOrEmpty(item.smallDescription))
                                         {
-                                            <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                            <div class="text">
+                                                <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                                    <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                    <div class="endline"></div>
+                                </div>
+                                    if (!item.hasOnlyEnglish)
+                                    {
+                            <div class="item arabicBox">
+                                @if (!String.IsNullOrEmpty(item.imgSrc))
+                                {
+                                    if (String.IsNullOrEmpty(item.ExternalLink))
+                                    {
+                                        if (!String.IsNullOrEmpty(item.description))
+                                        {
+                                            <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
                                         }
                                         else
                                         {
-                                            <div class="pic"><a href="@Url.Content(item.ExternalLink )" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                            <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                    }
+
+                                }
+                                <div class="top">
+                                    @if (!String.IsNullOrEmpty(item.Date))
+                                    {
+                                        <div class="date red">
+                                            @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                            {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
+                                        </div>
+
+                                    }
+                                    <div class="english" onclick="english1(event)">eng</div>
+                                </div>
+                                @if (String.IsNullOrEmpty(item.ExternalLink))
+                                {
+                                    if (!String.IsNullOrEmpty(item.description))
+                                    {
+                                        <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
+                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                        {
+                                            <div class="text">
+                                                <a href="@Url.Content(item.detailUrl+ "?lang=ar")">
+                                                    <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
+                                                </a>
+                                            </div>}
+                                    }
+                                    else
+                                    {
+                                        <h2 class="title"><a style="cursor:auto !important">@item.artitle</a></h2>
+                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                        {
+                                            <div class="text">
+                                                <a style="cursor:auto !important">
+                                                    <p>@Html.Raw(item.arsmallDescription)</p>
+                                                </a>
+                                            </div>}
+                                    }
+
+                                }
+                                else
+                                {
+                                    <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank"> @item.artitle</a></h2>
+                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                    {
+                                        <div class="text">
+                                            <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                                <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
+                                            </a>
+                                        </div>}
+                                }
+
+                                <div class="endline"></div>
+                            </div>
+                                    }
+
+                                }
+                                else
+                                {
+                            <div class="item arabicBox">
+                                @if (!String.IsNullOrEmpty(item.imgSrc))
+                                {
+                                    if (String.IsNullOrEmpty(item.ExternalLink))
+                                    {
+                                        if (!String.IsNullOrEmpty(item.description))
+                                        {
+                                            <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
                                         }
                                     }
-                                    <div class="top">
-                                        @if (!String.IsNullOrEmpty(item.Date))
-                                        {
-                                            <div class="date red">
-                                                @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                                {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
-                                            </div>
+                                    else
+                                    {
+                                        <div class="pic"><a href="@Url.Content(item.ExternalLink )" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                        }
-                                    </div>
-                                    @if (String.IsNullOrEmpty(item.ExternalLink))
+                                    }
+                                }
+                                <div class="top">
+                                    @if (!String.IsNullOrEmpty(item.Date))
+                                    {
+                                        <div class="date red">
+                                            @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                            {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
+                                        </div>
+
+                                    }
+                                </div>
+                                @if (String.IsNullOrEmpty(item.ExternalLink))
+                                {
+                                    if (!String.IsNullOrEmpty(item.description))
                                     {
                                         <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")">@item.artitle</a></h2>
                                         if (!String.IsNullOrEmpty(item.arsmallDescription))
@@ -374,20 +448,33 @@
                                     }
                                     else
                                     {
-                                        <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank">@item.artitle</a></h2>
+                                        <h2 class="title"><a style="cursor:auto !important">@item.artitle</a></h2>
                                         if (!String.IsNullOrEmpty(item.arsmallDescription))
                                         {
                                             <div class="text">
-                                                <a href="@Url.Content(item.ExternalLink)" target="_blank">
-                                                    <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>
+                                                <a style="cursor:auto !important">
+                                                    <p>@Html.Raw(item.arsmallDescription)</p>
                                                 </a>
                                             </div>}
                                     }
-                                    <div class="endline"></div>
-                                </div>
-                                    }
 
-                                </li>
+                                }
+                                else
+                                {
+                                    <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank">@item.artitle</a></h2>
+                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                    {
+                                        <div class="text">
+                                            <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                                <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>
+                                            </a>
+                                        </div>}
+                                }
+                                <div class="endline"></div>
+                            </div>
+                                }
+
+                            </li>
                             }
 
                         </ul>

@@ -32,7 +32,6 @@ namespace PolicyInitiativeFront.Models
         {
             var types = GetAllIsPublished();
             var model = new List<TypeArticle>();
-
             foreach (var item in types)
             {
                 var translated = db.TypeArticles.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.id);
@@ -41,7 +40,6 @@ namespace PolicyInitiativeFront.Models
                     id = item.id,
                     title = item.title,
                     arabictitle= translated != null ? translated.title : item.title,
-
                 });
             }
             return model;
@@ -50,8 +48,6 @@ namespace PolicyInitiativeFront.Models
         {
             return db.TypeArticles.FirstOrDefault(d => !d.isDeleted && d.id == id);
         }
-
-
     }
     #endregion
 }

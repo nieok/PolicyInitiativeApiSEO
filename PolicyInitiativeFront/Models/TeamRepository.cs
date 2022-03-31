@@ -35,9 +35,9 @@ namespace PolicyInitiativeFront.Models
         {
             return db.Directors.FirstOrDefault(d => !d.isDeleted && d.id == id);
         }
-        public List<Director> GetAllTeam(string imgsize = "",string category ="",string language = "en")
+        public List<Director> GetAllTeam(string imgsize = "",int category = 1,string language = "en")
         {
-            var news = GetAllIsPublished().Where(d=>d.TeamCategory.title.ToLower() == category.ToLower()).ToList();
+            var news = GetAllIsPublished().Where(d=>d.categoryId == category).OrderByDescending(d=>d.priority);
             var model = new List<Director>();
        
         
