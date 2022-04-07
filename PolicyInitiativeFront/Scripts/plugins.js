@@ -171,7 +171,7 @@ function initSlideshowSwiper() {
     if ($('.Slideshow').length != 0) {
         slideshowSwiper = new Swiper('.Slideshow .screen', {
             slidesPerView: 1,
-            lazy: true,
+            /*lazy: true,*/
             watchOverflow: true,
             speed: 900,
             loop: false,
@@ -188,11 +188,11 @@ function initSlideshowSwiper() {
                 nextEl: '.Slideshow .next',
                 prevEl: '.Slideshow .prev',
             },
-            on: {
-                lazyImageReady: function (slideEl) {
-                    $('.swiper-lazy-loaded').parents('.swiper-slide').addClass('imageready');
-                }
-            },
+            //on: {
+            //    lazyImageReady: function (slideEl) {
+            //        $('.swiper-lazy-loaded').parents('.swiper-slide').addClass('imageready');
+            //    }
+            //},
 
         });
 

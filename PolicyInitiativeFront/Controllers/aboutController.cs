@@ -60,7 +60,15 @@ namespace PolicyInitiativeFront.Controllers
             metas.metaObjectType = "corporatepage";
             metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
             ViewBag.metas = metas;
-            ViewBag.langurl = HttpContext.Request.Url.AbsoluteUri.ToString().Replace(Request.Url.Query, String.Empty);
+            if(Request.Url.Query != "")
+            {
+                ViewBag.langurl = HttpContext.Request.Url.AbsoluteUri.ToString().Replace(Request.Url.Query, String.Empty);
+
+            }
+            else
+            {
+                ViewBag.langurl = HttpContext.Request.Url.AbsoluteUri.ToString();
+            }
             #endregion
             return View(model);
         }

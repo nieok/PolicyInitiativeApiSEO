@@ -149,17 +149,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\about2Controller.cs" />
     <Compile Include="Controllers\aboutController.cs" />
     <Compile Include="Controllers\articleController.cs" />
     <Compile Include="Controllers\contactController.cs" />
     <Compile Include="Controllers\detailsController.cs" />
     <Compile Include="Controllers\engagementController.cs" />
     <Compile Include="Controllers\errorPageController.cs" />
-    <Compile Include="Controllers\foundersController.cs" />
     <Compile Include="Controllers\GoogleSitemapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\homewithswiperController.cs" />
     <Compile Include="Controllers\initiativesController.cs" />
     <Compile Include="Controllers\privacypolicyController.cs" />
     <Compile Include="Controllers\searchController.cs" />
@@ -359,7 +356,6 @@
       <DependentUpon>dblinq.dbml</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\about\Index.cshtml" />
     <Content Include="Views\Shared\authorPopup-arabic.cshtml" />
     <Content Include="Views\Shared\authorPopup.cshtml" />
@@ -374,23 +370,16 @@
     <Content Include="Views\initiatives\details.cshtml" />
     <Content Include="Views\contact\Index.cshtml" />
     <Content Include="Views\article\index.cshtml" />
-    <Content Include="Views\article\video.cshtml" />
-    <Content Include="Views\article\podcast.cshtml" />
-    <Content Include="Views\article\data.cshtml" />
     <Content Include="Views\search\Index.cshtml" />
     <Content Include="Views\search\search.cshtml" />
     <Content Include="Views\Shared\twitterBox.cshtml" />
-    <Content Include="Views\about2\Index.cshtml" />
-    <Content Include="Views\about2\arabic.cshtml" />
     <Content Include="Views\engagement\Index.cshtml" />
-    <Content Include="Views\founders\Index.cshtml" />
-    <Content Include="Views\founders\arabic.cshtml" />
     <Content Include="Views\details\Index.cshtml" />
-    <Content Include="Views\details\arabic.cshtml" />
     <Content Include="Views\homewithswiper\Index.cshtml" />
     <Content Include="Views\Shared\pagenotfound.cshtml" />
     <Content Include="Views\Shared\servererror.cshtml" />
     <Content Include="Views\engagement\details.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

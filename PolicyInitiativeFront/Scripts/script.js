@@ -162,7 +162,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         $scope.getnews = function () {
             $http({
                 method: 'GET',
-                url: RouteUrl + 'api/NewsCommunications/GetHomeData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts,
+                url: RouteUrl + 'api/NewsCommunications/GetHomeData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts + "&imgsize=335x319xi",
             }).then(function (res) {
                 $scope.data = res.data;
                 $('.itemsList.mids').addClass('loadmore');
@@ -189,7 +189,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                 datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div>';
                             }
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
-                            var count = 5;
+                            var count = 1;
                             if (value.authorsList.length != 0) {
                                 angular.forEach(value.authorsarList, function (value1, key) {
                                     if (value.authorsarList.length == count) {
@@ -235,7 +235,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
                             arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
 
-                            var count = 5;
+                            var count = 1;
                             if (value.authorsList.length != 0) {
                                 angular.forEach(value.authorsList, function (value1, key) {
                                     if (value.authorsList.length == count) {
@@ -251,7 +251,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             if (value.smallDescription != null) {
                                 desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate+'</span></a>'
                             }
-                            var count1 = 5;
+                            var count1 = 1;
                             if (value.authorsarList.length != 0) {
                                 angular.forEach(value.authorsarList, function (value1, key) {
 
@@ -327,7 +327,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         $scope.engagenews = function () {
             $http({
                 method: 'GET',
-                url: RouteUrl + 'api/PublicEngagements/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts,
+                url: RouteUrl + 'api/PublicEngagements/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts + "&imgsize=335x319xi",
             }).then(function (res) {
                 $scope.data = res.data;
                 $('.itemsList').addClass('loadmore');

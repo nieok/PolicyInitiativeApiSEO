@@ -31,17 +31,16 @@
                 <ul class="swiper-wrapper">
                     @foreach (var item in ViewBag.featuredBanner)
                     {
-                        <li class="swiper-slide">
+                        <li class="swiper-slide imageready">
 
                             <a class="item" href="@Url.Content(item.detailUrl)">
-                                <div class="swiper-lazy-preloader"></div>
+                                @*<div class="swiper-slide"></div>*@
                                 @if (!String.IsNullOrEmpty(item.imgSrc))
                                 {
                                     <div class="pic">
-                                        <img data-src="@Url.Content(item.imgSrc)" class="swiper-lazy" alt="@item.title" />
+                                        <img src="@Url.Content(item.imgSrc)"  alt="@item.title" />
                                     </div>
                                 }
-
                                 <div class="info">
                                     <div class="holder">
                                         @if (!String.IsNullOrEmpty(item.smallDescription))

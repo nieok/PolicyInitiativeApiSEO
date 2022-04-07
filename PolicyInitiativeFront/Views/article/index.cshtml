@@ -140,6 +140,14 @@
         {
             <div class="seperator"></div>
         }
+
+
+
+
+
+
+
+
         @{int comaCount = 0;}
         @if (Model.articleTemplateId != 4)
         {
@@ -180,23 +188,54 @@
                 }
             }
         }
-
-        @if (!Model.isPublicEngagement)
+        <div class="seperator"></div>
+        @if (Model.articleTemplateId == 1)
         {
-            <div class="seperator"></div>
-            if (Model.articleTemplateId == 2)
+            if (!String.IsNullOrEmpty(Model.topimgSrc))
             {
-                if (!String.IsNullOrEmpty(Model.videoUrl))
-                {
-                    <input class="videoUrl" value="@Model.videoUrl" hidden />
-                    <div class="youTube" style="margin-top: 35px;">
+                <div class="picDiv">
+                    <div class="item">
+                        <div class="pic"><img src="@Url.Content(Model.topimgSrc)" /></div>
+                        @if (!String.IsNullOrEmpty(Model.imgCaption))
+                        {
+                            <div class="captionPic">@Model.imgCaption</div>
 
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(Model.topimgSrc))
+                {
+                    <div class="picDiv">
+                        <div class="item">
+                            <div class="pic"><img src="@Url.Content(Model.topimgSrc)" /></div>
+                            @if (!String.IsNullOrEmpty(Model.imgCaption))
+                            {
+                                <div class="captionPic">@Model.imgCaption</div>
+
+                            }
+                        </div>
                     </div>
                 }
+            }
+        }
 
+
+        @if (Model.articleTemplateId == 2)
+        {
+            if (!String.IsNullOrEmpty(Model.videoUrl))
+            {
+                <input class="videoUrl" value="@Model.videoUrl" hidden />
+                <div class="youTube" style="margin-top: 35px;">
+
+                </div>
             }
 
         }
+
+
 
 
         @if (!String.IsNullOrEmpty(Model.description))

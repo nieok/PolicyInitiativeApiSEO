@@ -52,11 +52,15 @@
 .About.Arabic .titleTab .title{font-size: 28px;line-height:31px;}
 }
 
+.Article .text a{color:#050505;}
+
 .About.Arabic .author {
    font-family: 'SymbioARBold';
    font-size: 32px;
    line-height: 33px;
 }
+
+.Article .text sup{line-height:10px;}
 
 .Team.Arabic .subMenu .link {
    font-family: 'SymbioARBold';
@@ -247,7 +251,12 @@ mark {
 .itemSwiper .title{max-width:none;}
 .itemSwiper .endline{ margin-top: 23px;}
 .itemSwiper .endline:after{display:block;content:'';background: #050505; width: 110px; height: 4px;}
+.aboutus.arabic .item .info{padding:15px!important;text-align:center;justify-content:center;}
+.aboutus.arabic .item .info.right{justify-content:center;align-items:center;}
 
+@media (min-width: 768px){
+    .aboutus.arabic .item .caption{font-size:32px;line-height:34px;max-width:466px;}
+    }
 @media (max-width:1260px){
 .homePage .Menu{bottom:56px;}
 }
@@ -365,4 +374,31 @@ mark {
 
 .Description {
     padding: 10px 0 29px;
+}
+
+.homePage .itemsList .author {
+    line-height: 5px;
+}
+
+.teamPage .teamlist .text .monts {
+    font-family: 'montserrat';
+    font-size: 20px;
+}
+
+@media (max-width: 767px) {
+    .teamPage .teamlist .text .monts {
+        font-family: 'montserrat';
+        font-size: 13px !important;
+    }
+}
+
+.Slideshow .pic:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,36,26,.34);
 }

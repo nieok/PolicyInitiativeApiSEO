@@ -17,7 +17,7 @@ namespace PolicyInitiativeFront.Controllers
         // GET: about
         public ActionResult Index(int category= 1 ,string lang="en")
         {
-            var teams = teamRepository.GetAllTeam("220x220xi", category , lang);
+            var teams = teamRepository.GetAllTeam("269x180xi", category , lang);
            
             if (lang == "en")
             {
