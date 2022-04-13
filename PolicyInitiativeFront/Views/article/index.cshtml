@@ -40,7 +40,7 @@
                         @*<div class="addthis-smartlayers addthis-smartlayers-desktop"></div>*@
                         <div class="addthis_inline_share_toolbox"></div>
                     </li>
-
+                    <li class="mail" onmouseover="return addthis_open(this, '', '@ViewBag.metas.canonicalUrl', '@Model.title')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><svg xmlns="http://www.w3.org/2000/svg" width="28.248" height="28.129" viewBox="0 0 28.248 28.129"><g transform="translate(0.248 0.005)"><rect width="28" height="28" rx="3" transform="translate(0 0.124)"></rect><path d="M158.914,31.389,146.262,44.541,133.611,31.389" transform="translate(-132.445 -29.98)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"></path></g></svg></li>
                 </ul>
             </li>
 
@@ -143,50 +143,44 @@
 
 
 
-
-
-
-
-
         @{int comaCount = 0;}
         @if (Model.articleTemplateId != 4)
         {
-            if (!Model.isPublicEngagement)
+
+            foreach (var item in Model.authors)
             {
-                foreach (var item in Model.authors)
+                if (ViewBag.language == "en")
                 {
-                    if (ViewBag.language == "en")
-                    {
-                        comaCount++;
-                        <input hidden class="EngBio-@item.id" value="@item.bio" />
-                        <div class="author" onclick="openAuthorPopup('@item.title','EngBio-@item.id')">
-                            @if (Model.authors.Count > comaCount)
-                            {
-                                <text>@item.title, </text>}
-                            else
-                            {@item.title}
-                        </div>
-
-                    }
-                    else
-                    {
-                        comaCount++;
-                        <input hidden class="ARBio-@item.id" value="@item.bio" />
-                        <div class="author" onclick="openArabicAuthorPopup('@item.title','ARBio-@item.id')">
-                            @if (Model.authors.Count > comaCount)
-                            {
-                                <text>@item.title, </text>
-                            }
-
-                            else
-                            {@item.title}
-                        </div>
-                    }
-
-
+                    comaCount++;
+                    <input hidden class="EngBio-@item.id" value="@item.bio" />
+                    <div class="author" onclick="openAuthorPopup('@item.title','EngBio-@item.id')">
+                        @if (Model.authors.Count > comaCount)
+                        {
+                            <text>@item.title, </text>}
+                        else
+                        {@item.title}
+                    </div>
 
                 }
+                else
+                {
+                    comaCount++;
+                    <input hidden class="ARBio-@item.id" value="@item.bio" />
+                    <div class="author" onclick="openArabicAuthorPopup('@item.title','ARBio-@item.id')">
+                        @if (Model.authors.Count > comaCount)
+                        {
+                            <text>@item.title, </text>
+                        }
+
+                        else
+                        {@item.title}
+                    </div>
+                }
+
+
+
             }
+
         }
         <div class="seperator"></div>
         @if (Model.articleTemplateId == 1)
@@ -241,153 +235,167 @@
         @if (!String.IsNullOrEmpty(Model.description))
         {
             <div class="text">
-                @Html.Raw(Model.description)
+                    @Html.Raw(Model.description)
             </div>
             <br />
         }
-        @if (!Model.isPublicEngagement)
+
+        @if (Model.articleTemplateId == 3)
         {
-            if (Model.articleTemplateId == 3)
+            if (!String.IsNullOrEmpty(Model.audioSrc))
             {
-                if (!String.IsNullOrEmpty(Model.audioSrc))
-                {
 
-                    <div class="player" style=" direction: ltr;">
-                        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=@Model.audioSrc&color=%23100e10&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+                <div class="player" style=" direction: ltr;">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=@Model.audioSrc&color=%23100e10&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 
-                    </div>
-                }
+                </div>
             }
+        }
 
 
-            if (Model.articleTemplateId == 1)
+        @if (Model.articleTemplateId == 1)
+        {
+
+            foreach (var item in Model.arcticlesRepeater)
             {
-
-                foreach (var item in Model.arcticlesRepeater)
+                if (item.images.Any())
                 {
-                    if (item.images.Any())
-                    {
-                        <div class="picDiv withcaption">
+                    <div class="picDiv withcaption">
 
-                            <!-- if pic have caption add this class "withcaption "-->
-                            @foreach (var sub in item.images)
-                            {<div class="item">
-                                    @if (ViewBag.language == "en")
+                        <!-- if pic have caption add this class "withcaption "-->
+                        @foreach (var sub in item.images)
+                        {<div class="item">
+                                @if (ViewBag.language == "en")
+                                {
+                                    if (!String.IsNullOrEmpty(sub.caption))
+                                    {<div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@sub.caption" /></div>
+                                        <div class="captionPic">@sub.caption</div>
+
+                                    }
+                                }
+                                else
+                                {
+                                    if (!String.IsNullOrEmpty(sub.subCaption))
                                     {
-                                        if (!String.IsNullOrEmpty(sub.caption))
-                                        {<div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@sub.caption" /></div>
-                                            <div class="captionPic">@sub.caption</div>
+                                        <div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@sub.subCaption" /></div>
+                                        <div class="captionPic">@sub.subCaption</div>
 
-                                        }
                                     }
                                     else
                                     {
-                                        if (!String.IsNullOrEmpty(sub.subCaption))
+                                        if (!String.IsNullOrEmpty(sub.caption))
                                         {
-                                            <div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@sub.subCaption" /></div>
-                                            <div class="captionPic">@sub.subCaption</div>
+                                            <div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@sub.caption" /></div>
+                                            <div class="captionPic">@sub.caption</div>
 
                                         }
                                         else
                                         {
-                                            if (!String.IsNullOrEmpty(sub.caption))
-                                            {
-                                                <div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@sub.caption" /></div>
-                                                <div class="captionPic">@sub.caption</div>
+                                            <div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@item.title" /></div>
 
-                                            }
-                                            else
-                                            {
-                                                <div class="pic"><img src="@Url.Content(sub.imgSrc)" alt="@item.title" /></div>
-
-                                            }
                                         }
                                     }
+                                }
 
-                                </div>
-                            }
+                            </div>
+                        }
 
 
 
+                    </div>
+                }
+                if (ViewBag.language == "en")
+                {
+                    if (!String.IsNullOrEmpty(item.Description))
+                    {
+                        <div class="text ">
+                                @Html.Raw(item.Description)
                         </div>
                     }
-                    if (ViewBag.language == "en")
+                    else
+                    { <br /><br />}
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(item.ArabicDescription))
                     {
-                        if (!String.IsNullOrEmpty(item.Description))
-                        {
-                            <div class="text">
-                                @Html.Raw(item.Description)
-                            </div>
-                        }
-                        else
-                        { <br /><br />}
+                        <div class="text tablediv">
+                                @Html.Raw(item.ArabicDescription)
+                        </div>
                     }
                     else
-                    {
-                        if (!String.IsNullOrEmpty(item.ArabicDescription))
+                    { <br /><br />}
+                }
+
+                if (!String.IsNullOrEmpty(item.imgSrc) || !String.IsNullOrEmpty(item.arimgSrc))
+                {
+                    <div class="picDiv withcaption">
+                        <!-- if pic have caption add this class "withcaption "-->
+                        @if (ViewBag.language == "en")
                         {
-                            <div class="text">
-                                @Html.Raw(item.ArabicDescription)
-                            </div>
-                        }
-                        else
-                        { <br /><br />}
-                    }
-
-                    if (!String.IsNullOrEmpty(item.imgSrc))
-                    {
-                        <div class="picDiv withcaption">
-                            <!-- if pic have caption add this class "withcaption "-->
-                            @if (ViewBag.language == "en")
-                            {
-                                <div class="item">
-                                    @if (!String.IsNullOrEmpty(item.captionImage))
-                                    {
-                                        <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.captionImage" /></div>
-
-                                        <div class="captionPic">@item.captionImage</div>
-
-                                    }
-                                    else
-                                    {
-                                        <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></div>
-                                    }
-
-
-
-
-                                </div>
-                            }
-                            else
-                            {
-                                if (!String.IsNullOrEmpty(item.arabicCaptionImage))
+                            <div class="item">
+                                @if (!String.IsNullOrEmpty(item.captionImage))
                                 {
-                                    <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.arabicCaptionImage" /></div>
+                                    <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.captionImage" /></div>
 
-                                    <div class="captionPic">@item.arabicCaptionImage</div>
+                                    <div class="captionPic">@item.captionImage</div>
 
                                 }
                                 else
                                 {
                                     <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></div>
                                 }
+
+                            </div>
+                        }
+                        else
+                        {
+                            if (!String.IsNullOrEmpty(item.arabicCaptionImage))
+                            {
+                                if (!String.IsNullOrEmpty(item.arimgSrc))
+                                {
+                                    <div class="pic"><img src="@Url.Content(item.arimgSrc)" alt="@item.arabicCaptionImage" /><div class="captionPic">@item.arabicCaptionImage</div></div>
+
+                                }
+                                else
+                                {
+                                    <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.arabicCaptionImage" /><div class="captionPic">@item.arabicCaptionImage</div></div>
+
+                                }
+
+
+
                             }
+                            else
+                            {
+                                if (!String.IsNullOrEmpty(item.arimgSrc))
+                                {
+                                    <div class="pic"><img src="@Url.Content(item.arimgSrc)" alt="@item.title" /></div>
 
-                        </div>
-                    }
-                }
+                                }
+                                else
+                                {
+                                    <div class="pic"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></div>
 
+                                }
+                            }
+                        }
 
-
-
-                if (!String.IsNullOrEmpty(Model.note))
-                {
-                    <div class="note">
-                        @Html.Raw(Model.note)
                     </div>
                 }
             }
+
+
+
+
+            if (!String.IsNullOrEmpty(Model.note))
+            {
+                <div class="note">
+                    @Html.Raw(Model.note)
+                </div>
+            }
         }
+
     </div>
 
 </div>
@@ -438,17 +446,21 @@
 
 
                                                         @{ int comaCount1 = 0;}
-                                                        <div class="author">
-                                                            @foreach (var sub in item.authors)
-                                                            {
-                                                                comaCount1++;
-                                                                if (item.authors.Count > comaCount1)
-                                                                {<text>@sub.title, </text> }
-                                                            else
-                                                            {@sub.title}
+                                                        @if (item.authors.Count() != 0)
+                                                        {
+                                                            <div class="author">
+                                                                @foreach (var sub in item.authors)
+                                                                {
+                                                                    comaCount1++;
+                                                                    if (item.authors.Count > comaCount1)
+                                                                    {<text>@sub.title, </text> }
+                                                                else
+                                                                {@sub.title}
 
-                                                    }
-                                                        </div>
+                                                                 }
+                                                            </div>
+                                                        }
+
 
                                                         @if (!String.IsNullOrEmpty(item.smallDescription))
                                                         {
@@ -480,17 +492,19 @@
                                                                 <h3 class="title">@item.title</h3>
                                                             }
                                                             @{int comaCount2 = 0;}
-                                                            <div class="author">
-                                                                @foreach (var sub in item.authors)
-                                                                {
-                                                                    comaCount2++;
-                                                                    if (item.authors.Count > comaCount2)
-                                                                    {<text>@sub.artitle, </text> }
-                                                                else
-                                                                {@sub.artitle}
+                                                            @if (item.authors.Count() != 0)
+                                                            {   <div class="author">
+                                                                    @foreach (var sub in item.authors)
+                                                                    {
+                                                                        comaCount2++;
+                                                                        if (item.authors.Count > comaCount2)
+                                                                        {<text>@sub.artitle, </text> }
+                                                                    else
+                                                                    {@sub.artitle}
 
-                                                        }
-                                                            </div>
+                                                            }
+                                                                </div>
+                                                                }
                                                             @if (!String.IsNullOrEmpty(item.arsmallDescription))
                                                             {
                                                                 <div class="text">
@@ -508,38 +522,40 @@
                                             else
                                             {
 
-                                                <a class="item arabicBox" href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">
-                                                    @if (!String.IsNullOrEmpty(item.Date))
+                                        <a class="item arabicBox" href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">
+                                            @if (!String.IsNullOrEmpty(item.Date))
+                                            {
+                                                <div class="date">@item.Date</div>
+
+                                            }
+                                            @if (!String.IsNullOrEmpty(item.title))
+                                            {
+                                                <h3 class="title">@item.title</h3>
+                                            }
+                                            @{ int comaCount1 = 0;}
+                                            @if (item.authors.Count() != 0)
+                                            { 
+                                                <div class="author">
+                                                    @foreach (var sub in item.authors)
                                                     {
-                                                        <div class="date">@item.Date</div>
+                                                        comaCount1++;
+                                                        if (item.authors.Count > comaCount1)
+                                                        {<text>@sub.artitle, </text> }
+                                                    else
+                                                    {@sub.artitle}
 
-                                                    }
-                                                    @if (!String.IsNullOrEmpty(item.title))
-                                                    {
-                                                        <h3 class="title">@item.title</h3>
-                                                    }
-                                                    @{ int comaCount1 = 0;}
-                                                    <div class="author">
-                                                        @foreach (var sub in item.authors)
-                                                        {
-                                                            comaCount1++;
-                                                            if (item.authors.Count > comaCount1)
-                                                            {<text>@sub.artitle, </text> }
-                                                        else
-                                                        {@sub.artitle}
-
-                                                }
-                                                    </div>
-
-                                                    @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                                    {
-                                                        <div class="text">
-                                                            @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
-                                                        </div>
-                                                    }
+                                            }
+                                                </div>
+                                            }
+                                            @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                            {
+                                                <div class="text">
+                                                    @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
+                                                </div>
+                                            }
 
 
-                                                </a>
+                                        </a>
                                             }
                                         </li>
                                     }
@@ -591,17 +607,19 @@
                                                             <h3 class="title">@item.title</h3>
                                                         }
                                                         @{int comaCount1 = 0;}
-                                                        <div class="author">
-                                                            @foreach (var sub in item.authors)
-                                                            {
-                                                                comaCount1++;
-                                                                if (item.authors.Count > comaCount1)
-                                                                {<text>@sub.title, </text> }
-                                                            else
-                                                            {@sub.title}
+                                                        @if (item.authors.Count() != 0)
+                                                        { <div class="author">
+                                                                @foreach (var sub in item.authors)
+                                                                {
+                                                                    comaCount1++;
+                                                                    if (item.authors.Count > comaCount1)
+                                                                    {<text>@sub.title, </text> }
+                                                                else
+                                                                {@sub.title}
 
-                                                    }
-                                                        </div>
+                                                                }
+                                                            </div>
+                                                            }
                                                         @if (!String.IsNullOrEmpty(item.smallDescription))
                                                         {
                                                             <div class="text">
@@ -633,17 +651,19 @@
                                                                 <h3 class="title">@item.title</h3>
                                                             }
                                                             @{int comaCount2 = 0;}
-                                                            <div class="author">
-                                                                @foreach (var sub in item.authors)
-                                                                {
-                                                                    comaCount2++;
-                                                                    if (item.authors.Count > comaCount2)
-                                                                    {<text>@sub.artitle, </text> }
-                                                                else
-                                                                {@sub.artitle}
+                                                            @if (item.authors.Count() != 0)
+                                                            {   <div class="author">
+                                                                    @foreach (var sub in item.authors)
+                                                                    {
+                                                                        comaCount2++;
+                                                                        if (item.authors.Count > comaCount2)
+                                                                        {<text>@sub.artitle, </text> }
+                                                                    else
+                                                                    {@sub.artitle}
 
-                                                        }
-                                                            </div>
+                                                                    }
+                                                                </div>
+                                                                }
                                                             @if (!String.IsNullOrEmpty(item.arsmallDescription))
                                                             {
                                                                 <div class="text">
@@ -659,35 +679,38 @@
                                             }
                                             else
                                             { <a class="item arabicBox" href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                                    @if (!String.IsNullOrEmpty(item.Date))
-                                                    {
-                                                        <div class="date">@item.Date</div>
+    @if (!String.IsNullOrEmpty(item.Date))
+    {
+        <div class="date">@item.Date</div>
 
-                                                    }
-                                                    @if (!String.IsNullOrEmpty(item.title))
-                                                    {
-                                                        <h3 class="title">@item.title</h3>
-                                                    }
-                                                    @{ int comaCount1 = 0;}
-                                                    <div class="author">
-                                                        @foreach (var sub in item.authors)
-                                                        {
-                                                            comaCount1++;
-                                                            if (item.authors.Count > comaCount1)
-                                                            {<text>@sub.artitle, </text> }
-                                                        else
-                                                        {@sub.artitle}
-                                                }
-                                                    </div>
-                                                    @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                                    {
-                                                        <div class="text">
-                                                            @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
-                                                        </div>
-                                                    }
+    }
+    @if (!String.IsNullOrEmpty(item.title))
+    {
+        <h3 class="title">@item.title</h3>
+    }
+    @{ int comaCount1 = 0;}
+    @if (item.authors.Count() != 0)
+    {
+        <div class="author">
+            @foreach (var sub in item.authors)
+            {
+                comaCount1++;
+                if (item.authors.Count > comaCount1)
+                {<text>@sub.artitle, </text> }
+            else
+            {@sub.artitle}
+            }
+        </div>
+    }
+        @if (!String.IsNullOrEmpty(item.arsmallDescription))
+        {
+            <div class="text">
+                @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
+            </div>
+        }
 
 
-                                                </a>
+    </a>
                                             }
 
                                         </li>
@@ -757,24 +780,27 @@
                                                         <h3 class="title">@item.title</h3>
                                                     }
                                                     @{ int comaCount1 = 0;}
-                                                    <div class="author">
-                                                        @foreach (var sub in item.authors)
-                                                        {
-                                                            comaCount1++;
-                                                            if (item.authors.Count > comaCount1)
-                                                            {<text>@sub.title, </text> }
-                                                        else
-                                                        {@sub.title}
-
-                                                }
-                                                    </div>
-                                                    @if (!String.IsNullOrEmpty(item.smallDescription))
+                                                    @if (item.authors.Count() != 0)
                                                     {
-                                                        <div class="text">
-                                                            @Html.Raw(item.smallDescription) <span class="more">@item.articleTemplate</span>
+                                                        <div class="author">
+                                                            @foreach (var sub in item.authors)
+                                                            {
+                                                                comaCount1++;
+                                                                if (item.authors.Count > comaCount1)
+                                                                {<text>@sub.title, </text> }
+                                                            else
+                                                            {@sub.title}
+
+                                                            }
                                                         </div>
                                                     }
-                                                </a>
+                                                        @if (!String.IsNullOrEmpty(item.smallDescription))
+                                                        {
+                                                            <div class="text">
+                                                                @Html.Raw(item.smallDescription) <span class="more">@item.articleTemplate</span>
+                                                            </div>
+                                                        }
+                                                    </a>
 
                                             </div>
                                             if (!item.hasOnlyEnglish)
@@ -798,26 +824,29 @@
                                                             <h3 class="title">@item.title</h3>
                                                         }
                                                         @{int comaCount2 = 0;}
-                                                        <div class="author">
-                                                            @foreach (var sub in item.authors)
-                                                            {
-                                                                comaCount2++;
-                                                                if (item.authors.Count > comaCount2)
-                                                                {<text>@sub.artitle, </text> }
-                                                            else
-                                                            {@sub.artitle}
-
-                                                    }
-                                                        </div>
-                                                        @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                        @if (item.authors.Count() != 0)
                                                         {
-                                                            <div class="text">
+                                                            <div class="author">
+                                                                @foreach (var sub in item.authors)
+                                                                {
+                                                                    comaCount2++;
+                                                                    if (item.authors.Count > comaCount2)
+                                                                    {<text>@sub.artitle, </text> }
+                                                                else
+                                                                {@sub.artitle}
 
-                                                                @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
-
+                                                                }
                                                             </div>
                                                         }
-                                                    </a>
+                                                            @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                            {
+                                                                <div class="text">
+
+                                                                    @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
+
+                                                                </div>
+                                                            }
+                                                        </a>
 
                                                 </div>
                                             }
@@ -825,37 +854,40 @@
                                         else
                                         {
 
-                                            <a class="item arabicBox" href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                                @if (!String.IsNullOrEmpty(item.Date))
+                                    <a class="item arabicBox" href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                        @if (!String.IsNullOrEmpty(item.Date))
+                                        {
+                                            <div class="date">@item.Date</div>
+
+                                        }
+                                        @if (!String.IsNullOrEmpty(item.title))
+                                        {
+                                            <h3 class="title">@item.title</h3>
+                                        }
+                                        @{ int comaCount1 = 0;}
+                                        @if (item.authors.Count() != 0)
+                                        {
+                                            <div class="author">
+                                                @foreach (var sub in item.authors)
                                                 {
-                                                    <div class="date">@item.Date</div>
+                                                    comaCount1++;
+                                                    if (item.authors.Count > comaCount1)
+                                                    {<text>@sub.artitle, </text> }
+                                                else
+                                                {@sub.artitle}
 
                                                 }
-                                                @if (!String.IsNullOrEmpty(item.title))
-                                                {
-                                                    <h3 class="title">@item.title</h3>
-                                                }
-                                                @{ int comaCount1 = 0;}
-                                                <div class="author">
-                                                    @foreach (var sub in item.authors)
-                                                    {
-                                                        comaCount1++;
-                                                        if (item.authors.Count > comaCount1)
-                                                        {<text>@sub.artitle, </text> }
-                                                    else
-                                                    {@sub.artitle}
-
-                                            }
+                                            </div>
+                                        }
+                                            @if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                            {
+                                                <div class="text">
+                                                    @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
                                                 </div>
-                                                @if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                                {
-                                                    <div class="text">
-                                                        @Html.Raw(item.arsmallDescription) <span class="more">@item.ARarticleTemplate</span>
-                                                    </div>
-                                                }
+                                            }
 
 
-                                            </a>
+                                        </a>
                                         }
 
                                     </li>

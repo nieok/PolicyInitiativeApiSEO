@@ -47,7 +47,7 @@ namespace PolicyInitiativeFront.Controllers
             var settings = settingsRepository.GetFirstOrDefault();
             var featuredBanner = newsrpstry.GetAllHomeFeaturedBanner("1800x400xi");
             var featured = newsrpstry.GetAllFeatured(0,4,"en","335x319xi");
-            var engagefeatured = publicrptry.GetAllFeaturedEngagement(0,4,"en","335x319xi");
+            var engagefeatured = newsrpstry.GetAllFeaturedEngagement(0,4,"en","335x319xi");
 
             ViewBag.featuredBanner = featuredBanner;
             ViewBag.featured = featured;

@@ -14,6 +14,7 @@ namespace PolicyInitiativeFront.Models
     public partial class NewsCategory
     {
         public string urlTitle { get; set; }
+        public string color { get; set; }
     }
 
     #endregion
@@ -45,7 +46,7 @@ namespace PolicyInitiativeFront.Models
                 {
                     id = item.id,
                     title = item.title,
-                    color=item.color == "1" ? "purple" : (item.color == "2" ? "blue" : " green"),
+                    color= item.colorId.HasValue ? item.Color.hexaxolor :"",
                     urlTitle = GetUrlTitle(item.title),
                 });
             }

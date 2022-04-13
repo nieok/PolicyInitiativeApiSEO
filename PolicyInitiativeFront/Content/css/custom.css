@@ -289,7 +289,7 @@ mark {
 /*.Initiatives{padding-bottom:0px;}*/
 .Menu{min-height:364px;}
 .aboutus .container{padding-left:32px;}
-.aboutus{padding:81px 0px 33px;}
+.aboutus{padding:44px 0px 33px;}
 .aboutus .item .caption{font-size:14px;line-height:15px;max-width:256px;}
 .aboutus .item .text{font-size:15px;line-height:23px;margin-top:16px;}
 .aboutus .item .info{padding-right:30px;}
@@ -359,6 +359,9 @@ mark {
 }
 
 @media (max-width: 767px){
+    .Initiatives.details {
+        padding: 44px 0 0px !important;
+    }
     footer ul.medias {
         max-width: 114px !important;
     }   
@@ -376,17 +379,19 @@ mark {
     padding: 10px 0 29px;
 }
 
-.homePage .itemsList .author {
+.itemsList .author {
     line-height: 5px;
+    font-weight:unset;
+    font-size:14px;
 }
 
-.teamPage .teamlist .text .monts {
+.monts {
     font-family: 'montserrat';
     font-size: 20px;
 }
 
 @media (max-width: 767px) {
-    .teamPage .teamlist .text .monts {
+ .monts {
         font-family: 'montserrat';
         font-size: 13px !important;
     }
@@ -401,4 +406,52 @@ mark {
     width: 100%;
     height: 100%;
     background: rgba(0,36,26,.34);
+}
+
+.Article .author {
+    font-size: 19px;
+    font-weight:unset;
+}
+
+.tablediv{overflow:auto;-webkit-overflow-scrolling:touch;}
+.tablediv table{width:100% !important;min-width:600px;}
+.tablediv table td{padding-right:6px;}
+.arabic .tablediv table td{padding-left:6px;padding-right:0px;}
+
+.swipersholder .itemsList .author {
+    line-height: 19px;
+}
+.itemsList .arabicBox .author {
+    font-size: 18px;
+    font-family: 'SymbioARbold';
+    line-height: 16px;
+    margin-top: 7px;
+}
+
+.Article.arabic .author {
+    font-family: 'SymbioARBold';
+    font-size: 23px;
+    line-height: 28px;
+}
+.arabic .note .months{
+    font-size:16px;
+}
+
+@media (max-width: 767px)
+{
+    .itemSwiper .top .name {
+        line-height: 3px;
+    }
+    .subMenu ul.items {
+      display: flex;
+    }
+   
+}
+@media (max-width: 767px) {
+    .Menu ul.items {
+        padding-left: 28px !important;
+    }
+    .Menu .engag{
+        font-size:14px !important;
+    }
 }

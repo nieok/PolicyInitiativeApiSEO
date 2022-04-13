@@ -72,7 +72,7 @@
                                         @foreach (var auth in item.authors)
                                         {
                                             comaCount1++;
-                                            <input hidden class="EngBio-@auth.id" value="@auth.bio" />
+                                            <input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />
                                             <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
                                                 @if (item.authors.Count > comaCount1)
                                                 {<text>@auth.title, </text>}
@@ -108,7 +108,7 @@
                                             @foreach (var auth in item.arauthors)
                                             {
                                                 comaCount2++;
-                                                <input hidden class="ARBio-@auth.id" value="@auth.bio" />
+                                                <input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />
                                                 <div class="author" onclick="openArabicAuthorPopup('@auth.title','ARBio-@auth.id')">
                                                     @if (item.arauthors.Count > comaCount2)
                                                     {<text>@auth.title, </text>}
@@ -148,7 +148,7 @@
                                         @foreach (var auth in item.arauthors)
                                         {
                                             comaCount2++;
-                                            <input hidden class="OnlyARBio-@auth.id" value="@auth.bio" />
+                                            <input hidden class="OnlyARBio-@auth.id" value="@Html.Raw(auth.bio)" />
                                             <div class="author" onclick="openArabicAuthorPopup('@auth.title','OnlyARBio-@auth.id')">
                                                 @if (item.arauthors.Count > comaCount2)
                                                 {<text>@auth.title, </text>}

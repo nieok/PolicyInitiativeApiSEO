@@ -233,7 +233,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                                 arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="english" onclick="english(event)">eng</div></div> ';
                             }
                             titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
-                            arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
+                            arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.artitle + '</a></h2> ';
 
                             var count = 1;
                             if (value.authorsList.length != 0) {
@@ -327,7 +327,7 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
         $scope.engagenews = function () {
             $http({
                 method: 'GET',
-                url: RouteUrl + 'api/PublicEngagements/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts + "&imgsize=335x319xi",
+                url: RouteUrl + 'api/NewsCommunications/GetEngageData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts + "&imgsize=335x319xi",
             }).then(function (res) {
                 $scope.data = res.data;
                 $('.itemsList').addClass('loadmore');
@@ -456,14 +456,14 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                             if (value.ExternalLink == null) {
                                 if (value.description != null) {
                                     titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
-                                    arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
+                                    arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.artitle + '</a></h2> ';
                                 } else {
                                     titlediv = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
                                     arabictitle = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
                                 }
                             } else {
                                 titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
-                                arabictitle = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
+                                arabictitle = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.artitle + '</a></h2> ';
                             }
                             if (value.ExternalLink == null) {
                                 if (value.description != null) {
@@ -683,7 +683,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
     $scope.newsList = [];
     $scope.data = [];
     $scope.articleTemplateTitle = "";
-    $scope.numberOfProducts = 4;
+    $scope.numberOfProducts = 8;
     if (localStorage.getItem("articleTemplateId") != undefined) {
         $scope.articleTemplateId = localStorage.getItem("articleTemplateId");
         $scope.articleTemplateTitle = localStorage.getItem("articleTemplateTitle");
@@ -832,81 +832,40 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
 
                     values = values + '<li class="grid-item"> <div class="item arabicBox">';
                     if (value.imgSrc != null) {
-                        img = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
-
-                    }
-
-                    if (value.Date != null) {
-                        datediv = '<div class="top"> <div class="date">' + value.Date + '</div> </div >';
-                    }
-
-                    titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
-                    var count = 1;
-                    if (value.authorsList.length != 0) {
-                        angular.forEach(value.authorsarList, function (value1, key) {
-                            if (value.authorsarList.length == count) {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="OnlyARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
-
+                        if (value.ExternalLink == null) {
+                            if (value.description != null) {
+                                img = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
                             } else {
-                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'OnlyARBio-" + value1.id + "'" + ')">' + value1.title + ',</div> <input hidden class="OnlyARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
+                                img = '<div class="pic"><a style="cursor:auto!important;"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+
                             }
-                            count++;
-                        });
-
-                    }
-
-                    if (value.arsmallDescription != null) {
-                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">'+ value.ARarticleTemplate +'</span></a>'
-                    }
-
-                    values = values + img + datediv + titlediv + arauthordiv + ardesdiv + '</div> </div> </li>';
-
-                } else {
-
-
-                    values = values + '<li class="grid-item">';
-
-                    var englishBox = ' <div class="item englishBox">';
-                    var arabicBox = ' <div class="item arabicBox">';
-                    var arabicdate = '';
-                    var arabictitle = '';
-                    var arimg = '';
-
-                    if (value.imgSrc != null) {
-                        img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
-                        arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
-
-                    }
-                    if (value.Date != null) {
-                        if (value.hasOnlyEnglish == false) {
-                            datediv = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
-
                         } else {
-                            datediv = '<div class="top"> <div class="date">' + value.Date + '</div> </div> ';
+                            img = '<div class="pic"><a href=' + value.ExternalLink + ' target="blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
 
                         }
-                    }
-                    if (value.Date != null) {
-                        arabicdate = '<div class="top"> <div class="date">' + value.Date + '</div> <div class="english" onclick="english(event)">eng</div></div> ';
-                    }
-                    titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
-                    arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.title + '</a></h2> ';
 
-                    var count = 1;
-                    if (value.authorsList.length != 0) {
-                        angular.forEach(value.authorsList, function (value1, key) {
-                            if (value.authorsList.length == count) {
-                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
-                            } else {
-                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
-
-                            }
-                            count++;
-                        });
+                    }
+                    if (value.date != null) {
+                        if (value.newsCategory == null) {
+                            datediv = '<div class="top"> <div class="date">' + value.date + '</div> </div>';
+                        } else {
+                            datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div></div> ';
+                        }
                     }
 
-                    if (value.smallDescription != null) {
-                        desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">'+ value.articleTemplate +'</span></a>'
+                    if (value.ExternalLink == null) {
+
+                        if (value.description != null) {
+                            titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + "?lang=ar" + '>' + value.title + '</a></h2> ';
+
+                        } else {
+                            titlediv = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
+
+                        }
+
+                    } else {
+                        titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
+
                     }
                     var count1 = 1;
                     if (value.authorsarList.length != 0) {
@@ -923,13 +882,153 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
 
                     }
                     if (value.arsmallDescription != null) {
-                        ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">'+ value.ARarticleTemplate +'</span></a>'
+                        if (value.ExternalLink == null) {
+                            if (value.description != null) {
+                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + '?lang=ar' + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                            } else {
+                                ardesdiv = '<div class="text"> <a style="cursor:auto!important;">' + value.arsmallDescription + '  </a>'
+
+                            }
+                        } else {
+                            ardesdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank" >' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+
+                        }
+                    }
+                    values = values + img + datediv + titlediv + arauthordiv+ ardesdiv + '</div> </div> </li>';
+
+                } else {
+
+                    values = values + '<li class="grid-item">';
+                    var englishBox = ' <div class="item englishBox">';
+                    var arabicBox = ' <div class="item arabicBox">';
+                    var arabicdate = '';
+                    var arabictitle = '';
+                    var arimg = '';
+
+                    if (value.imgSrc != null) {
+
+                        if (value.ExternalLink == null) {
+                            if (value.description != null) {
+                                img = '<div class="pic"><a href=' + value.detailUrl + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                arimg = '<div class="pic"><a href=' + value.detailUrl + '?lang=ar' + '><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                            } else {
+                                img = '<div class="pic"><a style="cursor:auto!important;"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                                arimg = '<div class="pic"><a style="cursor:auto!important;">' + '<img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                            }
+                        } else {
+                            img = '<div class="pic"><a href=' + value.ExternalLink + ' target="_blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                            arimg = '<div class="pic"><a href=' + value.ExternalLink + ' target="_blank"><img src=' + value.imgSrc + ' alt=' + value.title + '/></a></div>';
+                        }
+
+
+                    }
+                    if (value.date != null) {
+                        if (value.hasOnlyEnglish == false) {
+                            if (value.newsCategory == null) {
+
+                                datediv = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+
+                            } else {
+                                datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div> <div class="arabic" onclick="arabic(event)">عربي</div></div> ';
+                            }
+                        } else {
+                            if (value.newsCategory == null) {
+
+                                datediv = '<div class="top"> <div class="date">' + value.date + '</div></div> ';
+
+                            } else {
+                                datediv = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div> </div> ';
+                            }
+                        }
+
+
+                    }
+
+                    if (value.date != null) {
+                        if (value.newsCategory == null) {
+                            arabicdate = '<div class="top"> <div class="date">' + value.date + '</div> <div class="arabic" onclick="english(event)">eng</div></div> ';
+
+                        } else {
+                            arabicdate = '<div class="top"> <div class="date">' + value.date + '<span class="dash">|</span><span class="categ">' + value.newsCategory + '</span></div> <div class="english" onclick="english(event)">eng</div></div> ';
+                        }
+
+                    }
+                    if (value.ExternalLink == null) {
+                        if (value.description != null) {
+                            titlediv = ' <h2 class="title">' + '<a href=' + value.detailUrl + '>' + value.title + '</a></h2> ';
+                            arabictitle = ' <h2 class="title">' + '<a href=' + value.detailUrl + '?lang=ar' + '>' + value.artitle + '</a></h2> ';
+                        } else {
+                            titlediv = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
+                            arabictitle = ' <h2 class="title">' + '<a style="cursor:auto!important;">' + value.title + '</a></h2> ';
+                        }
+                    } else {
+                        titlediv = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.title + '</a></h2> ';
+                        arabictitle = ' <h2 class="title">' + '<a href=' + value.ExternalLink + ' target="_blank">' + value.artitle + '</a></h2> ';
+                    }
+                    if (value.ExternalLink == null) {
+                        if (value.description != null) {
+                            if (value.smallDescription != null) {
+                                desdiv = '<div class="text"> <a href=' + value.detailUrl + '>' + value.smallDescription + '  <span class="read">' + value.articleTemplate + '</span></a>'
+                            }
+
+                            if (value.arsmallDescription != null) {
+                                ardesdiv = '<div class="text"> <a href=' + value.detailUrl + "?lang=ar" + '>' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                            }
+                        } else {
+                            if (value.smallDescription != null) {
+                                desdiv = '<div class="text"> <a style="cursor:auto!important;">' + value.smallDescription + ' </a>'
+                            }
+
+                            if (value.arsmallDescription != null) {
+                                ardesdiv = '<div class="text"> <a style="cursor:auto!important;">' + value.arsmallDescription + ' </a>'
+                            }
+                        }
+                    } else {
+                        if (value.smallDescription != null) {
+                            desdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank">' + value.smallDescription + '  <span class="read">' + value.articleTemplate + '</span></a>'
+                        }
+
+                        if (value.arsmallDescription != null) {
+                            ardesdiv = '<div class="text"> <a href=' + value.ExternalLink + ' target="_blank">' + value.arsmallDescription + '  <span class="read">' + value.ARarticleTemplate + '</span></a>'
+                        }
+                    }
+                    var count = 1;
+                    if (value.authorsList.length != 0) {
+                        angular.forEach(value.authorsList, function (value1, key) {
+                            if (value.authorsList.length == count) {
+                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
+                            } else {
+                                authordiv = authordiv + '<div class="author" onclick="openAuthorPopup(' + "'" + value1.title + "'" + "," + "'EngBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="EngBio-' + value1.id + '" value="' + value1.bio + '"/> ';
+
+                            }
+                            count++;
+                        });
+
+                    }
+              
+                    var count1 = 1;
+                    if (value.authorsarList.length != 0) {
+                        angular.forEach(value.authorsarList, function (value1, key) {
+
+                            if (value.authorsarList.length == count1) {
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + value1.id + "'" + ')">' + value1.title + '</div> <input hidden class="ARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
+
+                            } else {
+                                arauthordiv = arauthordiv + '<div class="author" onclick="openArabicAuthorPopup(' + "'" + value1.title + "'" + "," + "'ARBio-" + value1.id + "'" + ')">' + value1.title + ", " + '</div> <input hidden class="ARBio-' + value1.id + '" value="' + value1.bio + '"/> ';
+                            }
+                            count1++;
+                        });
+
                     }
                     if (value.hasOnlyEnglish == false) {
-                        values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div></li>';
+                        values = values + englishBox + img + datediv + titlediv + authordiv + desdiv + '</div></div>' + arabicBox + arimg + arabicdate + arabictitle + arauthordiv+ardesdiv + '</div> </div> </li>';
+                    } else {
+                        values = values + englishBox + img + datediv + titlediv + authordiv+ desdiv + '</div></div></li>';
 
                     }
                 }
+                   
+              
 
             });
             $items = $(values);
@@ -937,11 +1036,13 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
             setTimeout(function () {
 
                 $('.itemsList .grid').append($items).masonry('appended', $items);
-                initMasonryList(); // recall masonry
-
+                initMasonryList();
                 $('.itemsList').removeClass('loadmore');
-            }, 2000);
-    
+            }, 1000);
+            setTimeout(function () {
+
+                initMasonryList(); // recall masonry
+            }, 1500);
         });
     }
     $scope.getData();

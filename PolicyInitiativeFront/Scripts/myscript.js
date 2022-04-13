@@ -675,50 +675,54 @@ $(window).load(function () {
 
 // swipers in article pages
 
-let artcilesInstances = [];
-
-function initArticleSwiper() {
-    if ($('.itemSwiper').length != 0) {
-
-        $(".itemSwiper .screen").each(function (index, element) {
-            const $this = $(this);
-            $this.addClass("instance-" + index);
-            $this.parents('.itemSwiper').find(".prev").addClass("prev-" + index);
-            $this.parents('.itemSwiper').find(".next").addClass("next-" + index);
-            artcilesInstances[index] = new Swiper(".instance-" + index, {
-                speed: 900,
-                watchOverflow: true,
-                loop:false,
-                navigation: {
-                    prevEl: ".prev-" + index,
-                    nextEl: ".next-" + index,
-                },
-                breakpoints: {
-                    10: {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        slidesPerGroup:2,
-                        spaceBetween:37,
-                    },
-                    1111: {
-                        slidesPerView: 3,
-                        slidesPerGroup: 3,
-                        spaceBetween:37,
-                    },
-                },
-
-            })
-        }
-        );
-    }
-}
+//let artcilesInstances = [];
 
 
-initArticleSwiper();
+//function initArticleSwiper() {
+//    if ($('.itemSwiper').length != 0) {
+
+//        $(".itemSwiper .screen").each(function (index, element) {
+//            const $this = $(this);
+//            $this.addClass("instance-" + index);
+//            $this.parents('.itemSwiper').find(".prev").addClass("prev-" + index);
+//            $this.parents('.itemSwiper').find(".next").addClass("next-" + index);
+//            artcilesInstances[index] = new Swiper(".instance-" + index, {
+//                speed: 900,
+//                watchOverflow: true,
+//                loop: false,
+//                autoHeight:true,
+//                navigation: {
+//                    prevEl: ".prev-" + index,
+//                    nextEl: ".next-" + index,
+//                },
+//                breakpoints: {
+//                    10: {
+//                        slidesPerView: 1,
+//                        slidesPerGroup: 1,
+//                        spaceBetween: 20,
+//                    },
+//                    768: {
+//                        slidesPerView: 2,
+//                        slidesPerGroup:2,
+//                        spaceBetween:37,
+//                    },
+//                    1111: {
+//                        slidesPerView: 3,
+//                        slidesPerGroup: 3,
+//                        spaceBetween:37,
+//                    },
+//                },
+
+//            })
+//        }
+//        );
+//    }
+//}
+
+//if ($('body').hasClass('articlePage')) {
+//    initArticleSwiper();
+//}
+
 
 
 
@@ -850,6 +854,10 @@ $('.Tags .delete').click(function () {
 //_________________________________________________________________________________________________
 
 
+$('.Article .text table').each(function () {
+    $(this).wrap("<div class='tablediv'></div>")
+});
+
 
 
 
@@ -898,3 +906,5 @@ $(window).load(function () {
 });
 
 //_________________________________________________________________________________________________
+
+

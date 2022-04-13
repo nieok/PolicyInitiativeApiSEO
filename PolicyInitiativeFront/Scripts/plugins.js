@@ -830,6 +830,7 @@ function initArticleSwiper() {
                 speed: 900,
                 watchOverflow: true,
                 loop: false,
+                autoHeight:true,
                 navigation: {
                     prevEl: ".prev-" + index,
                     nextEl: ".next-" + index,
@@ -988,7 +989,11 @@ $('.Tags .delete').click(function () {
 
 //_________________________________________________________________________________________________
 
-
+if ($('.Article .text table').length != 0) {
+    $('.Article .text table').each(function () {
+        $(this).wrap("<div class='tablediv'></div>")
+    });
+}
 
 
 
@@ -1079,3 +1084,26 @@ $(document).ready(function () {
 
 
 });
+
+document.getElementById("fromdate").addEventListener("change", checkDate);
+document.getElementById("todate").addEventListener("change", checkDate);
+
+function checkDate() {
+    var fromdate = $('#fromdate');
+    var fromdate = $('#todate');
+
+   var fdate= fromdate.val();
+   var tdate = fromdate.val();
+    if (tdate == ""  && fdate == "") {
+        $('.filterMenu .close').show();
+        $('.filterMenu .applyBtn').hide();
+    }
+    if (tdate != "" || tdate != undefined) {
+        $('.filterMenu .close').hide();
+        $('.filterMenu .applyBtn').show();
+    }
+    if (fdate != "" || fdate != undefined) {
+        $('.filterMenu .close').hide();
+        $('.filterMenu .applyBtn').show();
+    }
+}

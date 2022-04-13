@@ -44,7 +44,7 @@
                         @foreach (var sub in ViewBag.categories)
                         {
                             string classitem = "item" + count;
-                            <a href="@Url.Content("~/initiatives/details/"+sub.id+"/"+ sub.urlTitle)" class="item @classitem @sub.color">@sub.title</a>
+                            <a href="@Url.Content("~/initiatives/details/"+sub.id+"/"+ sub.urlTitle)" class="item @classitem @sub.color" style="background: @sub.color">@sub.title</a>
 
                             count++;
                         }

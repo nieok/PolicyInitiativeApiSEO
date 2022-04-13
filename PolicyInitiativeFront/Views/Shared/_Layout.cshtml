@@ -99,10 +99,24 @@
 
     @if (controllername == "article")
     {
+        <script>
+            var addthis_config = {
+                data_track_addressbar: false,
+                services_compact: "facebook,linkedin,twitter,more",
+                ui_language: "en"
+            };
+        </script>
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ad1a4bf250665c"></script>
     }
     @if (controllername == "engagement" && actionname == "details")
     {
+        <script>
+            var addthis_config = {
+                data_track_addressbar: false,
+                services_compact: "facebook,linkedin,twitter,more",
+                ui_language: "en"
+            };
+        </script>
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ad1a4bf250665c"></script>
     }
 </body>
