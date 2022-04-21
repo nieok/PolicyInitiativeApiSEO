@@ -12,10 +12,9 @@ namespace PolicyInitiativeFront.Controllers
     {
         private CorporatePageRepository rpstry = new CorporatePageRepository();
         private CorporatePageSectionRepository sectionrpstry = new CorporatePageSectionRepository();
-     
         public NewsCommunicationRepository newsrpstry = new NewsCommunicationRepository();
-        public PublicEngagementRepository publicrptry = new PublicEngagementRepository();
         private settingsRepository settingsRepository = new settingsRepository();
+        private SliderRepository sliderRepository = new SliderRepository();
 
         public ActionResult Index()
         {
@@ -45,7 +44,8 @@ namespace PolicyInitiativeFront.Controllers
 
             }
             var settings = settingsRepository.GetFirstOrDefault();
-            var featuredBanner = newsrpstry.GetAllHomeFeaturedBanner("1800x400xi");
+            var featuredBanner = sliderRepository.GetAllSlider("1800x400xi");
+            //var featuredBanner = newsrpstry.GetAllHomeFeaturedBanner("1800x400xi");
             var featured = newsrpstry.GetAllFeatured(0,4,"en","335x319xi");
             var engagefeatured = newsrpstry.GetAllFeaturedEngagement(0,4,"en","335x319xi");
 

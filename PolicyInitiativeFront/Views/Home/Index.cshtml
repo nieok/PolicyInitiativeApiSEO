@@ -31,16 +31,88 @@
                 <ul class="swiper-wrapper">
                     @foreach (var item in ViewBag.featuredBanner)
                     {
-                        <li class="swiper-slide imageready">
+                    <li class="swiper-slide imageready">
+                        @if (!String.IsNullOrEmpty(item.link))
+                        {
+                            if (item.isTarget)
+                            {
+                                <a class="item" href="@Url.Content(item.link)" target="_blank">
+                                    @*<div class="swiper-slide"></div>*@
+                                    @if (!String.IsNullOrEmpty(item.imgSrc))
+                                    {
+                                        <div class="pic">
+                                            <img src="@Url.Content(item.imgSrc)" alt="@item.title" />
+                                        </div>
+                                    }
+                                    <div class="info">
+                                        <div class="holder">
+                                            @if (!String.IsNullOrEmpty(item.smallDescription))
+                                            {
+                                                <div class="caption">
+                                                    @Html.Raw(item.smallDescription)
+                                                </div>
+                                            }
 
-                            <a class="item" href="@Url.Content(item.detailUrl)">
+
+                                            @if (!String.IsNullOrEmpty(item.labelLink))
+                                            {
+                                                <div class="linkDiv">
+                                                    <div class="link">@item.labelLink</div>
+                                                </div>
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="item" href="@Url.Content(item.link)" >
+                                    @*<div class="swiper-slide"></div>*@
+                                    @if (!String.IsNullOrEmpty(item.imgSrc))
+                                    {
+                                        <div class="pic">
+                                            <img src="@Url.Content(item.imgSrc)" alt="@item.title" />
+                                        </div>
+                                    }
+                                    <div class="info">
+                                        <div class="holder">
+                                            @if (!String.IsNullOrEmpty(item.smallDescription))
+                                            {
+                                                <div class="caption">
+                                                    @Html.Raw(item.smallDescription)
+                                                </div>
+                                            }
+
+
+                                            @if (!String.IsNullOrEmpty(item.labelLink))
+                                            {
+                                                <div class="linkDiv">
+                                                    <div class="link">@item.labelLink</div>
+                                                </div>
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+
+                        }
+                        else
+                        {
+                            <a class="item" style="cursor:auto !important">
                                 @*<div class="swiper-slide"></div>*@
                                 @if (!String.IsNullOrEmpty(item.imgSrc))
                                 {
                                     <div class="pic">
-                                        <img src="@Url.Content(item.imgSrc)"  alt="@item.title" />
+                                        <img src="@Url.Content(item.imgSrc)" alt="@item.title" />
                                     </div>
                                 }
+
                                 <div class="info">
                                     <div class="holder">
                                         @if (!String.IsNullOrEmpty(item.smallDescription))
@@ -50,13 +122,18 @@
                                             </div>
                                         }
 
-                                        <div class="linkDiv">
-                                            <div class="link">read more</div>
-                                        </div>
+                                        @if (!String.IsNullOrEmpty(item.labelLink))
+                                        {
+                                            <div class="linkDiv">
+                                                <div class="link">@item.labelLink</div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </a>
-                        </li>
+                        }
+
+                    </li>
                     }
 
                 </ul>

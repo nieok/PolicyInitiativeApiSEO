@@ -166,7 +166,7 @@ namespace PolicyInitiativeFront.Models
 
         public List<NewsCommunication> GetAllFeatured(int batch = 0, int pageNumber = 4, string language = "en", string imgsize = "")
         {
-            var news = GetAllIsPublished().Where(d => d.isFeatured && !d.isFeatured1 && !d.isPublicEngagement && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null)).OrderByDescending(d => d.date).ToList();
+            var news = GetAllIsPublished().Where(d => d.isFeatured  && !d.isPublicEngagement && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null)).OrderByDescending(d => d.date).ToList();
             var model = new List<NewsCommunication>();
             var requestedLanguageId = langrpstry.GetByCode(language).id;
            

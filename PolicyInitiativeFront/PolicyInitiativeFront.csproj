@@ -181,7 +181,7 @@
     <Compile Include="Models\MetasModel.cs" />
     <Compile Include="Models\NewsCategoryRepository.cs" />
     <Compile Include="Models\NewsletterUserRepository.cs" />
-    <Compile Include="Models\PublicEngagementRepository.cs" />
+    <Compile Include="Models\SliderRepository.cs" />
     <Compile Include="Models\settingsRepository.cs" />
     <Compile Include="Models\SocialMediaRepository.cs" />
     <Compile Include="Models\TeamCategoryRepository.cs" />
