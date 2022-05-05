@@ -11,7 +11,7 @@ namespace PolicyInitiativeFront.Controllers
     public class searchController : SharedController
     {
         public NewsCommunicationRepository newsRepository = new NewsCommunicationRepository();
-        public ActionResult Index()
+        public ActionResult Index(string keyword="",string type="")
         {
             #region SEO
             MetasModel metas = new MetasModel();
@@ -27,6 +27,9 @@ namespace PolicyInitiativeFront.Controllers
             metas.metaObjectType = "corporatepage";
             metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
             ViewBag.metas = metas;
+
+            ViewBag.keyword = keyword;
+            ViewBag.type = type;
             #endregion
             return View();
         }

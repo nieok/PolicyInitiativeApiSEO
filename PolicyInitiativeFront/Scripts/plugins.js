@@ -123,16 +123,6 @@ $(window).load(function () {   // show website after load
     $('#wrapper').addClass('show');
 })
 
-
-
-
-
-
-
-
-
-
-
 //_________________________________________________________________
 
 if (!/Android|webOS|iPhone|iPod|iPad|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {   // desktop only
@@ -153,12 +143,6 @@ $(window).resize(function () {
     }
 })
 //_________________________________________________________________
-
-
-
-
-
-
 
 
 // slideshow on homepage
@@ -196,9 +180,6 @@ function initSlideshowSwiper() {
 
         });
 
-
-
-
     }
 }
 
@@ -206,15 +187,7 @@ $(window).load(function () {
     initSlideshowSwiper();
 });
 
-
-
 //_________________________________________________________________________________________________
-
-
-
-
-
-
 
 // google map in contact page
 //_________________________________________________________________________________________________
@@ -277,31 +250,16 @@ $(window).load(function () {
                 map: homeMap,
                 icon: image
             });
-
         }
-
-
-
-
-
     }
-
-
 })
 
-
-
 //_________________________________________________________________________________________________
-
-
-
-
 
 
 
 // homepage, masonry elements layout  (https://masonry.desandro.com/methods.html)
 //_________________________________________________________________________________________________
-
 
 function initMasonryList() {
     $('.itemsList .grid').masonry({
@@ -310,33 +268,8 @@ function initMasonryList() {
     });
 }
 
-// on scroll load more items
-//if ($('.initiativeSubpage').length == 0) {  // exclude masonry in initiatives/template2
-//$(window).scroll(function () {
-//    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {  // when reaching end of document
-//      /*  $('.itemsList').addClass('loadmore');*/
-//        //var $items = $('<li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li><li class="grid-item"> <div class="item"> <div class="top"> <div class="date">05.04.21</div> </div> <h2 class="title"><a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Lebanon: A Race to Form a Government or a Race to the Bottom?</a></h2> <div class="author">Sami Atallah</div> <div class="text"> <a href="http://thepolicyinitiativehtml.koeinbeta.com/article/template1">Five months have passed since caretaker Prime Minister Saad Hariri was nominated to form a new government. Since then, he has struggled to strike a balance between domestic and regional interests. While it might take some time for ostensibly disparate interests to align <span class="read">read</span></a> </div> </div> </li>');
-
-//        setTimeout(function () {
-//            if ($('.itemsList').hasClass('loadmore')) {
-//              /*  $('.itemsList .grid').append($items).masonry('appended', $items);*/
-//                initMasonryList(); // recall masonry
-//            }
-//                $('.itemsList').removeClass('loadmore');
-//            }, 2222);
-
-
-
-
-//    } else {
-//        $('.itemsList').removeClass('loadmore');
-//    }
-//    });
-
-//}
 // customise twitter box before footer
 //_________________________________________________________________________________________________
-
 
 var customizeTweetMedia = function () {   // CSS Overrides
     $('.Widget').addClass('show');  // show the twitter box (it is hidden by default)
@@ -344,26 +277,17 @@ var customizeTweetMedia = function () {   // CSS Overrides
     $('.Widget').find('.twitter-timeline').contents().find('p.timeline-tweet-text').css({ 'font-size': '17px', 'line-height': '22px' });
     $('.Widget').find('.twitter-timeline').contents().find('.timeline-Tweet').css({ 'background-color': '#ffffff' });
     $('.Widget').find('.twitter-timeline').contents().find('.timeline-Tweet-media').css({ 'display': 'none' });
-
 }
-
 var widget = $('.Widget');
-
 if (widget.length != 0) {
     twttr.widgets.load();
 }
-
 $(window).load(function () {
     setTimeout(function () {
-
         customizeTweetMedia();
-
     }, 2000)
-
 })
-
 //_________________________________________________________________________________________________
-
 
 $(window).load(function () {
     setTimeout(function () {
@@ -371,7 +295,6 @@ $(window).load(function () {
     }, 500);
 
 });
-
 
 // show arabic/english boxes
 function arabic(event) {   // show arabic box
@@ -388,7 +311,6 @@ function english(event) {   // show english box
 
 //_________________________________________________________________________________________________
 
-
 function arabic1(event) {   // show arabic box
     $(event.target).parents('.swiper-slide').find('.englishBox').hide();
     $(event.target).parents('.swiper-slide').find('.arabicBox').show();
@@ -400,10 +322,6 @@ function english1(event) {   // show english box
     $(event.target).parents('.swiper-slide').find('.arabicBox').hide();
     initMasonryList(); // call masonry
 };
-
-
-
-
 
 // author popup
 //_________________________________________________________________________________________________
@@ -436,8 +354,6 @@ $('.itemsList .item:not(.arabicBox) .author').click(function () {  // open engli
     openAuthorPopup();
 });
 
-
-
 $('.itemsList .item.arabicBox .author').click(function () {  // open arabic author popup
     openArabicAuthorPopup();
 })
@@ -459,10 +375,6 @@ $('.authorPopup  .close').click(function () { // close english author popup
 //_________________________________________________________________________________________________
 
 
-
-
-
-
 // header + menus
 //_________________________________________________________________________________________________
 
@@ -477,8 +389,6 @@ $('.desktop.homePage header .logo').mouseleave(function () {
     $('header .logo .main').show();
     $('header .logo .main2').hide();
 });
-
-
 
 
 //animate header on scroll on homepage
@@ -502,10 +412,6 @@ $(window).scroll(function () {
 })
 
 // ___________________________________________________________________________________________________
-
-
-
-
 
 // burger menu
 // ___________________________________________________________________________________________________
@@ -542,9 +448,6 @@ function openWebsiteMenu() {
 
 
 // ___________________________________________________________________________________________________
-
-
-
 
 // newsletter popup
 // ___________________________________________________________________________________________________
@@ -593,30 +496,7 @@ function closeNewsletterPop() {
     }
 }
 
-
-//function submitNewslMssg() {
-//    $('.newletterPop .sendbtn').addClass('loading');
-
-//    setTimeout(function () {
-//        $('.newletterPop .txmssg').addClass('show');
-//        $('.newletterPop .wrap').addClass('hide');
-//    }, 1500);
-
-//    setTimeout(function () {
-//        $('.newletterPop .txmssg').removeClass('show');
-//        $('.newletterPop .wrap').removeClass('hide');
-//        $('.newletterPop .sendbtn').removeClass('loading');
-//    }, 3500);
-
-
-//}
-
-
 // ___________________________________________________________________________________________________
-
-
-
-
 
 // filter menu
 // ___________________________________________________________________________________________________
@@ -641,9 +521,6 @@ function closeFilterDropdown() {
 
 }
 
-
-
-
 $('.sortOpen').click(function () {  // opening keywords & type menus
     var click = $(this);
     if ($(this).next('.pop').is(':hidden')) {
@@ -659,7 +536,6 @@ $('.sortOpen').click(function () {  // opening keywords & type menus
     }
 })
 
-
 // appending selected keywords and adding delete buttom with jquery
 // for english boxes
 $('.filterMenu .englishBox .pop.red .link').click(function () { // add selected keywords on right side
@@ -669,6 +545,24 @@ $('.filterMenu .englishBox .pop.red .link').click(function () { // add selected 
     $(this).next('.mobCancelbtn').show();//show delete buttom for mobile
     var getvalue = $(this).html();
     $('<div class="delete"></div>').insertAfter($('<div class="keyword red"></div>').appendTo('.englishBox .Values .list').html(getvalue).wrap('<li></li>'));
+    if ($('.filterMenu .Values ul.list>li .red').length == 1) {
+        var oldURL = new URL(window.location.href);
+        if (!oldURL.searchParams.get('type') && !oldURL.searchParams.get('keyword')) {
+            if (history.pushState) {
+                var newUrl = oldURL + "?keyword=" + getvalue;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+        } else if (oldURL.searchParams.get('type') && !oldURL.searchParams.get('keyword')) {
+            var newUrl = oldURL + "&keyword=" + getvalue;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+    } else {
+        const params = new URLSearchParams(location.search);
+        params.delete('keyword');
+        console.log(params.toString());
+        var newurl = window.location.origin + "/?" + params.toString();
+        window.history.pushState({ path: newurl }, '', newurl);
+    }
 });
 
 $('.filterMenu .englishBox .pop.green .link').click(function () {  // add selected keywords on right side
@@ -678,6 +572,26 @@ $('.filterMenu .englishBox .pop.green .link').click(function () {  // add select
     $(this).next('.mobCancelbtn').show();//show delete buttom for mobile
     var getvalue = $(this).html();
     $('<div class="delete"></div>').insertAfter($('<div class="keyword green"></div>').appendTo('.englishBox .Values .list').html(getvalue).wrap('<li></li>'));
+    if ($('.filterMenu .Values ul.list>li .green').length == 1) {
+        var oldURL = new URL(window.location.href);
+        if (!oldURL.searchParams.get('type') && !oldURL.searchParams.get('keyword')) {
+            if (history.pushState) {
+                var newUrl = oldURL + "?type=" + getvalue;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+        } else if (!oldURL.searchParams.get('type') && oldURL.searchParams.get('keyword')) {
+            var newUrl = oldURL + "&type=" + getvalue;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+    } else {
+        const params = new URLSearchParams(location.search);
+        params.delete('type');
+        console.log(params.toString());
+        var newurl = window.location.origin + "/?" + params.toString();
+        window.history.pushState({ path: newurl }, '', newurl);
+    }
+   
+  
 });
 
 $(".englishBox .Values").on('click', '.delete', function () {   // when pressing delete
@@ -692,11 +606,23 @@ $(".englishBox .Values").on('click', '.delete', function () {   // when pressing
         if ($('.filterMenu .Values ul.list>li').length == 0) {  // when all items are deleted, remove apply buttom
             $('.filterMenu .close').show();
             $('.filterMenu .applyBtn').hide();
+            history.pushState('', document.title, window.location.pathname);
         }
-
+        if ($('.filterMenu .Values ul.list>li .red').length == 0 && $('.filterMenu .Values ul.list>li').length != 0) {
+            const params = new URLSearchParams(location.search);
+            params.delete('keyword');
+            console.log(params.toString());
+            var newurl = window.location.origin + "/?" + params.toString();
+            window.history.pushState({ path: newurl }, '', newurl);
+        }
+        if ($('.filterMenu .Values ul.list>li .green').length == 0 && $('.filterMenu .Values ul.list>li').length != 0) {
+            const params = new URLSearchParams(location.search);
+            params.delete('type');
+            console.log(params.toString());
+            var newurl = window.location.origin + "/?" + params.toString();
+            window.history.pushState({ path: newurl }, '', newurl);
+        }
     }, 88);
-
-
 
 });
 
@@ -715,9 +641,6 @@ $('.englishBox .mobCancelbtn').click(function () { // when pressing delete for m
     }, 88);
 });
 
-
-
-
 // for arabic boxes
 $('.filterMenu .arabicBox .pop.red .link').click(function () { // add selected keywords on right side
     $('.filterMenu .close').hide();
@@ -726,6 +649,25 @@ $('.filterMenu .arabicBox .pop.red .link').click(function () { // add selected k
     $(this).next('.mobCancelbtn').show();//show delete buttom for mobile
     var getvalue = $(this).html();
     $('<div class="delete"></div>').insertAfter($('<div class="keyword red"></div>').appendTo('.arabicBox .Values .list').html(getvalue).wrap('<li></li>'));
+    if ($('.filterMenu .Values ul.list>li .red').length == 1) {
+        var oldURL = new URL(window.location.href);
+        if (!oldURL.searchParams.get('type') && !oldURL.searchParams.get('keyword')) {
+            if (history.pushState) {
+                var newUrl = oldURL + "?keyword=" + getvalue;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+        } else if (oldURL.searchParams.get('type') && !oldURL.searchParams.get('keyword')) {
+            var newUrl = oldURL + "&keyword=" + getvalue;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+    } else {
+        const params = new URLSearchParams(location.search);
+        params.delete('keyword');
+        console.log(params.toString());
+        var newurl = window.location.origin + "/?" + params.toString();
+        window.history.pushState({ path: newurl }, '', newurl);
+    }
+ 
 });
 
 $('.filterMenu .arabicBox .pop.green .link').click(function () {  // add selected keywords on right side
@@ -735,6 +677,24 @@ $('.filterMenu .arabicBox .pop.green .link').click(function () {  // add selecte
     $(this).next('.mobCancelbtn').show();//show delete buttom for mobile
     var getvalue = $(this).html();
     $('<div class="delete"></div>').insertAfter($('<div class="keyword green"></div>').appendTo('.arabicBox .Values .list').html(getvalue).wrap('<li></li>'));
+    if ($('.filterMenu .Values ul.list>li .green').length == 1) {
+        var oldURL = new URL(window.location.href);
+        if (!oldURL.searchParams.get('type') && !oldURL.searchParams.get('keyword')) {
+            if (history.pushState) {
+                var newUrl = oldURL + "?type=" + getvalue;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+        } else if (!oldURL.searchParams.get('type') && oldURL.searchParams.get('keyword')) {
+            var newUrl = oldURL + "&type=" + getvalue;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+    } else {
+        const params = new URLSearchParams(location.search);
+        params.delete('type');
+        console.log(params.toString());
+        var newurl = window.location.origin + "/?" + params.toString();
+        window.history.pushState({ path: newurl }, '', newurl);
+    }
 });
 
 $(".arabicBox .Values").on('click', '.delete', function () {   // when pressing delete
@@ -750,6 +710,22 @@ $(".arabicBox .Values").on('click', '.delete', function () {   // when pressing 
         if ($('.filterMenu .Values ul.list>li').length == 0) {  // when all items are deleted, remove apply buttom
             $('.filterMenu .close').show();
             $('.filterMenu .applyBtn').hide();
+            history.pushState('', document.title, window.location.pathname);
+        }
+
+        if ($('.filterMenu .Values ul.list>li .red').length == 0 && $('.filterMenu .Values ul.list>li').length != 0) {
+            const params = new URLSearchParams(location.search);
+            params.delete('keyword');
+            console.log(params.toString());
+            var newurl = window.location.origin + "/?" + params.toString();
+            window.history.pushState({ path: newurl }, '', newurl);
+        }
+        if ($('.filterMenu .Values ul.list>li .green').length == 0 && $('.filterMenu .Values ul.list>li').length != 0) {
+            const params = new URLSearchParams(location.search);
+            params.delete('type');
+            console.log(params.toString());
+            var newurl = window.location.origin + "/?" + params.toString();
+            window.history.pushState({ path: newurl }, '', newurl);
         }
 
     }, 88);
@@ -772,9 +748,6 @@ $('.arabicBox .mobCancelbtn').click(function () { // when pressing delete for mo
     }, 88);
 });
 
-
-
-
 function showArabicFilter() {
     $('.filterMenu .arabicBox,.filterMenu .languages .english').show();
     $('.filterMenu .englishBox,.filterMenu .languages .arabic').hide();
@@ -790,12 +763,7 @@ function showEnglishFilter() {
 }
 
 
-
-
 // ___________________________________________________________________________________________________
-
-
-
 
 
 // article templates
@@ -810,8 +778,6 @@ function calcCaptionWidth() {
 $(window).load(function () {
     // calcCaptionWidth();
 });
-
-
 
 
 // swipers in article pages
@@ -859,20 +825,7 @@ function initArticleSwiper() {
     }
 }
 
-
 initArticleSwiper();
-
-
-
-
-// init audio plugin
-
-//$(function () {
-//    $('audio').audioPlayer();
-//});
-
-
-
 
 // open search popup
 //______________________________________________
@@ -896,12 +849,7 @@ function closeSearchPopup() {
     $('body').removeClass('searchPopOpened');
 }
 
-
-
 //______________________________________________
-
-
-
 
 // play/stop youtube when opening video popup
 //_________________________________________________________________________________________________
@@ -913,8 +861,6 @@ if ($(".About").hasClass('video')) {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
-
-
 var youtubeVideo1;
 
 var videoid = $('.videoId').val();
@@ -924,9 +870,7 @@ function onYouTubeIframeAPIReady() {
         videoId: videoid,
         playerVars: { 'autoplay': 0, 'controls': 1, 'rel': 0, 'mute': 0, 'playsinline': 1 }
     });
-
 }
-
 
 function openVideoPopup() {
     $('.videoPopup').addClass('open');
@@ -940,12 +884,7 @@ function closeVideoPopup() {
     youtubeVideo1.stopVideo();
 }
 
-
-
 //_________________________________________________________________________________________________
-
-
-
 
 //footer tab, scroll to top
 //_________________________________________________________________________________________________
@@ -973,12 +912,6 @@ $(window).scroll(function () {
 })
 
 
-
-//_________________________________________________________________________________________________
-
-
-
-
 // tags page, delete item
 //_________________________________________________________________________________________________
 
@@ -996,12 +929,8 @@ if ($('.Article .text table').length != 0) {
 }
 
 
-
-
 // articles pages, hide left fixed menu when scroll down on desktop
 //_________________________________________________________________________________________________
-
-
 
 var $animation_element = $('.animation-element');
 var $window = $(window);
@@ -1021,19 +950,18 @@ function check_if_in_view() {
             if ((element_bottom_position >= window_top_position) &&
                 (element_top_position <= window_bottom_position)) {
                 $element.addClass('in-view');
-                $('.articlePage .Options').addClass('hide');
+                if (!$('.Article .end').hasClass('in-view')) {
+                    $('.articlePage .Options').addClass('hide');
+                } else {
+                    $('.articlePage .Options').removeClass('hide');
+                }
 
             } else {
                 $element.removeClass('in-view');
                 $('.articlePage .Options').removeClass('hide');
             }
         });
-
-
-
-
     }
-
 }
 
 $window.on('scroll resize', check_if_in_view);
@@ -1042,8 +970,6 @@ $(window).load(function () {
 });
 
 //_________________________________________________________________________________________________
-
-
 
 $(document).ready(function () {
     if ($('.Results').hasClass('search')) {
@@ -1081,8 +1007,6 @@ $(document).ready(function () {
 
         mark();
     }
-
-
 });
 
 document.getElementById("fromdate").addEventListener("change", checkDate);

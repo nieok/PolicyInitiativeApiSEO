@@ -16,26 +16,26 @@
             <ul class="groups">
                 <li>
                     <ul class="sub">
-                        @if (ViewBag.keywords != null)
-                        {
-                            <li>
-                                <div class="sortOpen red">
-                                    <div class="label">Keywords</div>
-                                </div>
-                                <div class="pop red">
-                                    <div class="holder mCustomScrollbar">
-                                        <ul class="items">
-                                            @foreach (var item in ViewBag.keywords)
-                                            {
-                                                <li><a class="link">@item.title</a><div class="mobCancelbtn"></div></li>
-
-                                            }
-
-                                        </ul>
+                            @if (ViewBag.keywords != null)
+                            {
+                                <li>
+                                    <div class="sortOpen red">
+                                        <div class="label">Keywords</div>
                                     </div>
-                                </div>
-                            </li>
-                        }
+                                    <div class="pop red">
+                                        <div class="holder mCustomScrollbar">
+                                            <ul class="items">
+                                                @foreach (var item in ViewBag.keywords)
+                                                {
+                                                    <li><a class="link">@item.title</a><div class="mobCancelbtn"></div></li>
+
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
                             @if (ViewBag.types != null)
                             {
                                 <li>

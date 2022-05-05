@@ -663,8 +663,13 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
             datet = datet.toLocaleDateString();
             localStorage.setItem("dateto", datet); }
 
+        var params = new URLSearchParams(location.search).toString();
+        if (params != "") {
+            window.location.href = fronturl + '/search/tags?' + params;
 
-        window.location.href = fronturl + '/search/tags';
+        } else {
+        window.location.href = fronturl + '/search/tags' ;
+        }
     }
 
     this.$onInit = function () {
@@ -684,6 +689,8 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
     $scope.data = [];
     $scope.articleTemplateTitle = "";
     $scope.numberOfProducts = 8;
+
+
     if (localStorage.getItem("articleTemplateId") != undefined) {
         $scope.articleTemplateId = localStorage.getItem("articleTemplateId");
         $scope.articleTemplateTitle = localStorage.getItem("articleTemplateTitle");
@@ -700,7 +707,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
         var type = localStorage.getItem("authorList");
         $scope.authorList = type.split(",");
     }
-    if (localStorage.getItem("typeList") != undefined) {
+    if (localStorage.getItem("typeList") != undefined && localStorage.getItem("typeList") !='') {
         var type = localStorage.getItem("typeList");
         $scope.typeList = type.split(",");
     }
@@ -718,7 +725,6 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
         $scope.typeList = $scope.typeList.filter(function (v) {
             return !!v;
         });
-
     }
 
     $scope.removeTemplate = function () {
@@ -797,11 +803,29 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
     $scope.showloader = function (title) {
         $('.label.' + title).addClass('load');
     }
+    $scope.querykeyword = $('.querykeyword').val();
+    $scope.querytype = $('.querytype').val();
 
+    if ($scope.querykeyword != "") {
+        $scope.keywordList = [];
+        localStorage.removeItem("keywordList");
+        if ($scope.keywordList.length == 0) {
+            $scope.keywordList.push($scope.querykeyword);
+        }
+    }
+    if ($scope.querytype != "") {
+        $scope.typeList = [];
+        localStorage.removeItem("typeList");
+        if ($scope.typeList.length == 0) {
+            $scope.typeList.push($scope.querytype);
+        }
+    } else {
+        $scope.typeList = [];
+    }
     $scope.getData = function () {
         $http({
             method: 'Post',
-            url: RouteUrl + 'api/NewsCommunications/SearchData',
+            url: RouteUrl + 'api/NewsCommunications/SearchData?keyword=' + $scope.querykeyword + "&type=" + $scope.querytype,
             data: {
                 batch: $scope.batch, pageNumber: $scope.numberOfProducts, articleTemplateId: $scope.articleTemplateId,category: $scope.category, authorList: $scope.authorList, datefrom: $scope.datefrom, dateto: $scope.dateto, typeList: $scope.typeList, keywordList: $scope.keywordList,  imgsize: "515x413xi"
             }

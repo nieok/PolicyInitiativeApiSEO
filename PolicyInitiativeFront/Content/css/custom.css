@@ -454,4 +454,7 @@ mark {
     .Menu .engag{
         font-size:14px !important;
     }
+    .Slideshow .pic {
+        min-height: unset;
+    }
 }
