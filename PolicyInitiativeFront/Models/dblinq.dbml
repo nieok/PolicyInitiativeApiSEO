@@ -12,6 +12,34 @@
       <Association Name="AgeGroup_AspNetUser" Member="AspNetUsers" ThisKey="id" OtherKey="ageGroupId" Type="AspNetUser" />
     </Type>
   </Table>
+  <Table Name="dbo.TypeArticles" Member="TypeArticles">
+    <Type Name="TypeArticle">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="TypeArticle_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageParentId" Type="TypeArticle" />
+      <Association Name="TypeArticle_ArticlesType" Member="ArticlesTypes" ThisKey="id" OtherKey="TypeId" Type="ArticlesType" />
+      <Association Name="TypeArticle_TypeArticle" Member="TypeArticle1" ThisKey="languageParentId" OtherKey="id" Type="TypeArticle" IsForeignKey="true" />
+      <Association Name="Language_TypeArticle" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ArticlesAuthor" Member="ArticlesAuthors">
     <Type Name="ArticlesAuthor">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -28,6 +56,26 @@
       <Column Name="ArticlesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Keyword_ArticlesKeyword" Member="Keyword" ThisKey="KeywordId" OtherKey="id" Type="Keyword" IsForeignKey="true" />
       <Association Name="NewsCommunication_ArticlesKeyword" Member="NewsCommunication" ThisKey="ArticlesId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.articlesRepeater" Member="articlesRepeaters">
+    <Type Name="articlesRepeater">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="parentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="arimgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="captionImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="arabicCaptionImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ArabieDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="articlesRepeater_articlesRepeaterMedia" Member="articlesRepeaterMedias" ThisKey="id" OtherKey="articleRepeaterId" Type="articlesRepeaterMedia" />
+      <Association Name="NewsCommunication_articlesRepeater" Member="NewsCommunication" ThisKey="parentId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.articlesRepeaterMedia" Member="articlesRepeaterMedias">
@@ -55,6 +103,25 @@
       <Column Name="ArticlesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="TypeArticle_ArticlesType" Member="TypeArticle" ThisKey="TypeId" OtherKey="id" Type="TypeArticle" IsForeignKey="true" />
       <Association Name="NewsCommunication_ArticlesType" Member="NewsCommunication" ThisKey="ArticlesId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticleTemplate" Member="ArticleTemplates">
+    <Type Name="ArticleTemplate">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="label" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ArticleTemplate_ArticleTemplate" Member="ArticleTemplates" ThisKey="id" OtherKey="languageParentId" Type="ArticleTemplate" />
+      <Association Name="ArticleTemplate_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="articleTemplateId" Type="NewsCommunication" />
+      <Association Name="ArticleTemplate_ArticleTemplate" Member="ArticleTemplate1" ThisKey="languageParentId" OtherKey="id" Type="ArticleTemplate" IsForeignKey="true" />
+      <Association Name="Language_ArticleTemplate" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
@@ -335,6 +402,20 @@
       <Association Name="CareerApplication_CareerApplication" Member="CareerApplication1" ThisKey="id" OtherKey="id" Type="CareerApplication" IsForeignKey="true" />
       <Association Name="ContactTitle_CareerApplication" Member="ContactTitle" ThisKey="contactTitleId" OtherKey="id" Type="ContactTitle" IsForeignKey="true" DeleteRule="SET NULL" />
       <Association Name="Country_CareerApplication" Member="Country" ThisKey="countryId" OtherKey="id" Type="Country" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Color" Member="Colors">
+    <Type Name="Color">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="hexaxolor" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Color_NewsCategory" Member="NewsCategories" ThisKey="id" OtherKey="colorId" Type="NewsCategory" />
     </Type>
   </Table>
   <Table Name="dbo.Company" Member="Companies">
@@ -691,6 +772,23 @@
       <Association Name="Language_EmailTemplate" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.EngagementCategory" Member="EngagementCategories">
+    <Type Name="EngagementCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="EngagementCategory_EngagementCategory" Member="EngagementCategories" ThisKey="id" OtherKey="languageParentId" Type="EngagementCategory" />
+      <Association Name="EngagementCategory_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="engagementCategoryId" Type="NewsCommunication" />
+      <Association Name="EngagementCategory_EngagementCategory" Member="EngagementCategory1" ThisKey="languageParentId" OtherKey="id" Type="EngagementCategory" IsForeignKey="true" />
+      <Association Name="Language_EngagementCategory" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ImageResize" Member="ImageResizes">
     <Type Name="ImageResize">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -874,6 +972,8 @@
       <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Language_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageId" Type="TypeArticle" />
+      <Association Name="Language_ArticleTemplate" Member="ArticleTemplates" ThisKey="id" OtherKey="languageId" Type="ArticleTemplate" />
       <Association Name="Language_Author" Member="Authors" ThisKey="id" OtherKey="languageId" Type="Author" />
       <Association Name="Language_Career" Member="Careers" ThisKey="id" OtherKey="languageId" Type="Career" />
       <Association Name="Language_Company" Member="Companies" ThisKey="id" OtherKey="languageId" Type="Company" />
@@ -883,16 +983,14 @@
       <Association Name="Language_CorporatePageSection" Member="CorporatePageSections" ThisKey="id" OtherKey="languageId" Type="CorporatePageSection" />
       <Association Name="Language_Director" Member="Directors" ThisKey="id" OtherKey="languageId" Type="Director" />
       <Association Name="Language_EmailTemplate" Member="EmailTemplates" ThisKey="id" OtherKey="languageId" Type="EmailTemplate" />
+      <Association Name="Language_EngagementCategory" Member="EngagementCategories" ThisKey="id" OtherKey="languageId" Type="EngagementCategory" />
       <Association Name="Language_InquiryType" Member="InquiryTypes" ThisKey="id" OtherKey="languageId" Type="InquiryType" />
       <Association Name="Language_Keyword" Member="Keywords" ThisKey="id" OtherKey="languageId" Type="Keyword" />
       <Association Name="Language_LanguageResourceTranslation" Member="LanguageResourceTranslations" ThisKey="id" OtherKey="languageId" Type="LanguageResourceTranslation" />
+      <Association Name="Language_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageId" Type="NewsCommunication" />
       <Association Name="Language_Region" Member="Regions" ThisKey="id" OtherKey="languageId" Type="Region" />
       <Association Name="Language_SocialMedia" Member="SocialMedias" ThisKey="id" OtherKey="languageId" Type="SocialMedia" />
       <Association Name="Language_TeamCategory" Member="TeamCategories" ThisKey="id" OtherKey="languageId" Type="TeamCategory" />
-      <Association Name="Language_ArticleTemplate" Member="ArticleTemplates" ThisKey="id" OtherKey="languageId" Type="ArticleTemplate" />
-      <Association Name="Language_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageId" Type="TypeArticle" />
-      <Association Name="Language_EngagementCategory" Member="EngagementCategories" ThisKey="id" OtherKey="languageId" Type="EngagementCategory" />
-      <Association Name="Language_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageId" Type="NewsCommunication" />
     </Type>
   </Table>
   <Table Name="dbo.LanguageResource" Member="LanguageResources">
@@ -916,6 +1014,101 @@
       <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Language_LanguageResourceTranslation" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="LanguageResource_LanguageResourceTranslation" Member="LanguageResource" ThisKey="languageResourceId" OtherKey="id" Type="LanguageResource" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsCategory" Member="NewsCategories">
+    <Type Name="NewsCategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="colorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="NewsCategory_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="categoryId" Type="NewsCommunication" />
+      <Association Name="Color_NewsCategory" Member="Color" ThisKey="colorId" OtherKey="id" Type="Color" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsCommunication" Member="NewsCommunications">
+    <Type Name="NewsCommunication">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="subtitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSubCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="videoUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isArchived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateArchived" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="archivedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isFeatured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isFeatured1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isFeatured2" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isReadyForPublish" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateUnPublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="unPublishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hasArabic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="audioSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DetailsImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description2" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description3" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="quote" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="topimgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="articleTemplateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isPublicEngagement" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPEFeatured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="engagementCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExternalLink" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="NewsCommunication_ArticlesAuthor" Member="ArticlesAuthors" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesAuthor" />
+      <Association Name="NewsCommunication_ArticlesKeyword" Member="ArticlesKeywords" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesKeyword" />
+      <Association Name="NewsCommunication_articlesRepeater" Member="articlesRepeaters" ThisKey="id" OtherKey="parentId" Type="articlesRepeater" />
+      <Association Name="NewsCommunication_ArticlesType" Member="ArticlesTypes" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesType" />
+      <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageParentId" Type="NewsCommunication" />
+      <Association Name="NewsCommunication_NewsCommunicationMedia" Member="NewsCommunicationMedias" ThisKey="id" OtherKey="newsCommunicationId" Type="NewsCommunicationMedia" />
+      <Association Name="ArticleTemplate_NewsCommunication" Member="ArticleTemplate" ThisKey="articleTemplateId" OtherKey="id" Type="ArticleTemplate" IsForeignKey="true" />
+      <Association Name="EngagementCategory_NewsCommunication" Member="EngagementCategory" ThisKey="engagementCategoryId" OtherKey="id" Type="EngagementCategory" IsForeignKey="true" />
+      <Association Name="Language_NewsCommunication" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
+      <Association Name="NewsCategory_NewsCommunication" Member="NewsCategory" ThisKey="categoryId" OtherKey="id" Type="NewsCategory" IsForeignKey="true" />
+      <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunication1" ThisKey="languageParentId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.NewsCommunicationMedia" Member="NewsCommunicationMedias">
@@ -1064,6 +1257,40 @@
       <Association Name="Region_Region1" Member="Region2" ThisKey="languageParentId" OtherKey="id" Type="Region" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Settings" Member="Settings">
+    <Type Name="Setting">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="shippingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="voucherValidity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="defaultSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="receiptSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="tPPostFailureSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="defaultSendFromEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="supportPhone" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="staticDataLastChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="staticImageLastChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="smsProvider" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="refundTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="disableGiftCardCreationOnWebsite" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="giftCardExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="giftCardMinAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="refundExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="friendCouponExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="friendCouponPercentage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="newsletterCouponExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="newsletterCouponPercentage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="loyaltyPointValue" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
+      <Column Name="instagramAccessToken" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="showTwitter" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="showType" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Setting_SettingsFile" Member="SettingsFiles" ThisKey="id" OtherKey="settingsId" Type="SettingsFile" />
+    </Type>
+  </Table>
   <Table Name="dbo.SettingsFile" Member="SettingsFiles">
     <Type Name="SettingsFile">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1086,6 +1313,23 @@
       <Column Name="productId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="type" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Slider" Member="Sliders">
+    <Type Name="Slider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="link" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isTarget" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="labelLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.SocialMedia" Member="SocialMedias">
@@ -1123,250 +1367,6 @@
       <Association Name="TeamCategory_TeamCategory" Member="TeamCategories" ThisKey="id" OtherKey="languageParentId" Type="TeamCategory" />
       <Association Name="Language_TeamCategory" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
       <Association Name="TeamCategory_TeamCategory" Member="TeamCategory1" ThisKey="languageParentId" OtherKey="id" Type="TeamCategory" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ArticleTemplate" Member="ArticleTemplates">
-    <Type Name="ArticleTemplate">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="label" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ArticleTemplate_ArticleTemplate" Member="ArticleTemplates" ThisKey="id" OtherKey="languageParentId" Type="ArticleTemplate" />
-      <Association Name="ArticleTemplate_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="articleTemplateId" Type="NewsCommunication" />
-      <Association Name="ArticleTemplate_ArticleTemplate" Member="ArticleTemplate1" ThisKey="languageParentId" OtherKey="id" Type="ArticleTemplate" IsForeignKey="true" />
-      <Association Name="Language_ArticleTemplate" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Settings" Member="Settings">
-    <Type Name="Setting">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="shippingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="voucherValidity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="defaultSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="receiptSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="tPPostFailureSendToEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="defaultSendFromEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="supportPhone" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="staticDataLastChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="staticImageLastChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="smsProvider" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="refundTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="disableGiftCardCreationOnWebsite" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="giftCardExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="giftCardMinAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="refundExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="friendCouponExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="friendCouponPercentage" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="newsletterCouponExpiryDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="newsletterCouponPercentage" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="loyaltyPointValue" Type="System.Decimal" DbType="Decimal(18,5) NOT NULL" CanBeNull="false" />
-      <Column Name="instagramAccessToken" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="showTwitter" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="showType" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Setting_SettingsFile" Member="SettingsFiles" ThisKey="id" OtherKey="settingsId" Type="SettingsFile" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TypeArticles" Member="TypeArticles">
-    <Type Name="TypeArticle">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="TypeArticle_ArticlesType" Member="ArticlesTypes" ThisKey="id" OtherKey="TypeId" Type="ArticlesType" />
-      <Association Name="TypeArticle_TypeArticle" Member="TypeArticles" ThisKey="id" OtherKey="languageParentId" Type="TypeArticle" />
-      <Association Name="Language_TypeArticle" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
-      <Association Name="TypeArticle_TypeArticle" Member="TypeArticle1" ThisKey="languageParentId" OtherKey="id" Type="TypeArticle" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.EngagementCategory" Member="EngagementCategories">
-    <Type Name="EngagementCategory">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="EngagementCategory_EngagementCategory" Member="EngagementCategories" ThisKey="id" OtherKey="languageParentId" Type="EngagementCategory" />
-      <Association Name="EngagementCategory_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="engagementCategoryId" Type="NewsCommunication" />
-      <Association Name="EngagementCategory_EngagementCategory" Member="EngagementCategory1" ThisKey="languageParentId" OtherKey="id" Type="EngagementCategory" IsForeignKey="true" />
-      <Association Name="Language_EngagementCategory" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.NewsCommunication" Member="NewsCommunications">
-    <Type Name="NewsCommunication">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="languageParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="languageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="subtitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgSubCaption" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="videoSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="videoUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="fileSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isArchived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateArchived" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="archivedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="isFeatured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isFeatured1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isFeatured2" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isReadyForPublish" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateUnPublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="unPublishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="publishedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="createdBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="modifiedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="datePublished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaDescriptionSecondary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="categoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="hasArabic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="audioSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="DetailsImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="description1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="description2" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="description3" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="quote" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="topimgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="articleTemplateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="isPublicEngagement" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isPEFeatured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="engagementCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExternalLink" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="NewsCommunication_ArticlesAuthor" Member="ArticlesAuthors" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesAuthor" />
-      <Association Name="NewsCommunication_ArticlesKeyword" Member="ArticlesKeywords" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesKeyword" />
-      <Association Name="NewsCommunication_ArticlesType" Member="ArticlesTypes" ThisKey="id" OtherKey="ArticlesId" Type="ArticlesType" />
-      <Association Name="NewsCommunication_NewsCommunicationMedia" Member="NewsCommunicationMedias" ThisKey="id" OtherKey="newsCommunicationId" Type="NewsCommunicationMedia" />
-      <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="languageParentId" Type="NewsCommunication" />
-      <Association Name="NewsCommunication_articlesRepeater" Member="articlesRepeaters" ThisKey="id" OtherKey="parentId" Type="articlesRepeater" />
-      <Association Name="ArticleTemplate_NewsCommunication" Member="ArticleTemplate" ThisKey="articleTemplateId" OtherKey="id" Type="ArticleTemplate" IsForeignKey="true" />
-      <Association Name="EngagementCategory_NewsCommunication" Member="EngagementCategory" ThisKey="engagementCategoryId" OtherKey="id" Type="EngagementCategory" IsForeignKey="true" />
-      <Association Name="Language_NewsCommunication" Member="Language" ThisKey="languageId" OtherKey="id" Type="Language" IsForeignKey="true" />
-      <Association Name="NewsCommunication_NewsCommunication" Member="NewsCommunication1" ThisKey="languageParentId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
-      <Association Name="NewsCategory_NewsCommunication" Member="NewsCategory" ThisKey="categoryId" OtherKey="id" Type="NewsCategory" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.articlesRepeater" Member="articlesRepeaters">
-    <Type Name="articlesRepeater">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="parentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="arimgSrc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="captionImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="arabicCaptionImage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ArabieDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="articlesRepeater_articlesRepeaterMedia" Member="articlesRepeaterMedias" ThisKey="id" OtherKey="articleRepeaterId" Type="articlesRepeaterMedia" />
-      <Association Name="NewsCommunication_articlesRepeater" Member="NewsCommunication" ThisKey="parentId" OtherKey="id" Type="NewsCommunication" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Color" Member="Colors">
-    <Type Name="Color">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="hexaxolor" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="deletedBy" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Color_NewsCategory" Member="NewsCategories" ThisKey="id" OtherKey="colorId" Type="NewsCategory" />
-    </Type>
-  </Table>
-  <Table Name="dbo.NewsCategory" Member="NewsCategories">
-    <Type Name="NewsCategory">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaKeywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="metaImgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customH1Content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customPageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="customUrlTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="colorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="NewsCategory_NewsCommunication" Member="NewsCommunications" ThisKey="id" OtherKey="categoryId" Type="NewsCommunication" />
-      <Association Name="Color_NewsCategory" Member="Color" ThisKey="colorId" OtherKey="id" Type="Color" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Slider" Member="Sliders">
-    <Type Name="Slider">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="imgSrc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="isDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="dateDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="link" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="smallDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="isPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="isTarget" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="labelLink" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

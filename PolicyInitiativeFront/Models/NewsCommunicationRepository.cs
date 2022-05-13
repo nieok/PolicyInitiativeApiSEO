@@ -223,21 +223,21 @@ namespace PolicyInitiativeFront.Models
         public NewsCommunication GetArticleById(int id, string langquery = "en", string src ="" ,string imgsize = "", string imgsize1 = "", string imgsize2="")
         {
             var model = db.NewsCommunications.FirstOrDefault(d => !d.isDeleted && d.id == id && (d.datePublished <= DateTime.Now || d.datePublished == null) && (d.dateUnPublished >= DateTime.Now || d.dateUnPublished == null));
-            var authorsart = db.ArticlesAuthors.Where(x => x.ArticlesId == model.id);
+            var authorsart = model.ArticlesAuthors.Where(x => x.ArticlesId == model.id);
             //var articleTypes = db.ArticlesTypes.Where(x => x.ArticlesId == model.id);
             var relatedinitiatives = src == "init" ? (model.categoryId !=null ? db.NewsCommunications.Where(x => x.categoryId == model.categoryId && x.id != model.id && !x.isDeleted && x.isPublished).ToList() : null): null;
             var related = new List<NewsCommunication>();
             var relatedTypes = new List<NewsCommunication>();
 
 
-            var getrelatedTemplate = db.NewsCommunications.Where(x => x.articleTemplateId == model.articleTemplateId && x.id != model.id && !x.isDeleted && x.isPublished).OrderByDescending(d => d.date).ToList();
+            var getrelatedTemplate = db.NewsCommunications.Where(x => x.articleTemplateId == model.articleTemplateId && x.id != model.id && !x.isDeleted && x.isPublished).OrderByDescending(d => d.date);
 
             relatedTypes.AddRange(getrelatedTemplate);
 
 
             foreach (var item in authorsart)
             {
-                var getrelated = db.ArticlesAuthors.Where(x => x.AuthorsId == item.AuthorsId && x.ArticlesId != model.id).Select(d => d.NewsCommunication).Where(d=>!d.isDeleted && d.isPublished).Distinct().OrderByDescending(d => d.date).ToList();
+                var getrelated = db.ArticlesAuthors.Where(x => x.AuthorsId == item.AuthorsId && x.ArticlesId != model.id).Select(d => d.NewsCommunication).Where(d=>!d.isDeleted && d.isPublished).Distinct().OrderByDescending(d => d.date);
 
                 related.AddRange(getrelated);
             }
@@ -247,7 +247,7 @@ namespace PolicyInitiativeFront.Models
 
             var translatedItem = model.NewsCommunications.FirstOrDefault(lang => lang.languageId == 2);
 
-            var authors = db.ArticlesAuthors.Where(x => x.ArticlesId == model.id).Select(d => d.Author);
+            var authors = authorsart.Where(x => x.ArticlesId == model.id).Select(d => d.Author);
             var authorslist = new List<ArticleAuthor>();
             foreach (var item in authors)
             {
@@ -520,7 +520,7 @@ namespace PolicyInitiativeFront.Models
 
             foreach (var item in news)
             {
-                var authors = db.ArticlesAuthors.Where(x => x.ArticlesId == item.id).Select(d => d.Author);
+                var authors = item.ArticlesAuthors.Select(d => d.Author);
                 var authorslist = new List<ArticleAuthor>();
                 var authorsarlist = new List<ArticleAuthor>();
                 foreach (var entryItem in authors)
@@ -542,7 +542,7 @@ namespace PolicyInitiativeFront.Models
                     });
 
                 }
-                var arabictemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.ArticleTemplate.id).label;
+                var arabictemplate = db.ArticleTemplates.FirstOrDefault(d => d.languageId == 2 && d.languageParentId == item.ArticleTemplate.id);
                 model.Add(new NewsCommunication
                 {
 
@@ -565,7 +565,7 @@ namespace PolicyInitiativeFront.Models
                     //: (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title))),
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
                     articleTemplate = item.ArticleTemplate.label,
-                    ARarticleTemplate = arabictemplate,
+                    ARarticleTemplate = arabictemplate != null ? arabictemplate.label : null,
                 });
             }
             return model;
