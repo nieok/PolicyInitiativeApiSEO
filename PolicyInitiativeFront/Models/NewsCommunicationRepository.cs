@@ -511,7 +511,15 @@ namespace PolicyInitiativeFront.Models
         }
         public static string StripTagsRegex(string source)
         {
-            return Regex.Replace(source, "<.*?>", string.Empty);
+            if(!String.IsNullOrEmpty(source))
+            {
+                return Regex.Replace(source, "<.*?>", string.Empty);
+            }
+            else
+            {
+                return null;
+            }
+     
         }
         public List<NewsCommunication> GetAllByCategoryId(int id,string imgsize = "")
         {
