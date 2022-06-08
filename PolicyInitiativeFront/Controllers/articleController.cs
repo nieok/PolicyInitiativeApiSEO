@@ -16,7 +16,7 @@ namespace PolicyInitiativeFront.Controllers
         public ActionResult index(int id, string lang = "en", string src ="")
         {
            
-            var news = articlerpstry.GetArticleById(id, lang , src, "712x401xi", "1000x1000xi", "858x383xi");
+            var news = articlerpstry.GetArticleById(id, lang , src, "858x2000xi", "1000x1000xi", "858x2000xi");
 
          
             #region SEO
