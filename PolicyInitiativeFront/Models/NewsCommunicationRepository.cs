@@ -482,7 +482,28 @@ namespace PolicyInitiativeFront.Models
        
             foreach (var item in news)
             {
-               
+                var authors = item.ArticlesAuthors.Select(d => d.Author);
+                var authorslist = new List<ArticleAuthor>();
+                var authorsarlist = new List<ArticleAuthor>();
+                foreach (var entryItem in authors)
+                {
+                    var translated = entryItem.Authors.FirstOrDefault(lang => lang.languageId == 2);
+
+                    authorsarlist.Add(new ArticleAuthor
+                    {
+                        id = entryItem.id,
+                        title = translated == null ? entryItem.title : translated.title,
+                        bio = translated == null ? StripTagsRegex(entryItem.bio) : StripTagsRegex(translated.bio),
+                    });
+
+                    authorslist.Add(new ArticleAuthor
+                    {
+                        id = entryItem.id,
+                        title = entryItem.title,
+                        bio = StripTagsRegex(entryItem.bio),
+                    });
+
+                }
                 model.Add(new NewsCommunication
                 {
                     id = item.id,
@@ -496,8 +517,8 @@ namespace PolicyInitiativeFront.Models
                     arabicDesc = item.NewsCommunications.FirstOrDefault(d => d.languageId == 2) != null ? item.NewsCommunications.FirstOrDefault(d => d.languageId == 2).smallDescription : null,
                     Date = item.date.Value.ToString("MM.dd.yy"),
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
-                    authorsList = item.ArticlesAuthors.Select(d => string.Join(",", d.Author.title)).FirstOrDefault(),
-                    authorsarList = item.ArticlesAuthors.Select(d => d.Author.Authors.FirstOrDefault(x => x.languageId == 2) != null ? string.Join(",", d.Author.Authors.FirstOrDefault(x => x.languageId == 2).title) : null).FirstOrDefault(),
+                    authors =   authorslist,
+                    arauthors =  authorsarlist,
                     detailUrl = ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title),
                     //detailUrl = item.articleTemplateId == null ? item.ArticlesTypes.Where(d => d.TypeId == 1).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "podcast/details/" + item.id + "/" + GetUrlTitle(item.title)
                     //: (item.ArticlesTypes.Where(d => d.TypeId == 3).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "video/details/" + item.id + "/" + GetUrlTitle(item.title) : (item.ArticlesTypes.Where(d => d.TypeId == 2).Count() != 0 ? ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "data/details/" + item.id + "/" + GetUrlTitle(item.title) : ConfigurationManager.AppSettings["ProjectOnlineUrl"] + "article/details/" + item.id + "/" + GetUrlTitle(item.title)))

@@ -32,92 +32,161 @@
                     {
                         if (!item.hasArabic)
                         {
-                    <li>
-                        @if (String.IsNullOrEmpty(item.ExternalLink))
-                        {
-                            <a class="Article" href="@Url.Content(item.detailUrl)">
-                                <h2 class="title">@item.title </h2>
-                                @if (!String.IsNullOrEmpty(item.authorsList))
+                            <li>
+                                @if (String.IsNullOrEmpty(item.ExternalLink))
                                 {
-                                    <div class="author">by <span class="keyword">@item.authorsList</span></div>
+                                    <a class="Article" href="@Url.Content(item.detailUrl)">
+                                        <h2 class="title">@item.title </h2>
+                                        @if (item.authors.Count != 0)
+                                        {
+                                            <div class="author">
+                                                by
+                                                @{ int comaCount = 0;}
+                                                @foreach (var auth in item.authors)
+                                                {
+                                                    comaCount++;
+                                                    <input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                    <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                                        @if (item.authors.Count > comaCount)
+                                                        {<text>@auth.title, </text> }
+                                                    else
+                                                    {@auth.title}
+                                                    </div>
 
+
+                                                }
+                                            </div>
+                                        }
+                                        @*@if (!String.IsNullOrEmpty(item.authorsList))
+                                            {
+                                                <div class="author">by <span class="keyword">@item.authorsList</span>
+
+                                            }*@
+                                        @if (!String.IsNullOrEmpty(item.smallDescription))
+                                        {
+                                            <div class="text">
+                                                @Html.Raw(item.smallDescription)
+                                            </div>
+                                        }
+
+
+
+                                    </a>
                                 }
-                                @if (!String.IsNullOrEmpty(item.smallDescription))
+                                else
                                 {
-                                    <div class="text">
-                                        @Html.Raw(item.smallDescription)
-                                    </div>
+                                    <a class="Article" href="@Url.Content(item.ExternalLink)" target="_blank">
+                                        <h2 class="title">@item.title </h2>
+                                        @if (item.authors.Count != 0)
+                                        {
+                                            <div class="author">
+                                                by
+                                                @{ int comaCount = 0;}
+                                                @foreach (var auth in item.authors)
+                                                {
+                                                    comaCount++;
+                                                    <input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                    <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                                        @if (item.authors.Count > comaCount)
+                                                        {<text>@auth.title, </text> }
+                                                    else
+                                                    {@auth.title}
+                                                    </div>
+
+
+                                                }
+                                            </div>
+                                        }
+                                        @if (!String.IsNullOrEmpty(item.smallDescription))
+                                        {
+                                            <div class="text">
+                                                @Html.Raw(item.smallDescription)
+                                            </div>
+                                        }
+
+
+
+                                    </a>
                                 }
 
-
-
-                            </a>
+                            </li>
                         }
                         else
                         {
-                            <a class="Article" href="@Url.Content(item.ExternalLink)" target="_blank">
-                                <h2 class="title">@item.title </h2>
-                                @if (!String.IsNullOrEmpty(item.authorsList))
+                            <li>
+                                @if (String.IsNullOrEmpty(item.ExternalLink))
                                 {
-                                    <div class="author">by <span class="keyword">@item.authorsList</span></div>
+                                    <a class="Article arabic" href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                        <h2 class="title">@item.title </h2>
+                                        @if (item.arauthors.Count != 0)
+                                        {
+                                            <div class="author">
+                                                by
+                                                @{ int comaCount1 = 0;}
+                                                @foreach (var auth in item.arauthors)
+                                                {
+                                                    comaCount1++;
+                                                    <input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                    <div class="author" onclick="openArabicAuthorPopup('@auth.title','@auth.id')">
+                                                        @if (item.arauthors.Count > comaCount1)
+                                                        {<text>@auth.title, </text>}
+                                                    else
+                                                    {@auth.title}
+                                                    </div>
 
+                                                }
+                                            </div>
+                                        }
+                                        @*@if (!String.IsNullOrEmpty(item.authorsarList))
+                                            {
+                                                <div class="author">by <span class="keyword">@item.authorsarList</span></div>
+
+                                            }*@
+                                        @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                        {
+                                            <div class="text">
+                                                @Html.Raw(item.arabicDesc)
+                                            </div>
+                                        }
+
+
+                                    </a>
                                 }
-                                @if (!String.IsNullOrEmpty(item.smallDescription))
+                                else
                                 {
-                                    <div class="text">
-                                        @Html.Raw(item.smallDescription)
-                                    </div>
+                                    <a class="Article arabic" href="@Url.Content(item.ExternalLink)" target="_blank">
+                                        <h2 class="title">@item.title </h2>
+                                        @if (item.arauthors.Count != 0)
+                                        {
+                                            <div class="author">
+                                                by
+                                                @{ int comaCount1 = 0;}
+                                                @foreach (var auth in item.arauthors)
+                                                {
+                                                    comaCount1++;
+                                                    <input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                    <div class="author" onclick="openArabicAuthorPopup('@auth.title','@auth.id')">
+                                                        @if (item.arauthors.Count > comaCount1)
+                                                        {<text>@auth.title, </text>}
+                                                    else
+                                                    {@auth.title}
+                                                    </div>
+
+                                                }
+                                            </div>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                        {
+                                            <div class="text">
+                                                @Html.Raw(item.arabicDesc)
+                                            </div>
+                                        }
+
+
+                                    </a>
                                 }
-
-
-
-                            </a>
-                        }
-
-                    </li>
-                        }
-                        else
-                        {
-                <li>
-                    @if (String.IsNullOrEmpty(item.ExternalLink))
-                    {
-                        <a class="Article arabic" href="@Url.Content(item.detailUrl + "?lang=ar")">
-                            <h2 class="title">@item.title </h2>
-                            @if (!String.IsNullOrEmpty(item.authorsarList))
-                            {
-                                <div class="author">by <span class="keyword">@item.authorsarList</span></div>
-
-                            }
-                            @if (!String.IsNullOrEmpty(item.arabicDesc))
-                            {
-                                <div class="text">
-                                    @Html.Raw(item.arabicDesc)
-                                </div>
-                            }
-
-
-                        </a>
-                    }
-                    else
-                    {
-                        <a class="Article arabic" href="@Url.Content(item.ExternalLink)" target="_blank">
-                            <h2 class="title">@item.title </h2>
-                            @if (!String.IsNullOrEmpty(item.authorsarList))
-                            {
-                                <div class="author">by <span class="keyword">@item.authorsarList</span></div>
-
-                            }
-                            @if (!String.IsNullOrEmpty(item.arabicDesc))
-                            {
-                                <div class="text">
-                                    @Html.Raw(item.arabicDesc)
-                                </div>
-                            }
-
-
-                        </a>
-                    }
-                </li>
+                            </li>
                         }
 
 
@@ -131,9 +200,9 @@
             {
                 <ul class="list">
                     <li class="title">No results found</li>
-                    </ul>
-             }
+                </ul>
+            }
 
-            </div>
+        </div>
     </div>
 </div>
