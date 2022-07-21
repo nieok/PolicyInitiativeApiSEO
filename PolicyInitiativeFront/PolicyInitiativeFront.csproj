@@ -157,7 +157,9 @@
     <Compile Include="Controllers\errorPageController.cs" />
     <Compile Include="Controllers\GoogleSitemapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\initiativebetaController.cs" />
     <Compile Include="Controllers\initiativesController.cs" />
+    <Compile Include="Controllers\interactiveController.cs" />
     <Compile Include="Controllers\privacypolicyController.cs" />
     <Compile Include="Controllers\searchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -175,6 +177,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Models\InteractiveRepository.cs" />
     <Compile Include="Models\KeywordRepository.cs" />
     <Compile Include="Models\LanguageRepository.cs" />
     <Compile Include="Models\LanguageResourceRepository.cs" />
@@ -236,6 +239,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\newstyles.css" />
     <Content Include="Content\css\player.css" />
     <Content Include="Content\css\plugin.min.css" />
     <Content Include="Content\css\plugins.css" />
@@ -296,6 +300,7 @@
     <Content Include="robots.txt" />
     <Content Include="Scripts\audioPlayer.js" />
     <Content Include="Scripts\myscript.js" />
+    <Content Include="Scripts\newcustom.js" />
     <Content Include="Scripts\plugins.js" />
     <Content Include="Scripts\plugins.min.js" />
     <Content Include="Scripts\script.js" />
@@ -379,6 +384,9 @@
     <Content Include="Views\Shared\servererror.cshtml" />
     <Content Include="Views\engagement\details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\initiativebeta\Index.cshtml" />
+    <Content Include="Views\interactive\Index.cshtml" />
+    <Content Include="Views\Shared\imgpopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

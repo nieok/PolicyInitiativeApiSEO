@@ -41,8 +41,8 @@ namespace PolicyInitiativeFront.Controllers
                 }
 
             }
-            var categories = categoryRepository.GetAllNewsCategory().ToList();
-            ViewBag.categories = categories;
+            var categories = categoryRepository.GetAllInitiatives("634x428xi");
+         
             #region SEO
             MetasModel metas = new MetasModel();
             CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["InitiativePage"]));
@@ -58,7 +58,7 @@ namespace PolicyInitiativeFront.Controllers
             metas.canonicalUrl = HttpContext.Request.Url.AbsoluteUri.ToString();
             ViewBag.metas = metas;
             #endregion
-            return View(model);
+            return View(categories);
         }
 
         public ActionResult details(int id)

@@ -45,13 +45,13 @@
                                                 @foreach (var auth in item.authors)
                                                 {
                                                     comaCount++;
-                                                    <input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />
-                                                    <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                                    @*<input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />*@
+                                                    <span class="keyword" >
                                                         @if (item.authors.Count > comaCount)
                                                         {<text>@auth.title, </text> }
                                                     else
                                                     {@auth.title}
-                                                    </div>
+                                                    </span>
 
 
                                                 }
@@ -85,13 +85,13 @@
                                                 @foreach (var auth in item.authors)
                                                 {
                                                     comaCount++;
-                                                    <input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />
-                                                    <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                                    @*<input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />*@
+                                                    <span class="keyword">
                                                         @if (item.authors.Count > comaCount)
                                                         {<text>@auth.title, </text> }
                                                     else
                                                     {@auth.title}
-                                                    </div>
+                                                    </span>
 
 
                                                 }
@@ -126,13 +126,13 @@
                                                 @foreach (var auth in item.arauthors)
                                                 {
                                                     comaCount1++;
-                                                    <input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />
-                                                    <div class="author" onclick="openArabicAuthorPopup('@auth.title','@auth.id')">
+                                                    @*<input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />*@
+                                                    <span class="keyword" >
                                                         @if (item.arauthors.Count > comaCount1)
                                                         {<text>@auth.title, </text>}
                                                     else
                                                     {@auth.title}
-                                                    </div>
+                                                    </span>
 
                                                 }
                                             </div>
@@ -164,13 +164,13 @@
                                                 @foreach (var auth in item.arauthors)
                                                 {
                                                     comaCount1++;
-                                                    <input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />
-                                                    <div class="author" onclick="openArabicAuthorPopup('@auth.title','@auth.id')">
+                                                    @*<input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />*@
+                                                    <span class="keyword" >
                                                         @if (item.arauthors.Count > comaCount1)
                                                         {<text>@auth.title, </text>}
                                                     else
                                                     {@auth.title}
-                                                    </div>
+                                                    </span>
 
                                                 }
                                             </div>

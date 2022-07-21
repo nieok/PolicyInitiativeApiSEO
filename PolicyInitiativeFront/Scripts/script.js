@@ -157,15 +157,19 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
     $scope.batch = 1;
     $scope.news = [];
     $scope.data = [];
-    $scope.numberOfProducts = 4;
+    $scope.numberOfProducts = 12;
     if ($('body').hasClass('homePage')) {
         $scope.getnews = function () {
+            $('.itemsList.mids').addClass('loadmore');
+            $('.btnloadmore').addClass('ng-hide');
+               
             $http({
                 method: 'GET',
-                url: RouteUrl + 'api/NewsCommunications/GetHomeData?batch=' + $scope.batch + '&numberOfProducts=' + $scope.numberOfProducts + "&imgsize=335x319xi",
+                url: RouteUrl + 'api/NewsCommunications/GetHomeData?batch=' + $scope.batch + '&pageNumber=' + $scope.numberOfProducts + "&imgsize=335x319xi",
             }).then(function (res) {
                 $scope.data = res.data;
-                $('.itemsList.mids').addClass('loadmore');
+                $scope.batch = $scope.batch+1;
+    
                 var $items = '';
                 var values = '';
                 if ($scope.batch != 0) {
@@ -284,6 +288,11 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
                         $('.itemsList .grid').append($items).masonry('appended', $items);
                         initMasonryList(); // recall masonry
 
+                        if ($scope.data.length < 11) {
+                            $('.btnloadmore').addClass('ng-hide');
+                        } else {
+                            $('.btnloadmore').removeClass('ng-hide');
+                        }
                         $('.itemsList.mids').removeClass('loadmore');
                     }, 2000);
                 }
@@ -291,36 +300,36 @@ app.controller('myCtrl', function ($scope, $http, $timeout, $window, $compile, $
             });
         }
 
-        $scope.getnews();
-        var load = true;
-        $(window).on('scroll touchmove mousewheel', function () {
-            if (ishome == "true") {
-                if (load == true && $(window).scrollTop() + $(window).height() > $(document).height() - 100) { 
-                    if ($scope.data.length > 3) {
-                        $('.itemsList.mids').addClass('loadmore');
-                    }
-                    load = false;
-                    setTimeout(function () {
-                        if ($scope.data.length > 3) {
-                            $scope.batch = $scope.batch + 1;
-                            $('.grid-item').removeClass('newPost');
-                            $scope.getnews();
+/*        $scope.getnews();*/
+        //var load = true;
+        //$(window).on('scroll touchmove mousewheel', function () {
+        //    if (ishome == "true") {
+        //        if (load == true && $(window).scrollTop() + $(window).height() > $(document).height() - 100) { 
+        //            if ($scope.data.length > 3) {
+        //                $('.itemsList.mids').addClass('loadmore');
+        //            }
+        //            load = false;
+        //            setTimeout(function () {
+        //                if ($scope.data.length > 3) {
+        //                    $scope.batch = $scope.batch + 1;
+        //                    $('.grid-item').removeClass('newPost');
+        //                    $scope.getnews();
                  
-                        } else {
-                            $('.box').addClass('hideborder');
-                            $('.itemsList.mids').removeClass('loadmore');
-                        }
+        //                } else {
+        //                    $('.box').addClass('hideborder');
+        //                    $('.itemsList.mids').removeClass('loadmore');
+        //                }
 
-                    }, 1500)
-                    if ($scope.data.length == 0) {
-                        $('.itemsList.mids').removeClass('loadmore');
-                    }
-                    setTimeout(function () {
-                        load = true;
-                    }, 2500)
-                }
-            }
-        });
+        //            }, 1500)
+        //            if ($scope.data.length == 0) {
+        //                $('.itemsList.mids').removeClass('loadmore');
+        //            }
+        //            setTimeout(function () {
+        //                load = true;
+        //            }, 2500)
+        //        }
+        //    }
+        //});
     }
 
     if ($('body').hasClass('engagePage')) {
@@ -689,7 +698,7 @@ app.controller('SearchCTRL', function ($scope, $http, $window, $stateParams, $ro
     $scope.data = [];
     $scope.articleTemplateTitle = "";
     $scope.numberOfProducts = 8;
-
+    $('.itemsList').addClass('loadmore');
 
     if (localStorage.getItem("articleTemplateId") != undefined) {
         $scope.articleTemplateId = localStorage.getItem("articleTemplateId");

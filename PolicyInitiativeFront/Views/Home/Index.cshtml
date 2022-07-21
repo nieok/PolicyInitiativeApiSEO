@@ -172,6 +172,8 @@
                             <div class="date">@item.Date</div>
 
                         }
+                        <span class="dash">|</span>
+                        <div class="genre">Policy Paper </div>
                         @if (!item.hasOnlyEnglish)
                         {
                         <div class="arabic" onclick="arabic(event)">عربي</div>}
@@ -216,6 +218,8 @@
                                     <div class="date">@item.Date</div>
 
                                 }
+                                <span class="dash">|</span>
+                                 <div class="genre">مقالة</div>
                                 <div class="english" onclick="english(event)">eng</div>
                             </div>
                             <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
@@ -261,6 +265,8 @@
                                 <div class="date">@item.Date</div>
 
                             }
+                            <span class="dash">|</span>
+                            <div class="genre">Policy Paper</div>
                         </div>
                         <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")"> @item.artitle</a></h2>
                         @{ int comaCount1 = 0;}
@@ -297,12 +303,160 @@
 
 
         </ul>
+        <div class="btnhold">
+            <button class="btnloadmore" ng-click="getnews()">load more</button>
+        </div>
+        
     </div>
 </div>
 
-@if (ViewBag.engagefeatured.Count != 0)
-{
-    <div class="swipersholder animation-element">
+
+<div class="swipersholder animation-element">
+
+    @if (ViewBag.categories.Count != 0)
+    {
+        @*<div class="itemSwiper itemsList">
+            <div class="container">
+                <div class="top">
+                    <h2 class="name">Initiatives</h2>
+                    <a class="all" href="@Url.Content("~/initiatives")">view all</a>
+                </div>
+
+                <div class="Initiatives v2">
+                    <div class="mywrap">
+                        <div class="graph">
+                            <div class="lines">
+                                <img src="@Url.Content("~/content/pictures/curves.png")" />
+                                <a href="@Url.Content("~/initiatives?box=0")" class="item item1 color_blue">Shifting to a new economic paradigm</a>
+                                <a href="@Url.Content("~/initiatives?box=1")" class="item item2 color_green">Advancing socio-economic right</a>
+                                <a href="@Url.Content("~/initiatives?box=2")" class="item item3 color_red">Building a state with a mission</a>
+                                <a href="@Url.Content("~/initiatives?box=3")" class="item item4 color_green">Advocating for fair representation and accountability</a>
+                                <a href="@Url.Content("~/initiatives?box=4")" class="item item5 color_blue">Leveraging aid for the public book</a>
+                                <a href="@Url.Content("~/initiatives?box=5")" class="item item6 color_blue">Activating effective local development</a>
+                                <a href="@Url.Content("~/initiatives?box=6")" class="item item7 color_red">Investing in environmental sustainability</a>
+                                <a href="@Url.Content("~/initiatives?box=7")" class="item item8 color_green">Fostering political and social stability</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>*@
+        <div class="itemSwiper itemsList">
+            <div class="container">
+                <div class="top">
+                    <h2 class="name">Initiatives</h2>
+                    <a class="all" href="@Url.Content("~/initiatives")">view all</a>
+                </div>
+
+                <div class="Initiatives v2">
+                    <div class="mywrap">
+                        <div class="graph">
+                            <div class="lines">
+                                <img src="@Url.Content("~/content/pictures/curves.png")" />
+                                @{int count = 0; }
+                                @{int count1 = 1; }
+                                @foreach (var sub in ViewBag.categories)
+                                {
+                                    string classitem = "item" + count1;
+                                    <a href="@Url.Content("~/initiatives?box="+count)" class="item @classitem @sub.color" style="background: @sub.color">@sub.title</a>
+
+                                    count++;
+                                    count1++;
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    }
+    @if (ViewBag.interactives.Count != 0)
+    {
+        <div class="itemSwiper itemsList version2">
+            <div class="container">
+                <div class="top">
+                    <h2 class="name">Interactive</h2>
+                    <a class="all" href="@Url.Content("~/interactive")">view all</a>
+                </div>
+                <div class="wrap">
+                    <div class="screen">
+                        <ul class="swiper-wrapper">
+                            @foreach (var item in ViewBag.interactives)
+                            {
+                                if (!String.IsNullOrEmpty(item.link))
+                                {
+                                    <li class="swiper-slide">
+                                        <div class="item englishBox">
+                                            @if (!String.IsNullOrEmpty(item.imgSrc))
+                                            {
+                                                <div class="pic"><a href="@item.link" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title"/></a></div>
+                                            }
+                                            @*<h2 class="title"> <a href="@item.link" target="_blank">@item.title</a></h2>*@
+                                            @if (!String.IsNullOrEmpty(item.smallDescription))
+                                            {
+                                                <div class="text">
+                                                    <a href="@item.link" target="_blank">
+                                                        <p>
+                                                            @Html.Raw(item.smallDescription)
+                                                            <span class="read">Read more</span>
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            }
+
+
+                                            <div class="endline"></div>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="swiper-slide">
+                                        <div class="item englishBox">
+                                            @if (!String.IsNullOrEmpty(item.imgSrc))
+                                            {
+                                                <div class="pic"><a style="cursor:auto!important"><img src="@Url.Content(item.imgSrc)" alt="@item.title"/></a></div>
+                                            }
+                                            @*<h2 class="title"> <a style="cursor:auto!important">@item.title</a></h2>*@
+                                            @if (!String.IsNullOrEmpty(item.smallDescription))
+                                            {
+                                                <div class="text">
+                                                    <a style="cursor:auto!important">
+                                                        <p>
+                                                            @Html.Raw(item.smallDescription)
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            }
+
+
+                                            <div class="endline"></div>
+                                        </div>
+                                    </li>
+                                }
+
+
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
+                <div class="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
+            </div>
+        </div>
+    }
+
+
+    @if (ViewBag.engagefeatured.Count != 0)
+    {
         <div class="itemSwiper itemsList">
             <div class="container">
                 <div class="top">
@@ -314,243 +468,243 @@
                         <ul class="swiper-wrapper">
                             @foreach (var item in ViewBag.engagefeatured)
                             {
-                            <li class="swiper-slide">
-                                @if (!item.hasArabic)
-                                {
-                                <div class="item englishBox">
-                                    @if (!String.IsNullOrEmpty(item.imgSrc))
+                                <li class="swiper-slide">
+                                    @if (!item.hasArabic)
                                     {
-                                        if (String.IsNullOrEmpty(item.ExternalLink))
-                                        {
-                                            if (!String.IsNullOrEmpty(item.description))
+                                        <div class="item englishBox">
+                                            @if (!String.IsNullOrEmpty(item.imgSrc))
                                             {
-                                                <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                                if (String.IsNullOrEmpty(item.ExternalLink))
+                                                {
+                                                    if (!String.IsNullOrEmpty(item.description))
+                                                    {
+                                                        <div class="pic"><a href="@Url.Content(item.detailUrl)"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                                }
+
+                                            }
+                                            <div class="top">
+                                                @if (!String.IsNullOrEmpty(item.Date))
+                                                {
+                                                    <div class="date red">
+                                                        @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                                        {<span class="dash">|</span><span class="categ">@item.newsCategory</span>}
+                                                    </div>
+
+                                                }
+                                                @if (!item.hasOnlyEnglish)
+                                                {
+                                                    <div class="arabic" onclick="arabic1(event)">عربي</div>
+
+                                                }
+                                            </div>
+                                            @if (String.IsNullOrEmpty(item.ExternalLink))
+                                            {
+                                                if (!string.IsNullOrEmpty(item.description))
+                                                {
+                                                    <h2 class="title"> <a href="@Url.Content(item.detailUrl)">@item.title</a></h2>
+                                                    if (!String.IsNullOrEmpty(item.smallDescription))
+                                                    {
+                                                        <div class="text">
+                                                            <a href="@Url.Content(item.detailUrl)">
+                                                                <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="title"><a style="cursor:auto !important">@item.title</a></h2>
+                                                    if (!String.IsNullOrEmpty(item.smallDescription))
+                                                    {
+                                                        <div class="text">
+                                                            <a style="cursor:auto !important">
+                                                                <p>@Html.Raw(item.smallDescription)</p>
+                                                            </a>
+                                                        </div>}
+                                                }
+
                                             }
                                             else
                                             {
-                                                <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
+                                                <h2 class="title"> <a href="@Url.Content(item.ExternalLink)" target="_blank">@item.title</a></h2>
+                                                if (!String.IsNullOrEmpty(item.smallDescription))
+                                                {
+                                                    <div class="text">
+                                                        <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                                            <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
+                                                        </a>
+                                                    </div>
+                                                }
                                             }
-
-                                        }
-                                        else
+                                            <div class="endline"></div>
+                                        </div>
+                                        if (!item.hasOnlyEnglish)
                                         {
-                                            <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                            <div class="item arabicBox">
+                                                @if (!String.IsNullOrEmpty(item.imgSrc))
+                                                {
+                                                    if (String.IsNullOrEmpty(item.ExternalLink))
+                                                    {
+                                                        if (!String.IsNullOrEmpty(item.description))
+                                                        {
+                                                            <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                        }
+                                                        }
 
-                                    }
-                                    <div class="top">
-                                        @if (!String.IsNullOrEmpty(item.Date))
-                                        {
-                                            <div class="date red">
-                                                @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                                {<span class="dash">|</span><span class="categ">@item.newsCategory</span>}
-                                            </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                        }
-                                        @if (!item.hasOnlyEnglish)
-                                        {
-                                            <div class="arabic" onclick="arabic1(event)">عربي</div>
+                                                    }
 
-                                        }
-                                    </div>
-                                    @if (String.IsNullOrEmpty(item.ExternalLink))
-                                    {
-                                        if (!string.IsNullOrEmpty(item.description))
-                                        {
-                                            <h2 class="title"> <a href="@Url.Content(item.detailUrl)">@item.title</a></h2>
-                                            if (!String.IsNullOrEmpty(item.smallDescription))
-                                            {
-                                                <div class="text">
-                                                    <a href="@Url.Content(item.detailUrl)">
-                                                        <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
-                                                    </a>
+                                                }
+                                                <div class="top">
+                                                    @if (!String.IsNullOrEmpty(item.Date))
+                                                    {
+                                                        <div class="date red">
+                                                            @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                                            {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
+                                                        </div>
+
+                                                    }
+                                                    <div class="english" onclick="english1(event)">eng</div>
                                                 </div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <h2 class="title"><a style="cursor:auto !important">@item.title</a></h2>
-                                            if (!String.IsNullOrEmpty(item.smallDescription))
-                                            {
-                                                <div class="text">
-                                                    <a style="cursor:auto !important">
-                                                        <p>@Html.Raw(item.smallDescription)</p>
-                                                    </a>
-                                                </div>}
-                                        }
+                                                @if (String.IsNullOrEmpty(item.ExternalLink))
+                                                {
+                                                    if (!String.IsNullOrEmpty(item.description))
+                                                    {
+                                                        <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
+                                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                        {
+                                                            <div class="text">
+                                                                <a href="@Url.Content(item.detailUrl+ "?lang=ar")">
+                                                                    <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
+                                                                </a>
+                                                            </div>}
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2 class="title"><a style="cursor:auto !important">@item.artitle</a></h2>
+                                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                        {
+                                                            <div class="text">
+                                                                <a style="cursor:auto !important">
+                                                                    <p>@Html.Raw(item.arsmallDescription)</p>
+                                                                </a>
+                                                            </div>}
+                                                    }
 
-                                    }
-                                    else
-                                    {
-                                        <h2 class="title"> <a href="@Url.Content(item.ExternalLink)" target="_blank">@item.title</a></h2>
-                                        if (!String.IsNullOrEmpty(item.smallDescription))
-                                        {
-                                            <div class="text">
-                                                <a href="@Url.Content(item.ExternalLink)" target="_blank">
-                                                    <p>@Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span></p>
-                                                </a>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank"> @item.artitle</a></h2>
+                                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                    {
+                                                        <div class="text">
+                                                            <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                                                <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
+                                                            </a>
+                                                        </div>}
+                                                }
+
+                                                <div class="endline"></div>
                                             </div>
                                         }
-                                    }
-                                    <div class="endline"></div>
-                                </div>
-                                    if (!item.hasOnlyEnglish)
-                                    {
-                            <div class="item arabicBox">
-                                @if (!String.IsNullOrEmpty(item.imgSrc))
-                                {
-                                    if (String.IsNullOrEmpty(item.ExternalLink))
-                                    {
-                                        if (!String.IsNullOrEmpty(item.description))
-                                        {
-                                            <div class="pic"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-                                        }
-                                        else
-                                        {
-                                            <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                        }
 
                                     }
                                     else
                                     {
-                                        <div class="pic"><a href="@Url.Content(item.ExternalLink)" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+                                        <div class="item arabicBox">
+                                            @if (!String.IsNullOrEmpty(item.imgSrc))
+                                            {
+                                                if (String.IsNullOrEmpty(item.ExternalLink))
+                                                {
+                                                    if (!String.IsNullOrEmpty(item.description))
+                                                    {
+                                                        <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                    }
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
 
-                                }
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date red">
-                                            @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                            {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="pic"><a href="@Url.Content(item.ExternalLink )" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
+
+                                                }
+                                            }
+                                            <div class="top">
+                                                @if (!String.IsNullOrEmpty(item.Date))
+                                                {
+                                                    <div class="date red">
+                                                        @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
+                                                        {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
+                                                    </div>
+
+                                                }
+                                            </div>
+                                            @if (String.IsNullOrEmpty(item.ExternalLink))
+                                            {
+                                                if (!String.IsNullOrEmpty(item.description))
+                                                {
+                                                    <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")">@item.artitle</a></h2>
+                                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                    {
+                                                        <div class="text">
+                                                            <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                                                <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>
+                                                            </a>
+                                                        </div>}
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="title"><a style="cursor:auto !important">@item.artitle</a></h2>
+                                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                    {
+                                                        <div class="text">
+                                                            <a style="cursor:auto !important">
+                                                                <p>@Html.Raw(item.arsmallDescription)</p>
+                                                            </a>
+                                                        </div>}
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank">@item.artitle</a></h2>
+                                                if (!String.IsNullOrEmpty(item.arsmallDescription))
+                                                {
+                                                    <div class="text">
+                                                        <a href="@Url.Content(item.ExternalLink)" target="_blank">
+                                                            <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>
+                                                        </a>
+                                                    </div>}
+                                            }
+                                            <div class="endline"></div>
                                         </div>
-
-                                    }
-                                    <div class="english" onclick="english1(event)">eng</div>
-                                </div>
-                                @if (String.IsNullOrEmpty(item.ExternalLink))
-                                {
-                                    if (!String.IsNullOrEmpty(item.description))
-                                    {
-                                        <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=ar")"> @item.artitle</a></h2>
-                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <div class="text">
-                                                <a href="@Url.Content(item.detailUrl+ "?lang=ar")">
-                                                    <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
-                                                </a>
-                                            </div>}
-                                    }
-                                    else
-                                    {
-                                        <h2 class="title"><a style="cursor:auto !important">@item.artitle</a></h2>
-                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <div class="text">
-                                                <a style="cursor:auto !important">
-                                                    <p>@Html.Raw(item.arsmallDescription)</p>
-                                                </a>
-                                            </div>}
                                     }
 
-                                }
-                                else
-                                {
-                                    <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank"> @item.artitle</a></h2>
-                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                    {
-                                        <div class="text">
-                                            <a href="@Url.Content(item.ExternalLink)" target="_blank">
-                                                <p>@Html.Raw(item.arsmallDescription) <span class="read">@item.ARarticleTemplate</span></p>
-                                            </a>
-                                        </div>}
-                                }
-
-                                <div class="endline"></div>
-                            </div>
-                                    }
-
-                                }
-                                else
-                                {
-                            <div class="item arabicBox">
-                                @if (!String.IsNullOrEmpty(item.imgSrc))
-                                {
-                                    if (String.IsNullOrEmpty(item.ExternalLink))
-                                    {
-                                        if (!String.IsNullOrEmpty(item.description))
-                                        {
-                                            <div class="pic"><a href="@Url.Content(item.detailUrl + "?lang=ar")"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                        }
-                                        else
-                                        {
-                                            <div class="pic"><a style="cursor:auto !important"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <div class="pic"><a href="@Url.Content(item.ExternalLink )" target="_blank"><img src="@Url.Content(item.imgSrc)" alt="@item.title" /></a></div>
-
-                                    }
-                                }
-                                <div class="top">
-                                    @if (!String.IsNullOrEmpty(item.Date))
-                                    {
-                                        <div class="date red">
-                                            @item.Date  @if (!String.IsNullOrEmpty(item.newsCategory))
-                                            {<span class="dash">|</span><span class="categ">@item.arnewsCategory</span>}
-                                        </div>
-
-                                    }
-                                </div>
-                                @if (String.IsNullOrEmpty(item.ExternalLink))
-                                {
-                                    if (!String.IsNullOrEmpty(item.description))
-                                    {
-                                        <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar")">@item.artitle</a></h2>
-                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <div class="text">
-                                                <a href="@Url.Content(item.detailUrl + "?lang=ar")">
-                                                    <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>
-                                                </a>
-                                            </div>}
-                                    }
-                                    else
-                                    {
-                                        <h2 class="title"><a style="cursor:auto !important">@item.artitle</a></h2>
-                                        if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                        {
-                                            <div class="text">
-                                                <a style="cursor:auto !important">
-                                                    <p>@Html.Raw(item.arsmallDescription)</p>
-                                                </a>
-                                            </div>}
-                                    }
-
-                                }
-                                else
-                                {
-                                    <h2 class="title"><a href="@Url.Content(item.ExternalLink)" target="_blank">@item.artitle</a></h2>
-                                    if (!String.IsNullOrEmpty(item.arsmallDescription))
-                                    {
-                                        <div class="text">
-                                            <a href="@Url.Content(item.ExternalLink)" target="_blank">
-                                                <p>@Html.Raw(item.arsmallDescription)   <span class="read">@item.ARarticleTemplate</span></p>
-                                            </a>
-                                        </div>}
-                                }
-                                <div class="endline"></div>
-                            </div>
-                                }
-
-                            </li>
+                                </li>
                             }
 
                         </ul>
@@ -560,8 +714,8 @@
                 <div class="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
                 <div class="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
             </div>
-        </div>
-    </div>
-}
+        </div>}
+</div>
+
 
 

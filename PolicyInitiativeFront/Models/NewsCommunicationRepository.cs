@@ -37,6 +37,8 @@ namespace PolicyInitiativeFront.Models
         public List<ArticleRelatedView> relatedperiodicals { get; set; }
         public string articleTemplate { get; set; }
         public string ARarticleTemplate { get; set; }
+        public string articleTemplateTitle { get; set; }
+        public string ARarticleTemplateTitle { get; set; }
         public string types { get; set; } 
         public string auth { get; set; } 
         public string newsCategory { get; set; } 
@@ -595,6 +597,8 @@ namespace PolicyInitiativeFront.Models
                     imgSrc = item.imgSrc == "" || item.imgSrc == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newsCommunications/" : "images/" + imgsize + "/") + item.imgSrc,
                     articleTemplate = item.ArticleTemplate.label,
                     ARarticleTemplate = arabictemplate != null ? arabictemplate.label : null,
+                    articleTemplateTitle=item.ArticleTemplate.title,
+                    ARarticleTemplateTitle = arabictemplate != null ? arabictemplate.title : null,
                 });
             }
             return model;

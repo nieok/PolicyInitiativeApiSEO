@@ -52,6 +52,29 @@ namespace PolicyInitiativeFront.Models
             }
             return model;
         }
+
+        public List<NewsCategory> GetAllInitiatives(string imgsize = "")
+        {
+            var news = GetAllIsPublished().ToList();
+            var model = new List<NewsCategory>();
+
+            foreach (var item in news)
+            {
+                model.Add(new NewsCategory
+                {
+                    id = item.id,
+                    title = item.title,
+                    color = item.colorId.HasValue ? item.Color.hexaxolor : "",
+                    urlTitle = GetUrlTitle(item.title),
+                    description = item.description,
+                    largeDescription = item.largeDescription,
+                    smallDescription = item.smallDescription,
+                    imgSrc = item.imgSrc1 == "" || item.imgSrc1 == null ? null : ConfigurationManager.AppSettings["ProjectOnlineAPIUrl"] + (imgsize == "" ? "content/uploads/newscategories/" : "images/" + imgsize + "/") + item.imgSrc1,
+
+                });
+            }
+            return model;
+        }
         public NewsCategory GetCatById(int id,  string imgsize = "")
         {
        

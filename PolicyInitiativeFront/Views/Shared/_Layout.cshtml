@@ -23,29 +23,32 @@
         @Html.Partial("_Metas")
     }
 
-        <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon2.ico")" />
-        <link rel="stylesheet" href="https://use.typekit.net/hng1okw.css">
-        <link href="@Url.Content("~/Content/css/plugin.min.css?v=2")" rel="stylesheet" />
-  
-        @*<link href="@Url.Content("~/Content/css/Style.min.css?v=183")" rel="stylesheet" />*@
-        <link href="@Url.Content("~/Content/css/custom.css?v=1")" rel="stylesheet" />
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon2.ico")" />
+    <link rel="stylesheet" href="https://use.typekit.net/hng1okw.css">
+    <link href="@Url.Content("~/Content/css/plugin.min.css?v=2")" rel="stylesheet" />
 
-        <script>document.documentElement.className = 'js';</script>
-        <!-- #region PhoneGap -->
-        <script type="text/javascript" charset="utf-8">
-            var appVersion = "";
-            var defaultData = undefined;
-            var firstOpen = false;
-            var orderPrice = "";
-            var orderNumber = "";
-            var medium;
-            var device = undefined;
-        </script>
+    @*<link href="@Url.Content("~/Content/css/Style.min.css?v=183")" rel="stylesheet" />*@
+    <link href="@Url.Content("~/Content/css/custom.css?v=1")" rel="stylesheet" />
+    @{ if (controllername == "initiatives" || controllername == "home" || controllername == "interactive" || controllername == "article")
+        {
+            <link href="@Url.Content("~/Content/css/newstyles.css?v=1")" rel="stylesheet" />
+        } }
+    <script>document.documentElement.className = 'js';</script>
+    <!-- #region PhoneGap -->
+    <script type="text/javascript" charset="utf-8">
+        var appVersion = "";
+        var defaultData = undefined;
+        var firstOpen = false;
+        var orderPrice = "";
+        var orderNumber = "";
+        var medium;
+        var device = undefined;
+    </script>
 
 
-        <meta name="twitter:widgets:autoload" content="off">
+    <meta name="twitter:widgets:autoload" content="off">
 
- </head>
+</head>
 
 <body @Html.Raw(ViewBag.BodyAttributes) ng-controller="myCtrl">
     @if (ViewBag.metas != null)
@@ -63,20 +66,27 @@
     @*<div hidden>
             <div addthis-tool tool-class="addthis_inline_share_toolbox"></div>
         </div>*@
-    <div id="wrapper" style="opacity: 1;">
-        @{Html.RenderPartial("header");}
-        <div id="content">
-            @RenderBody()
-        </div>
-
-        @{Html.RenderPartial("authorPopup");}
-        @{Html.RenderPartial("authorPopup-arabic");}
-        @{Html.RenderPartial("filterMenu");}
-        @{Html.RenderPartial("videoPopup");}
-        @{Html.RenderPartial("searchPop");}
-        @{Html.RenderPartial("footer");}
-
+<div id="wrapper" style="opacity: 1;">
+    @{Html.RenderPartial("header");}
+    <div id="content">
+        @RenderBody()
     </div>
+
+    @if (controllername != "search" && actionname != "search")
+    {
+        { Html.RenderPartial("authorPopup"); }
+        { Html.RenderPartial("authorPopup-arabic"); }
+    }
+
+    @{Html.RenderPartial("filterMenu");}
+    @{Html.RenderPartial("videoPopup");}
+    @{Html.RenderPartial("searchPop");}
+    @{Html.RenderPartial("footer");}
+    @{ if (controllername == "article")
+        {
+           {Html.RenderPartial("imgpopup");}
+        } }
+</div>
     @{ if (controllername == "contact")
         {
             <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyBmRJICbrcT92eeEU6Cdc9DAlchb_1ZxKU"></script>
@@ -84,7 +94,10 @@
 
     <script type="text/javascript" src="@(Url.Content("~/Scripts/plugins.js?v=1"))"></script>
     @*<script type="text/javascript" src="@(Url.Content("~/Scripts/myscript.js?v=1"))"></script>*@
-
+    @{ if (controllername == "initiatives" || controllername == "interactive" || controllername == "home" || controllername == "article")
+        {
+            <script type="text/javascript" src="@(Url.Content("~/Scripts/newcustom.js?v=1"))"></script>
+        } }
     @if (controllername == "search" && actionname == "search")
     {
         <script src="https://cdn.jsdelivr.net/mark.js/8.6.0/jquery.mark.min.js" crossorigin="anonymous"></script>
@@ -121,15 +134,3 @@
     }
 </body>
 </html>
-
-
-<!--
-about2
-about2/arabic
-enagagement
-founders
-founders/arabic
-details
-details/arabic
-homewithswiper
--->

@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "The Policy Initiative - Initiative Details";
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    ViewBag.BodyAttributes = "class=initiatePage";
+}
+
+
+<h1 class="hiddenHeader">The Policy Initiative</h1>
+
+
+<div class="Options">
+    <div class="container">
+        <ul class="items">
+            <li><div class="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 25.961 25.966"><path d="M25.608,22.449l-5.056-5.056a1.216,1.216,0,0,0-.862-.355h-.827a10.543,10.543,0,1,0-1.826,1.826v.827a1.216,1.216,0,0,0,.355.862l5.056,5.056a1.212,1.212,0,0,0,1.719,0L25.6,24.173a1.223,1.223,0,0,0,.005-1.724ZM10.548,17.038a6.491,6.491,0,1,1,6.491-6.491A6.487,6.487,0,0,1,10.548,17.038Z" fill="#070606"></path></svg></div></li>
+        </ul>
+    </div>
+</div>
+
+<div class="inSlide">
+    <div class="inner">
+    <div class="container">
+        <div class="outerscreen">
+            <ul class="swiper-wrapper">
+                @foreach(var cat in Model)
+                {
+                    var news = new NewsCategoryRepository().GetCatById(cat.id);
+                <li class="swiper-slide mainslide">
+                    <div class="Slider" >
+                        <div class="head" style="background: @cat.color">
+                            <ul class="grp">
+                                <li>
+                                    <div class="holder ">
+                                        <div class="data">
+                                            <h2 class="title">@cat.title</h2>
+                                            @if (!String.IsNullOrEmpty(cat.description))
+                                            {
+                                                <div class="text mCustomScrollbar">
+                                                    @Html.Raw(cat.description)
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <div class="close"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g fill="none" stroke="#fff" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none"></circle><circle cx="24" cy="24" r="23.5" fill="none"></circle><g transform="translate(16.851 16.323)"><line y2="20.676" transform="translate(14.896 0.472) rotate(45)" fill="none" stroke="#fff" stroke-width="2"></line><line x1="14.825" y1="15.021" fill="none" stroke="#fff" stroke-width="2"></line></g></g></svg></div>
+                                    </div>
+                                </li>
+                                @if (!String.IsNullOrEmpty(cat.imgSrc))
+                                {
+                                    <li>
+                                        <div class="photo"><img src="@Url.Content(cat.imgSrc)"  alt="@cat.title"/></div>
+                                    </li>
+                                }
+
+                            </ul>
+                            <div class="heightnb"></div>
+                        </div>
+                       
+                        <div class="itemSwiper itemsList version3">
+                            <div class="wrap">
+                                <div class="screen">
+                                    <ul class="swiper-wrapper">
+                                        @foreach (var item in news)
+                                        {
+                                            if (!item.hasArabic)
+                                            {
+                                                <li class="swiper-slide">
+                                                    <div class="item englishBox">
+                                                        <div class="top">
+                                                            @if (!String.IsNullOrEmpty(item.Date))
+                                                            {
+                                                                <div class="date">@item.Date</div>
+                                                            }
+                                                            <span class="dash">|</span>
+                                                            <div class="genre">Article</div>
+                                                            @if (!item.hasOnlyEnglish)
+                                                            {
+                                                                <div class="arabic" onclick="arabic(event)">عربي</div>
+
+                                                            }
+                                                        </div>
+                                                        <h2 class="title"><a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">@item.title</a></h2>
+                                                        @{ int comaCount1 = 0;}
+                                                        @foreach (var auth in item.authors)
+                                                        {
+                                                            comaCount1++;
+                                                            <input hidden class="EngBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                            <div class="author" onclick="openAuthorPopup('@auth.title','EngBio-@auth.id')">
+                                                                @if (item.authors.Count > comaCount1)
+                                                                {<text>@auth.title, </text>}
+                                                            else
+                                                            {@auth.title}
+                                                            </div>
+
+                                                        }
+                                                        @if (!String.IsNullOrEmpty(item.smallDescription))
+                                                        {
+                                                            <div class="text">
+                                                                <a href="@Url.Content(item.detailUrl+ "?lang=en&src=init")">
+                                                                    @Html.Raw(item.smallDescription) <span class="read">@item.articleTemplate</span>
+                                                                </a>
+                                                            </div>
+                                                        }
+                                                        <div class="endline"></div>
+                                                    </div>
+
+                                                    @if (!item.hasOnlyEnglish)
+                                                    {
+                                                        <div class="item arabicBox">
+                                                            <div class="top">
+                                                                @if (!String.IsNullOrEmpty(item.Date))
+                                                                {
+                                                                    <div class="date">@item.Date</div>
+                                                                }
+                                                                <span class="dash">|</span>
+                                                                <div class="genre">Article</div>
+                                                                <div class="english" onclick="english(event)">eng</div>
+
+
+                                                            </div>
+                                                            <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
+                                                            @{ int comaCount2 = 0;}
+                                                            @foreach (var auth in item.arauthors)
+                                                            {
+                                                                comaCount2++;
+                                                                <input hidden class="ARBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                                <div class="author" onclick="openArabicAuthorPopup('@auth.title','ARBio-@auth.id')">
+                                                                    @if (item.arauthors.Count > comaCount2)
+                                                                    {<text>@auth.title, </text>}
+                                                                else
+                                                                {@auth.title}
+                                                                </div>
+
+                                                            }
+                                                            @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                                            {
+                                                                <div class="text">
+                                                                    <a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">
+                                                                        @Html.Raw(item.arabicDesc)
+                                                                        <span class="read">@item.ARarticleTemplate</span>
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            <div class="endline"></div>
+                                                        </div>
+                                                    }
+
+
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="swiper-slide">
+                                                    <div class="item arabicBox">
+                                                        <div class="top">
+                                                            @if (!String.IsNullOrEmpty(item.Date))
+                                                            {
+                                                                <div class="date">@item.Date</div>
+                                                            }
+                                                        </div>
+                                                        <h2 class="title"><a href="@Url.Content(item.detailUrl + "?lang=ar&src=init")">@item.artitle</a></h2>
+                                                        @{ int comaCount2 = 0;}
+                                                        @foreach (var auth in item.arauthors)
+                                                        {
+                                                            comaCount2++;
+                                                            <input hidden class="OnlyARBio-@auth.id" value="@Html.Raw(auth.bio)" />
+                                                            <div class="author" onclick="openArabicAuthorPopup('@auth.title','OnlyARBio-@auth.id')">
+                                                                @if (item.arauthors.Count > comaCount2)
+                                                                {<text>@auth.title, </text>}
+                                                            else
+                                                            {@auth.title}
+                                                            </div>
+
+                                                        }
+                                              
+                                                        @if (!String.IsNullOrEmpty(item.arabicDesc))
+                                                        {
+                                                            <div class="text">
+                                                                <a href="@Url.Content(item.detailUrl + "?lang=ar")">
+                                                                    @Html.Raw(item.arabicDesc)
+                                                                    <span class="read">@item.ARarticleTemplate</span>
+                                                                </a>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
+                            <div class="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g transform="translate(-1253 -648)"><g transform="translate(97 275)"><g transform="translate(1156 373)" fill="none" stroke="#080808" stroke-width="1"><circle cx="24" cy="24" r="24" stroke="none" /><circle cx="24" cy="24" r="23.5" fill="none" /></g><g transform="translate(1)"><path d="M51.949,282.844l7.77,7.77-7.77,7.77" transform="translate(1128.042 106.656)" fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M1032.806,389h-15.8" transform="translate(152.991 8.5)" fill="none" stroke="#080808" stroke-linecap="round" stroke-width="2" /></g></g></g></svg></div>
+                        </div>
+
+                        <div class="navprev"></div><div class="navnext"></div>
+                    </div>
+                </li>
+            }
+                
+
+            </ul>
+        </div>
+         
+     </div>
+        <div class="detect"></div>
+    </div>
+    <div class="navprev"></div><div class="navnext"></div>
+</div>

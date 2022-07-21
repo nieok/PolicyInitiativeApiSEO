@@ -15,43 +15,22 @@ namespace PolicyInitiativeFront.Controllers
         public NewsCommunicationRepository newsrpstry = new NewsCommunicationRepository();
         private settingsRepository settingsRepository = new settingsRepository();
         private SliderRepository sliderRepository = new SliderRepository();
-
+        private NewsCategoryRepository categoryRepository = new NewsCategoryRepository();
+        private InteractiveRepository InteractiveRepository = new InteractiveRepository();
         public ActionResult Index()
         {
-          
-            var model = new List<object>();
-            var corporatePageTemplates = rpstry.GetPageDataById(Convert.ToInt32(ConfigurationManager.AppSettings["HomePage"]), "en");
-
-        
-            foreach (var item in corporatePageTemplates.corporatePageTemplates)
-            {
-                if (item.isEntry == false)
-                {
-                    var data = new List<CorporatePageSection>();
-                    if (item.frontHtmlId == "1")
-                    {
-                        data = sectionrpstry.GetSectionDataById(item.id, "en", item.frontHtmlId, "");
-
-                    }
-                    else
-                    {
-                        data = sectionrpstry.GetSectionDataById(item.id, "en", item.frontHtmlId);
-
-                    }
-
-                    model.AddRange(data);
-                }
-
-            }
             var settings = settingsRepository.GetFirstOrDefault();
             var featuredBanner = sliderRepository.GetAllSlider("1800x400xi");
             //var featuredBanner = newsrpstry.GetAllHomeFeaturedBanner("1800x400xi");
-            var featured = newsrpstry.GetAllFeatured(0,4,"en","335x319xi");
+            var featured = newsrpstry.GetAllFeatured(0,12,"en","335x319xi");
             var engagefeatured = newsrpstry.GetAllFeaturedEngagement(0,4,"en","335x319xi");
-
+            var categories = categoryRepository.GetAllNewsCategory().ToList();
+            var interactives = InteractiveRepository.GetAllHomeInteractives("523x284xi").ToList();
+            ViewBag.categories = categories;
             ViewBag.featuredBanner = featuredBanner;
             ViewBag.featured = featured;
             ViewBag.engagefeatured = engagefeatured;
+            ViewBag.interactives = interactives;
             #region SEO
             MetasModel metas = new MetasModel();
             CorporatePage currentPage = rpstry.GetById(Convert.ToInt32(ConfigurationManager.AppSettings["HomePage"]));
@@ -68,7 +47,7 @@ namespace PolicyInitiativeFront.Controllers
             ViewBag.metas = metas;
             #endregion
             ViewBag.settings = settings;
-            return View(model);
+            return View();
         }
 
     }
